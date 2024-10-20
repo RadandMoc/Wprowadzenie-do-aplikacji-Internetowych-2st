@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moje CV</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!--<header>
+        <nav>
+            <ul>
+                <li><a href="#wyksztalcenie">Wykształcenie</a></li>
+                <li><a href="#doswiadczenie">Doświadczenie</a></li>
+                <li><a href="#hobby">Hobby</a></li>
+                <li><a href="#projekty">Projekty</a></li>
+            </ul>
+        </nav>
+    </header>-->
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="kontakt.html">Kontakt</a></li>
+                <li><a href="galeria.html">Galeria</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+
+    <!-- Boczne przyciski do nawigacji po sekcjach -->
+    <div class="side-buttons">
+        <a href="#wyksztalcenie" class="circle-btn">W</a>
+        <a href="#doswiadczenie" class="circle-btn">D</a>
+        <a href="#hobby" class="circle-btn">H</a>
+        <a href="#projekty" class="circle-btn">P</a>
+    </div>
+
+    
+    <main>
+        <section id="wyksztalcenie" class="content-section">
+            <div class="text-left">
+                <h2>Wykształcenie</h2>
+                <p>Opis Twojego wykształcenia...</p>
+            </div>
+            <div class="image-right">
+                <img src="wyksztalcenie.jpg" alt="Wykształcenie" class="rounded-image">
+            </div>
+        </section>
+        
+        <section id="doswiadczenie" class="content-section alt-background">
+            <div class="image-left">
+                <img src="doswiadczenie.jpg" alt="Doświadczenie" class="rounded-image">
+            </div>
+            <div class="text-right">
+                <h2>Doświadczenie zawodowe</h2>
+                <div class="job-icon" 
+                     onmouseover="showSummary('job1-summary')" 
+                     onmouseout="hideSummary('job1-summary')" 
+                     onclick="toggleFullDescription('job1-details', 'job1-summary')">
+                    <img src="praca1.png" alt="Praca 1" class="job-icon-image">
+                    <div id="job1-summary" class="job-summary">
+                        <p>Software Developer w Firmie X | 2020 - obecnie</p>
+                    </div>
+                </div>
+                <div id="job1-summary" class="job-summary">
+                    <p>Software Developer w Firmie X | 2020 - obecnie</p>
+                </div>
+                <div id="job1-details" class="job-details" style="display: none;">
+                    <p><strong>Opis stanowiska:</strong> Tworzenie aplikacji webowych...</p>
+                    <img src="firma1.jpg" alt="Firma X" class="rounded-image">
+                </div>
+
+                <div class="job-icon" 
+                     onmouseover="showSummary('job2-summary')" 
+                     onmouseout="hideSummary('job2-summary')" 
+                     onclick="toggleFullDescription('job2-details')">
+                    <img src="praca2.png" alt="Praca 2" class="job-icon-image">
+                </div>
+                <div id="job2-summary" class="job-summary">
+                    <p>Inżynier Systemów w Firmie Y | 2018 - 2020</p>
+                </div>
+                <div id="job2-details" class="job-details" style="display: none;">
+                    <p><strong>Opis stanowiska:</strong> Administracja serwerami...</p>
+                    <img src="firma2.jpg" alt="Firma Y" class="rounded-image">
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Rozwijana sekcja z doświadczeniem spoza IT -->
+        <section id="doswiadczenie-spoza-it" class="content-section">
+            <div class="text-left">
+                <h2>Doświadczenie poza IT</h2>
+                <button onclick="toggleSection('januszex')">Pokaż szczegóły</button>
+                <div id="januszex" style="display:none;">
+                    <p><strong>Januszex</strong> | Pracownik fizyczny | 2015 - 2017</p>
+                    <p>Praca fizyczna, obsługa maszyn, nadzór nad linią produkcyjną...</p>
+                </div>
+            </div>
+            <div class="image-right">
+                <img src="januszex.jpg" alt="Januszex" class="rounded-image">
+            </div>
+        </section>
+
+        <section id="hobby" class="content-section alt-background">
+            <div class="image-left">
+                <img src="hobby.jpg" alt="Hobby" class="rounded-image">
+            </div>
+            <div class="text-right">
+                <h2>Hobby</h2>
+                <p>Opis Twoich zainteresowań...</p>
+            </div>
+        </section>
+
+        <section id="projekty" class="content-section">
+            <div class="text-left">
+                <h2>Ciekawsze projekty</h2>
+                <ul>
+                    <li>Projekt 1 - Opis...</li>
+                    <li>Projekt 2 - Opis...</li>
+                </ul>
+            </div>
+            <div class="image-right">
+                <img src="projekty.jpg" alt="Projekty" class="rounded-image">
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Twoje Imię i Nazwisko</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

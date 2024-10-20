@@ -1,0 +1,182 @@
+/* Ogólne style dla całego dokumentu */
+body {
+    font-family: 'Open Sans', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+header {
+    background-color: #333;
+    padding: 10px;
+}
+
+/* Menu nawigacyjne */
+header nav ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+header nav ul li {
+    margin: 0 15px;
+}
+
+header nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+header nav ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Główna sekcja */
+main {
+    padding: 20px;
+    position: relative;
+    max-width: 800px;
+    margin: 50px auto;
+    background-color: #fff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+/* Stopka */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #333;
+    color: white;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    border-radius: 0 0 10px 10px;
+}
+
+/* Sekcje treści z naprzemiennym układem */
+.content-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    margin-bottom: 30px;
+    border-radius: 10px;
+}
+
+.alt-background {
+    background-color: #f0f0f0;
+}
+
+.text-left, .text-right {
+    width: 50%;
+}
+
+.image-right, .image-left {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+}
+
+.rounded-image {
+    border-radius: 10px;
+    width: 80%;
+}
+
+/* Ikonki pracy */
+.job-icon {
+    display: inline-block;
+    margin: 10px;
+    cursor: pointer;
+    position: relative;
+}
+
+.job-icon-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.job-summary {
+    display: none;
+    position: absolute;
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    max-width: 200px;
+    z-index: 999;
+    font-size: 14px;
+    line-height: 1.5;
+    transform: translateY(-10px);
+}
+
+/* Trójkąt podpowiedzi */
+.job-summary::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 20px;
+    border-width: 10px;
+    border-style: solid;
+    border-color: #333 transparent transparent transparent;
+}
+
+/* Wyświetlanie podpowiedzi na hover */
+.job-icon:hover .job-summary {
+    display: block;
+}
+
+/* Ukrywanie podpowiedzi po kliknięciu */
+.job-icon.clicked .job-summary {
+    display: none;
+}
+
+/* Szczegóły pracy */
+.job-details img {
+    width: 50%;
+    margin-top: 10px;
+    border-radius: 10px;
+}
+
+.job-details {
+    transition: opacity 0.3s ease;
+}
+
+/* Boczne przyciski nawigacyjne */
+.side-buttons {
+    position: fixed;
+    top: 40%;
+    right: 10px;
+    z-index: 100;
+}
+
+.circle-btn {
+    display: block;
+    margin: 10px 0;
+    width: 50px;
+    height: 50px;
+    background-color: #333;
+    color: white;
+    text-align: center;
+    line-height: 50px;
+    border-radius: 50%;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 101;
+}
+
+.circle-btn:hover {
+    background-color: #555;
+}
+
+/* Płynne przewijanie przy nawigacji */
+html {
+    scroll-behavior: smooth;
+}

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kontakt</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="kontakt.html">Kontakt</a></li>
+                <li><a href="galeria.html">Galeria</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <h2>Kontakt</h2>
+        <form id="contactForm" action="submit.html" method="POST">
+            <label for="email">E-Mail:</label>
+            <input type="text" id="email" name="email" placeholder="Twój e-mail">
+            
+            <label for="subject">Temat wiadomości:</label>
+            <select id="subject" name="subject">
+                <option value="Zapytanie">Zapytanie</option>
+                <option value="Oferta współpracy">Oferta współpracy</option>
+                <option value="Inne">Inne</option>
+            </select>
+            
+            <label for="message">Wiadomość:</label>
+            <textarea id="message" name="message" placeholder="Twoja wiadomość"></textarea>
+            
+            <input type="submit" value="Wyślij">
+        </form>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Twoje Imię i Nazwisko</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
