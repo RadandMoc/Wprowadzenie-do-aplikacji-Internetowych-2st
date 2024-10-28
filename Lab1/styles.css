@@ -27,9 +27,9 @@ th {
 
 .container {
   display: grid;
-  grid-template-columns: repeat(3, 100px); /* trzy kolumny */
-  grid-template-rows: repeat(2, 100px); /* dwa wiersze */
-  gap: 10px; /* odstępy między elementami */
+  grid-template-columns: repeat(3, 100px); 
+  grid-template-rows: repeat(2, 100px); 
+  gap: 10px; 
 }
 
 .box {
@@ -60,5 +60,5 @@ th {
 }
 
 body {
-  background-color: #f0f0f0; /* Jasnoszary kolor tła */
+  background-color: #f0f0f0;
 }
