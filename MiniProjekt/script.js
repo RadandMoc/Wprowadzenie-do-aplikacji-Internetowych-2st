@@ -22,17 +22,13 @@ document.getElementById('contactForm').addEventListener('submit', function(event
 // Pokazywanie i ukrywanie chmurki
 function showSummary(id) {
     const summary = document.getElementById(id);
-    const parent = summary.closest('.job-icon');
-    if (!parent.classList.contains('clicked')) {
-        summary.style.display = 'block';
-    }
+    summary.style.display = 'block';
 }
 
 function hideSummary(id) {
     const summary = document.getElementById(id);
     summary.style.display = 'none';
 }
-
 // Przełączanie pełnego opisu po kliknięciu — blokuje chmurkę
 function toggleFullDescription(detailsId, summaryId) {
     const details = document.getElementById(detailsId);

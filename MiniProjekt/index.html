@@ -8,16 +8,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!--<header>
-        <nav>
-            <ul>
-                <li><a href="#wyksztalcenie">Wykształcenie</a></li>
-                <li><a href="#doswiadczenie">Doświadczenie</a></li>
-                <li><a href="#hobby">Hobby</a></li>
-                <li><a href="#projekty">Projekty</a></li>
-            </ul>
-        </nav>
-    </header>-->
     <header>
         <nav>
             <ul>
@@ -39,7 +29,57 @@
 
     
     <main>
-        <section id="wyksztalcenie" class="content-section">
+        <h1 id="wyksztalcenie" class="center-header">Wykształcenie</h1>
+
+        <!-- First Education Block -->
+        <div class="content-section">
+            <div class="text-left alt-background">
+                <h2 class="centered-heading" onmouseover="showSummary('education1-summary')" onmouseout="hideSummary('education1-summary')">
+                    Studia licencjackie na AGH
+                </h2>
+                <div id="education1-summary" class="job-summary centered-heading">
+                    <b>Informatyka i Ekonometria</b>,
+                    <i> 2021-2024</i>
+                    <br/>
+                    <u>Technologie:</u>
+                    <p>
+                        .NET, C#, R, Python, Java, C, VBA, (ms)SQL, .NET Core (w tym cshtml, html, JS, CSS), proste sieci neuronowe, liczne metaheurystyki
+                    </p>
+                </div>
+                <h3 class="centered-heading small-margin"><i>Wydział Zarządzania</i></h3>
+                <h4 class="centered-heading small-margin">Kierunek: Informatyka i Ekonometria (IiE)</h4>
+                <p class="centered-heading small-margin">Efekty: Kierunek pomógł mi nauczyć się licznych technologii informacyjnych, zapoczątkował moją znajomość z różnymi modelami AI/SI. Nauczył mnie dopasowywania licznych modeli statystycznych, przeprowadzania testów statystycznych, analizy danych, ich obróbki i wizualizacji. Wszystko to zostało doprawione nowoczesnymi naukami zarządzania zarówno zespołem jak i przedsiębiorstwami.</p>
+            </div>
+            <div class="image-right">
+                <img src="https://www.zarz.agh.edu.pl/wp-content/uploads/2016/04/IMG_5950.jpg" alt="Studia licencjackie" class="rounded-image">
+            </div>
+        </div>
+    
+        <!-- Second Education Block -->
+        <div class="content-section">
+            <div class="image-left">
+                <img src="https://perspektywy.pl/portal/images/aktualnosci/2023/2023-10-02-agh-informatyka-a.jpg" alt="Studia magisterskie" class="rounded-image">
+            </div>
+            <div class="text-right alt-background">
+                <h2 class="centered-heading" onmouseover="showSummary('education2-summary')" onmouseout="hideSummary('education2-summary')">
+                    Studia magisterskie na AGH
+                </h2>
+                <div id="education2-summary" class="job-summary centered-heading">
+                    <b>Uczenie Maszynowe i Sztuczna Inteligencja</b>,
+                    <i> 2024-2026</i>
+                    <br/>
+                    <u>Technologie:</u>
+                    <p>
+                        Python, (ms)SQL, Technologie internetowe (w tym html, JS, CSS), systemy Unix i wiele rzeczy, których jeszcze nie zacząłem
+                    </p>
+                </div>
+                <h3 class="centered-heading small-margin"><i>Wydział Informatyki</i></h3>
+                <h4 class="centered-heading small-margin">Kierunek: Uczenie Maszynowe i Sztuczna Inteligencja (UMiSI)</h4>
+                <p class="centered-heading small-margin">Efekty: W ciągu jednego semestru nadrabiałem zaległości w wiedzy technologii informacyjnych, które były uczone na kierunku czysto informatycznym. Duży nacisk postawiono na algorytmikę, złożoność obliczeniową, styl (czytelność) pisanego programu i jego projektowania.</p>
+            </div>
+        </div>
+
+        <section class="content-section">
             <div class="text-left">
                 <h2>Wykształcenie</h2>
                 <p>Opis Twojego wykształcenia...</p>
@@ -129,7 +169,7 @@
     </main>
 
     <footer>
-        <p>&copy; 2024 Twoje Imię i Nazwisko</p>
+        <p>&copy; 2024 Radosław Mocarski</p>
     </footer>
 
     <script src="script.js"></script>

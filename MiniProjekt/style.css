@@ -39,6 +39,7 @@ header nav ul li a:hover {
 main {
     padding: 20px;
     position: relative;
+    min-width: 70vw;
     max-width: 800px;
     margin: 50px auto;
     background-color: #fff;
@@ -56,6 +57,7 @@ footer {
     bottom: 0;
     width: 100%;
     border-radius: 0 0 10px 10px;
+    box-sizing: border-box;
 }
 
 /* Sekcje treści z naprzemiennym układem */
@@ -64,20 +66,36 @@ footer {
     justify-content: space-between;
     align-items: center;
     padding: 20px;
-    margin-bottom: 30px;
-    border-radius: 10px;
+    margin-bottom: 15px;
+    margin-top: 15px;
 }
 
 .alt-background {
     background-color: #f0f0f0;
+    border-radius: 10px;
+    align-items: center;
+    padding: 20px;
 }
 
 .text-left, .text-right {
     width: 50%;
 }
 
+.center-header{
+    display: flex;
+    justify-content: center;
+}
+
+.centered-heading {
+    text-align: center;
+}
+
+.small-margin{
+    margin: 3px;
+}
+
 .image-right, .image-left {
-    width: 50%;
+    width: 60%;
     display: flex;
     justify-content: center;
 }
