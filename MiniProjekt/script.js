@@ -12,12 +12,18 @@ document.getElementById('contactForm').addEventListener('submit', function(event
     const email = document.getElementById('email').value;
     const message = document.getElementById('message').value;
 
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
     if (!email || !message) {
         alert('Proszę uzupełnić wszystkie pola!');
         event.preventDefault();
     }
-});
 
+    if (!emailRegex.test(email)) {
+        alert('Proszę podać poprawny adres e-mail!');
+        event.preventDefault();
+    }
+});
 
 // Pokazywanie i ukrywanie chmurki
 function showSummary(id) {
@@ -33,16 +39,6 @@ function hideSummary(id) {
 function loadNextPage(pageName){
     window.location.href = pageName;
 }
-// Przełączanie pełnego opisu po kliknięciu — blokuje chmurkę
-function toggleFullDescription(detailsId, summaryId) {
-    const summary = document.getElementById(summaryId);
-    const parent = summary.closest('.job-icon');
-    if (!parent.classList.contains('clicked')) {
-        parent.classList.add('clicked'); // Blokujemy chmurkę
-        window.location.href = "firma1.html"; // Przekierowanie na nową stronę
-    }
-}
-
 
 function toggleSection(id) {
     const section = document.getElementById(id);

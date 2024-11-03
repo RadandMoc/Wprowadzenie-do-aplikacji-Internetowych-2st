@@ -1,4 +1,5 @@
-/* Ogólne style dla całego dokumentu */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=DynaPuff:wght@400..700&family=Playwrite+GB+S:ital,wght@0,100..400;1,100..400&display=swap');
+
 body {
     font-family: 'Open Sans', sans-serif;
     margin: 0;
@@ -11,9 +12,14 @@ body {
     min-height: 100vh;
 }
 
+.other-text-style{
+    font-family: "Cinzel", serif;
+}
+
 header {
     background-color: #333;
-    padding: 10px;
+    padding: 15px 20px;
+    border-bottom: 3px solid #f4f4f9; /* Zachowanie kolorystyki */
 }
 
 /* Menu nawigacyjne */
@@ -29,13 +35,14 @@ header nav ul li {
 }
 
 header nav ul li a {
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
+    color: #fff;
+    font-weight: 600;
+    transition: opacity 0.3s;
 }
 
 header nav ul li a:hover {
-    text-decoration: underline;
+    opacity: 0.7; /* Subtelna zmiana przezroczystości na hover */
+    text-decoration: none;
 }
 
 /* Główna sekcja */
@@ -61,6 +68,12 @@ footer {
     border-radius: 0 0 10px 10px;
     box-sizing: border-box;
     margin-top: auto; /* Zapewnia, że stopka znajdzie się na dole strony */
+}
+
+a,
+input,
+button {
+    transition: all 0.3s ease-in-out;
 }
 
 /* Sekcje treści z naprzemiennym układem */
@@ -104,15 +117,21 @@ footer {
     object-fit: contain;
 }
 
-.image-right, .image-left {
+.image-right {
     width: 60%;
     display: flex;
-    justify-content: center;
+    justify-content: right;
+}
+
+.image-left {
+    width: 60%;
+    display: flex;
+    justify-content: left;
 }
 
 .rounded-image {
     border-radius: 10px;
-    width: 80%;
+    width: 90%;
 }
 
 /* Ikonki pracy */
@@ -213,7 +232,7 @@ html {
     display: flex;
     flex-wrap: wrap;
     gap: 1vw; /* Odstęp między zdjęciami */
-    justify-content: space-around; /* Równomierne rozmieszczenie zdjęć */
+    justify-content: center; /* Równomierne rozmieszczenie zdjęć */
     align-items: center; /* Centrowanie obrazów w osi pionowej */
 
 }
@@ -225,9 +244,102 @@ html {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Opcjonalny cień */
 }
 
-@media (max-width: 800px) {
+.iframe-container {
+    width: 70%; 
+    position: relative;
+    padding-bottom: 40%; 
+    height: 0; 
+    overflow: hidden;
+    margin: auto; 
+}
+
+.iframe-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%; 
+    height: 100%;
+}
+
+form#contactForm {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+form#contactForm input[type="text"],
+form#contactForm select,
+form#contactForm textarea {
+    border: 2px solid #ccc;
+    border-radius: 8px; /* Zaokrąglenie rogów */
+    padding: 10px;
+    font-size: 16px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+form#contactForm input[type="text"]:focus,
+form#contactForm select:focus,
+form#contactForm textarea:focus {
+    border-color: #666; /* Utrzymanie stonowanych kolorów */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    outline: none;
+}
+
+form#contactForm input[type="submit"] {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+form#contactForm input[type="submit"]:hover {
+    background-color: #555;
+    transform: scale(1.05);
+}
+
+@media (max-width: 600px) {
     .gallery img {
         max-width: 70%; /* Zmiana szerokości dla mniejszych ekranów */
         height: fit-content; /* Zachowanie proporcji także na mniejszych ekranach */
+    }
+
+    .circle-btn {
+        display: none;
+    }
+
+    .rounded-image {
+        width: 100%;
+        }
+        
+        .content-section {
+        display: revert;
+        justify-items: center;
+        }
+        
+        .text-left {
+        width: 90%;
+        }
+
+        .text-right {
+        width: 90%;
+        }
+        
+        .image-right{
+            width: 100%;
+        }
+
+        .image-left{
+            width: 100%;
+        }
+}
+
+@media (min-width:601px) and (max-width:940px){
+    .circle-btn {
+        display: none;
     }
 }
