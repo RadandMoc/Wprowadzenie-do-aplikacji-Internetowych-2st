@@ -29,9 +29,12 @@ function hideSummary(id) {
     const summary = document.getElementById(id);
     summary.style.display = 'none';
 }
+
+function loadNextPage(pageName){
+    window.location.href = pageName;
+}
 // Przełączanie pełnego opisu po kliknięciu — blokuje chmurkę
 function toggleFullDescription(detailsId, summaryId) {
-    const details = document.getElementById(detailsId);
     const summary = document.getElementById(summaryId);
     const parent = summary.closest('.job-icon');
     if (!parent.classList.contains('clicked')) {

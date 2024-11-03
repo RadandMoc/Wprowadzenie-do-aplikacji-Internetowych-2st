@@ -94,6 +94,14 @@ footer {
     margin: 3px;
 }
 
+.max-height250 {
+    max-height: 250px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+  }
+  
+
 .image-right, .image-left {
     width: 60%;
     display: flex;
@@ -126,7 +134,7 @@ footer {
     color: #fff;
     padding: 10px;
     border-radius: 10px;
-    max-width: 200px;
+    max-width: 25vw;
     z-index: 999;
     font-size: 14px;
     line-height: 1.5;
