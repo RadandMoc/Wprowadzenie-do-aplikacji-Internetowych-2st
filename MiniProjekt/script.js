@@ -9,6 +9,7 @@ function toggleDetails(id) {
 
 // Walidacja formularza kontaktowego
 document.getElementById('contactForm').addEventListener('submit', function(event) {
+    event.preventDefault();
     const email = document.getElementById('email').value;
     const message = document.getElementById('message').value;
 
@@ -23,6 +24,29 @@ document.getElementById('contactForm').addEventListener('submit', function(event
         alert('Proszę podać poprawny adres e-mail!');
         event.preventDefault();
     }
+
+    // Wysłanie formularza
+    fetch('https://formspree.io/f/YOUR_FORM_ID', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ recipient, email, message })
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Sukces:', data);
+        alert('Wiadomość została wysłana!');
+    })
+    .catch((error) => {
+        console.error('Błąd:', error);
+        alert('Wystąpił problem z wysyłaniem wiadomości: ' + error.message);
+    });
 });
 
 // Pokazywanie i ukrywanie chmurki
