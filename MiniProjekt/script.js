@@ -31,8 +31,6 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
 
-        // Wiadomość, która zostanie wyświetlona po prawidłowym wysłaniu formularza
-        alert('Formularz został poprawnie wysłany!');
     });
 });
 
