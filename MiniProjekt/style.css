@@ -278,6 +278,8 @@ form#contactForm textarea {
     font-size: 16px;
     transition: border-color 0.3s, box-shadow 0.3s;
     max-width: 80vw;
+    resize: vertical;
+    overflow: auto;
 }
 
 form#contactForm input[type="text"]:focus,
