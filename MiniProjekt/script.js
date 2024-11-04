@@ -31,6 +31,7 @@ document.getElementById('contactForm').addEventListener('submit', function(event
         headers: {
             'Content-Type': 'application/json'
         },
+        body: JSON.stringify({ email, message }) // Usuń `recipient` jeśli jest zbędne
     })
     .then(response => {
         if (!response.ok) {
@@ -47,7 +48,6 @@ document.getElementById('contactForm').addEventListener('submit', function(event
         alert('Wystąpił problem z wysyłaniem wiadomości: ' + error.message);
     });
 });
-
 
 // Pokazywanie i ukrywanie chmurki
 function showSummary(id) {
