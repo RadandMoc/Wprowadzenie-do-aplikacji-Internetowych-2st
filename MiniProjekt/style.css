@@ -20,6 +20,7 @@ header {
     background-color: #333;
     padding: 15px 20px;
     border-bottom: 3px solid #f4f4f9; /* Zachowanie kolorystyki */
+    border-radius: 0 0 10px 10px;
 }
 
 /* Menu nawigacyjne */
@@ -65,7 +66,7 @@ footer {
     background-color: #333;
     color: white;
     width: 100%;
-    border-radius: 0 0 10px 10px;
+    border-radius: 10px 10px 0 0;
     box-sizing: border-box;
     margin-top: auto; /* Zapewnia, że stopka znajdzie się na dole strony */
 }
