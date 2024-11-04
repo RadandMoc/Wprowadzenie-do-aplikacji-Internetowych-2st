@@ -17,12 +17,12 @@ document.getElementById('contactForm').addEventListener('submit', function(event
 
     if (!email || !message) {
         alert('Proszę uzupełnić wszystkie pola!');
-        return; // Wystarczy jedno `event.preventDefault()`
+        event.preventDefault();
     }
 
     if (!emailRegex.test(email)) {
         alert('Proszę podać poprawny adres e-mail!');
-        return;
+        event.preventDefault();
     }
 
     // Wysłanie formularza
@@ -31,7 +31,7 @@ document.getElementById('contactForm').addEventListener('submit', function(event
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ email, message }) // Usuń `recipient` jeśli jest zbędne
+        body: JSON.stringify({ recipient, email, message })
     })
     .then(response => {
         if (!response.ok) {
