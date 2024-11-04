@@ -275,6 +275,7 @@ form#contactForm textarea {
     padding: 10px;
     font-size: 16px;
     transition: border-color 0.3s, box-shadow 0.3s;
+    max-width: 80vw;
 }
 
 form#contactForm input[type="text"]:focus,
@@ -302,7 +303,7 @@ form#contactForm input[type="submit"]:hover {
     transform: scale(1.05);
 }
 
-@media (max-width: 600px) {
+@media (max-width: 620px) {
     .gallery img {
         max-width: 70%; /* Zmiana szerokości dla mniejszych ekranów */
         height: fit-content; /* Zachowanie proporcji także na mniejszych ekranach */
@@ -336,10 +337,19 @@ form#contactForm input[type="submit"]:hover {
         .image-left{
             width: 100%;
         }
+    
+        .job-summary{
+        max-width: 65vw;
+        position-area: bottom;
+        }
 }
 
-@media (min-width:601px) and (max-width:940px){
+@media (min-width:620px) and (max-width:940px){
     .circle-btn {
         display: none;
     }
+    
+    .job-summary{
+        max-width: 33vw;
+        }
 }
