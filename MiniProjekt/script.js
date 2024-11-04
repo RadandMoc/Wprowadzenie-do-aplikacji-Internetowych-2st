@@ -7,6 +7,36 @@ function toggleDetails(id) {
     }
 }
 
+// Walidacja formularza kontaktowego
+document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('contactForm');
+
+    form.addEventListener('submit', function (event) {
+        // Pobranie wartości pól formularza
+        const email = document.getElementById('email').value.trim();
+        const message = document.getElementById('message').value.trim();
+
+        // Sprawdzenie, czy pola są wypełnione
+        if (!email || !message) {
+            alert('Proszę wypełnić wszystkie wymagane pola.');
+            event.preventDefault(); // Zatrzymanie wysyłania formularza
+            return;
+        }
+
+        // Proste sprawdzenie poprawności adresu e-mail
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailPattern.test(email)) {
+            alert('Proszę podać poprawny adres e-mail.');
+            event.preventDefault(); // Zatrzymanie wysyłania formularza
+            return;
+        }
+
+        // Wiadomość, która zostanie wyświetlona po prawidłowym wysłaniu formularza
+        alert('Formularz został poprawnie wysłany!');
+    });
+});
+
+
 // Pokazywanie i ukrywanie chmurki
 function showSummary(id) {
     const summary = document.getElementById(id);
