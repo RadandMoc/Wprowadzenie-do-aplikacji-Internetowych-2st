@@ -101,6 +101,7 @@ button {
 .center-header {
     display: flex;
     justify-content: center;
+    text-align: center;
 }
 
 .centered-heading {
