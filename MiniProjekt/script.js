@@ -26,7 +26,7 @@ document.getElementById('contactForm').addEventListener('submit', function(event
     }
 
     // Wysłanie formularza
-    fetch('https://formspree.io/f/xanyevkr', {
+    fetch('https://formspree.io/f/YOUR_FORM_ID', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
