@@ -64,20 +64,3 @@ document.querySelectorAll('.circle-btn').forEach(button => {
         });
     });
 });
-
-//wywalić poniżej
-function startClock() {
-    const clockElement = document.getElementById("clock");
-    
-    function updateClock() {
-        const now = new Date();
-        const hours = String(now.getHours()).padStart(2, '0');
-        const minutes = String(now.getMinutes()).padStart(2, '0');
-        const seconds = String(now.getSeconds()).padStart(2, '0');
-        
-        clockElement.textContent = `${hours}:${minutes}:${seconds}`;
-    }
-    
-    updateClock(); // Wywołanie od razu, by nie było opóźnienia
-    setInterval(updateClock, 1000); // Aktualizuje zegar co sekundę
-}
