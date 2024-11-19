@@ -1,0 +1,23 @@
+canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#backgroundCanvas {
+  z-index: 1;
+}
+
+#gameCanvas {
+  z-index: 2;
+}
+
+#uiCanvas {
+  z-index: 3;
+  pointer-events: none; /* Zapobiega przechwytywaniu zdarzeń przez uiCanvas */
+}
+
+body {
+  margin: 0;
+  overflow: hidden;
+}

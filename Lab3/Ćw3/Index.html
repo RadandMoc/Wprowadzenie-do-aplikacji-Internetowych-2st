@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista Produktów</title>
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: center;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    img {
+      max-width: 100px;
+    }
+    .filter-container {
+      margin-bottom: 15px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="filter-container">
+  <input type="text" id="filterInput" placeholder="Filtruj po tytule lub opisie">
+  <select id="sortSelect">
+    <option value="original">Oryginalna kolejność</option>
+    <option value="asc">Rosnąco</option>
+    <option value="desc">Malejąco</option>
+  </select>
+</div>
+
+<table id="productTable">
+  <thead>
+    <tr>
+      <th>Zdjęcie</th>
+      <th>Tytuł</th>
+      <th>Opis</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- Wiersze z danymi produktów zostaną dodane tutaj dynamicznie -->
+  </tbody>
+</table>
+
+<script src="skrypt.js"></script>
+
+</body>
+</html>
