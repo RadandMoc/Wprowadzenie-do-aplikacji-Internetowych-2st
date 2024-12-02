@@ -1,0 +1,6 @@
+na jednym terminalu: 
+python app.py
+
+następnie w requests.http klikać w requesty które istnieją prawym przyciskiem myszy i send request.
+Żeby przejrzeć bazę danych po lewej stronie vs code jest database. kliknąć dwa razy lewym na znaczek,
+a potem podwójnie na books. tam jest stan książek.

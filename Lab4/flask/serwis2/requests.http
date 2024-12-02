@@ -1,0 +1,23 @@
+### Pobranie wszystkich zamówień użytkownika
+GET http://127.0.0.1:5000/api/orders/1
+
+### Dodanie nowego zamówienia
+POST http://127.0.0.1:5000/api/orders
+Content-Type: application/json
+
+{
+    "user_id": 1,
+    "book_id": 1,
+    "quantity": 2
+}
+
+### Usunięcie zamówienia
+DELETE http://127.0.0.1:5000/api/orders/1
+
+### Aktualizacja zamówienia
+PATCH http://127.0.0.1:5000/api/orders/4
+Content-Type: application/json
+
+{
+    "quantity": 3
+}

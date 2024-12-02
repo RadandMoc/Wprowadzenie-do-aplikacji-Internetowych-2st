@@ -1,0 +1,20 @@
+### Pobierz wszystkie książki
+GET http://localhost:3000/api/book
+
+### Pobierz książkę po ID
+GET http://localhost:3000/api/book/1
+
+### Dodaj książkę (zabezpieczone JWT)
+POST http://localhost:3000/api/book
+Content-Type: application/json
+Authorization: Bearer <JWT_TOKEN>
+
+{
+  "title": "New Book",
+  "author": "John Doe",
+  "year": 2023
+}
+
+### Usuń książkę (zabezpieczone JWT)
+DELETE http://localhost:3000/api/book/1
+Authorization: Bearer <JWT_TOKEN>

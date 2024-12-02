@@ -1,0 +1,18 @@
+### Pobranie wszystkich książek
+GET http://127.0.0.1:5000/api/books
+
+### Dodanie nowej książki
+POST http://127.0.0.1:5000/api/books
+Content-Type: application/json
+
+{
+    "title": "Book Title",
+    "author": "Author Name",
+    "year": 2023
+}
+
+### Pobranie konkretnej książki
+GET http://127.0.0.1:5000/api/books/1
+
+### Usunięcie książki
+DELETE http://127.0.0.1:5000/api/books/1

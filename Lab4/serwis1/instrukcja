@@ -1,0 +1,3 @@
+do terminala:
+node index.js
+później klepać requests.http

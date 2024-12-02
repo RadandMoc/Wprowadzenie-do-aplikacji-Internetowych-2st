@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Książki</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        button {
+            margin: 5px;
+            padding: 10px 15px;
+            cursor: pointer;
+        }
+        input, textarea {
+            margin: 5px 0;
+            display: block;
+            width: 300px;
+            padding: 5px;
+        }
+        .book {
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <h1>Książki</h1>
+
+    <button onclick="fetchBooks()">Pokaż wszystkie książki</button>
+    <button onclick="showAddBookForm()">Dodaj książkę</button>
+
+    <div id="content"></div>
+
+    <script>
+        const API_URL = "http://localhost:3000/api/books";
+
+        // Pobierz wszystkie książki
+        async function fetchBooks() {
+            const response = await fetch(API_URL);
+            const books = await response.json();
+
+            const content = document.getElementById('content');
+            content.innerHTML = ""; // Wyczyść zawartość
+
+            if (books.length === 0) {
+                content.innerHTML = "<p>Brak książek w bazie danych.</p>";
+                return;
+            }
+
+            books.forEach(book => {
+                const bookDiv = document.createElement('div');
+                bookDiv.classList.add('book');
+                bookDiv.innerHTML = `
+                    <h3>${book.title}</h3>
+                    <p><strong>Autor:</strong> ${book.author}</p>
+                    <p><strong>Rok:</strong> ${book.year}</p>
+                    <button onclick="fetchBook(${book.id})">Szczegóły</button>
+                    <button onclick="deleteBook(${book.id})">Usuń</button>
+                `;
+                content.appendChild(bookDiv);
+            });
+        }
+
+        // Pobierz konkretną książkę
+        async function fetchBook(id) {
+            const response = await fetch(`${API_URL}/${id}`);
+            const book = await response.json();
+
+            const content = document.getElementById('content');
+            content.innerHTML = `
+                <h2>${book.title}</h2>
+                <p><strong>Autor:</strong> ${book.author}</p>
+                <p><strong>Rok:</strong> ${book.year}</p>
+                <button onclick="fetchBooks()">Powrót do listy</button>
+            `;
+        }
+
+        // Pokaż formularz dodawania książki
+        function showAddBookForm() {
+            const content = document.getElementById('content');
+            content.innerHTML = `
+                <h2>Dodaj książkę</h2>
+                <form onsubmit="addBook(event)">
+                    <input type="text" id="title" placeholder="Tytuł" required />
+                    <input type="text" id="author" placeholder="Autor" required />
+                    <input type="number" id="year" placeholder="Rok" required />
+                    <button type="submit">Dodaj książkę</button>
+                </form>
+            `;
+        }
+
+        // Dodaj nową książkę
+        async function addBook(event) {
+            event.preventDefault();
+
+            const title = document.getElementById('title').value;
+            const author = document.getElementById('author').value;
+            const year = document.getElementById('year').value;
+
+            const response = await fetch(API_URL, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ title, author, year }),
+            });
+
+            if (response.ok) {
+                alert("Książka została dodana!");
+                fetchBooks();
+            } else {
+                alert("Wystąpił błąd podczas dodawania książki.");
+            }
+        }
+
+        // Usuń książkę
+        async function deleteBook(id) {
+            const response = await fetch(`${API_URL}/${id}`, {
+                method: "DELETE",
+            });
+
+            if (response.ok) {
+                alert("Książka została usunięta!");
+                fetchBooks();
+            } else {
+                alert("Wystąpił błąd podczas usuwania książki.");
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+### Pobranie wszystkich zamówień
+GET http://localhost:3001/api/orders/all
+Content-Type: application/json
+
+### Pobranie wszystkich zamówień użytkownika
+GET http://localhost:3001/api/orders/1
+Content-Type: application/json
+
+### Dodanie nowego zamówienia (zabezpieczone JWT)
+POST http://localhost:3001/api/orders
+Content-Type: application/json
+Authorization: Bearer <JWT_TOKEN>
+
+{
+  "userId": 1,
+  "bookId": 3,
+  "quantity": 3
+}
+
+### Edycja zamówienia (zabezpieczone JWT)
+PATCH http://localhost:3001/api/orders/1
+Content-Type: application/json
+Authorization: Bearer <JWT_TOKEN>
+
+{
+  "quantity": 5
+}
+
+### Usunięcie zamówienia (zabezpieczone JWT)
+DELETE http://localhost:3001/api/orders/1
+Authorization: Bearer <JWT_TOKEN>

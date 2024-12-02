@@ -1,0 +1,12 @@
+GET http://localhost:3000/api/books
+
+POST http://localhost:3000/api/books
+Content-Type: application/json
+
+{
+  "title": "Przykładowa książka",
+  "author": "Jan Kowalski",
+  "year": 2024
+}
+
+DELETE http://localhost:3000/api/books/1
