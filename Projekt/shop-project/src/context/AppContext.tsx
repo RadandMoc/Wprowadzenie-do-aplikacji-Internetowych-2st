@@ -22,6 +22,7 @@ interface Review {
 
 interface User {
   username: string;
+  password: string;
   role: "admin" | "user";
 }
 
@@ -34,6 +35,8 @@ interface AppContextProps {
   removeFromCart: (productId: number) => void;
   user: User | null;
   login: (username: string, password: string) => void;
+  accessToken: string | null;
+  refreshToken: string | null;
 }
 
 export const AppContext = createContext<AppContextProps | undefined>(undefined);
@@ -42,16 +45,24 @@ const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [products, setProducts] = useState<Product[]>([]);
   const [cart, setCart] = useState<Product[]>([]);
   const [user, setUser] = useState<User | null>(null);
+  const [accessToken, setAccessToken] = useState<string | null>(null);
+  const [refreshToken, setRefreshToken] = useState<string | null>(null);
 
   const login = (username: string, password: string) => {
     fetch("/data/users.json")
       .then((res) => res.json())
       .then((users) => {
         const foundUser = users.find(
-          (u: User) => u.username === username && u.role
+          (u: User) => u.username === username && u.password === password
         );
-        if (foundUser) setUser(foundUser);
-        else alert("Invalid credentials");
+        if (foundUser) {
+          setUser(foundUser);
+          // Symulacja generowania tokenów
+          setAccessToken("fakeAccessToken123");
+          setRefreshToken("fakeRefreshToken456");
+        } else {
+          alert("Invalid credentials");
+        }
       });
   };
 
@@ -100,6 +111,8 @@ const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
         removeFromCart,
         user,
         login,
+        accessToken,
+        refreshToken,
       }}
     >
       {children}

@@ -6,9 +6,15 @@ const Login: React.FC = () => {
   const { login } = useContext(AppContext)!;
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState<string | null>(null);
 
   const handleLogin = () => {
-    login(username, password);
+    if (username && password) {
+      login(username, password);
+      setError(null);
+    } else {
+      setError("Please enter both username and password.");
+    }
   };
 
   return (
@@ -31,6 +37,11 @@ const Login: React.FC = () => {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
+      {error && (
+        <Typography color="error" variant="body2">
+          {error}
+        </Typography>
+      )}
       <Button variant="contained" color="primary" onClick={handleLogin}>
         Login
       </Button>
