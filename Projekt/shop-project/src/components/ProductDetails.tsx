@@ -46,9 +46,26 @@ const ProductDetails: React.FC = () => {
 
   return (
     <Container>
-      <Typography variant="h4">{product.name}</Typography>
-      <Typography>{product.description}</Typography>
-      <Typography>Price: ${product.price}</Typography>
+      <Typography variant="h4" gutterBottom>
+        {product.name}
+      </Typography>
+      <Typography variant="h6" gutterBottom>
+        Price: ${product.price}
+      </Typography>
+
+      {product.image && (
+        <Box sx={{ textAlign: "center", mb: 4 }}>
+          <img
+            src={product.image}
+            alt={product.name}
+            style={{ maxWidth: "100%", height: "auto", borderRadius: "8px" }}
+          />
+        </Box>
+      )}
+
+      <Typography variant="body1" gutterBottom>
+        {product.description}
+      </Typography>
 
       <Box sx={{ mt: 4 }}>
         <Typography variant="h5">Reviews</Typography>
