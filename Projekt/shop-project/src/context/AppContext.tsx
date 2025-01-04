@@ -7,7 +7,17 @@ interface Product {
   price: number;
   category: string;
   stock: number;
+  image?: string;
   quantity?: number; // Ilość produktu w koszyku (opcjonalne)
+  reviews?: Review[]; // Tablica recenzji (opcjonalna)
+}
+
+interface Review {
+  id: number;
+  username: string;
+  comment: string;
+  rating: number;
+  date: string;
 }
 
 interface User {
@@ -20,6 +30,7 @@ interface AppContextProps {
   setProducts: React.Dispatch<React.SetStateAction<Product[]>>;
   cart: Product[];
   addToCart: (product: Product, quantity: number) => void;
+  addReview: (productId: number, review: Review) => void;
   removeFromCart: (productId: number) => void;
   user: User | null;
   login: (username: string, password: string) => void;
@@ -63,6 +74,21 @@ const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     setCart((prev) => prev.filter((item) => item.id !== productId));
   };
 
+  const addReview = (productId: number, review: Review) => {
+    setProducts((prevProducts) =>
+      prevProducts.map((product) =>
+        product.id === productId
+          ? {
+              ...product,
+              reviews: product.reviews
+                ? [...product.reviews, review]
+                : [review],
+            }
+          : product
+      )
+    );
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -70,6 +96,7 @@ const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
         setProducts,
         cart,
         addToCart,
+        addReview,
         removeFromCart,
         user,
         login,

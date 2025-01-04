@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { AppContext } from "../context/AppContext";
 import {
   Container,
@@ -13,6 +14,8 @@ import {
   InputLabel,
   FormControl,
   SelectChangeEvent,
+  CardActionArea,
+  CardMedia,
 } from "@mui/material";
 
 const ProductList: React.FC = () => {
@@ -51,7 +54,7 @@ const ProductList: React.FC = () => {
   );
 
   return (
-    <Container>
+    <Container sx={{ mt: 4 }}>
       <Typography variant="h4" gutterBottom>
         Product List
       </Typography>
@@ -89,10 +92,29 @@ const ProductList: React.FC = () => {
         {filteredProducts.map((product) => (
           <Grid item xs={12} md={6} lg={4} key={product.id}>
             <Card>
+              {/* Klikalna warstwa przenosząca do szczegółów produktu */}
+              <CardActionArea component={Link} to={`/product/${product.id}`}>
+                {product.image && (
+                  <CardMedia
+                    component="img"
+                    height="160"
+                    image={product.image}
+                    alt={product.name}
+                  />
+                )}
+                <CardContent>
+                  <Typography variant="h5" gutterBottom>
+                    {product.name}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    {product.description}
+                  </Typography>
+                  <Typography variant="subtitle1" sx={{ mt: 1 }}>
+                    Price: ${product.price}
+                  </Typography>
+                </CardContent>
+              </CardActionArea>
               <CardContent>
-                <Typography variant="h5">{product.name}</Typography>
-                <Typography>{product.description}</Typography>
-                <Typography>Price: ${product.price}</Typography>
                 <Button
                   variant="contained"
                   color="primary"
@@ -108,7 +130,12 @@ const ProductList: React.FC = () => {
 
       {/* No products message */}
       {filteredProducts.length === 0 && (
-        <Typography variant="h6" color="textSecondary" align="center">
+        <Typography
+          variant="h6"
+          color="textSecondary"
+          align="center"
+          sx={{ mt: 4 }}
+        >
           No products match your search.
         </Typography>
       )}
