@@ -7,7 +7,7 @@ interface Product {
   price: number;
   category: string;
   stock: number;
-  quantity?: number;
+  quantity?: number; // Ilość produktu w koszyku (opcjonalne)
 }
 
 interface User {
@@ -32,12 +32,21 @@ const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [cart, setCart] = useState<Product[]>([]);
   const [user, setUser] = useState<User | null>(null);
 
-  const login = (username: string, password: string) => {};
+  const login = (username: string, password: string) => {
+    fetch("/data/users.json")
+      .then((res) => res.json())
+      .then((users) => {
+        const foundUser = users.find(
+          (u: User) => u.username === username && u.role
+        );
+        if (foundUser) setUser(foundUser);
+        else alert("Invalid credentials");
+      });
+  };
 
   const addToCart = (product: Product, quantity: number) => {
     const existingProduct = cart.find((item) => item.id === product.id);
     if (existingProduct) {
-      // Jeśli produkt już jest w koszyku, zwiększ jego ilość
       setCart((prev) =>
         prev.map((item) =>
           item.id === product.id
@@ -46,7 +55,6 @@ const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
         )
       );
     } else {
-      // Jeśli produkt jest nowy, dodaj go z ilością
       setCart((prev) => [...prev, { ...product, quantity }]);
     }
   };

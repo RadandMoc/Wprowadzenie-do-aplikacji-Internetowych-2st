@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "name": "Smartphone",
+    "description": "A modern smartphone with 128GB storage.",
+    "price": 799,
+    "category": "Electronics",
+    "stock": 10
+  },
+  {
+    "id": 2,
+    "name": "Laptop",
+    "description": "Powerful laptop with 16GB RAM and 512GB SSD.",
+    "price": 1199,
+    "category": "Electronics",
+    "stock": 5
+  }
+]
