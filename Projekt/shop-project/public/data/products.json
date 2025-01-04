@@ -14,5 +14,149 @@
     "price": 1199,
     "category": "Electronics",
     "stock": 5
+  },
+  {
+    "id": 3,
+    "name": "Blender",
+    "description": "High-speed blender for smoothies and soups.",
+    "price": 89.99,
+    "category": "Home Appliances",
+    "stock": 50
+  },
+  {
+    "id": 4,
+    "name": "Vacuum Cleaner",
+    "description": "Powerful vacuum cleaner with HEPA filter.",
+    "price": 199.99,
+    "category": "Home Appliances",
+    "stock": 30
+  },
+  {
+    "id": 5,
+    "name": "Soccer Ball",
+    "description": "Durable soccer ball for outdoor play.",
+    "price": 29.99,
+    "category": "Sports",
+    "stock": 100
+  },
+  {
+    "id": 6,
+    "name": "Tennis Racket",
+    "description": "Lightweight tennis racket for professionals.",
+    "price": 129.99,
+    "category": "Sports",
+    "stock": 40
+  },
+  {
+    "id": 7,
+    "name": "T-shirt",
+    "description": "Comfortable cotton T-shirt in multiple colors.",
+    "price": 19.99,
+    "category": "Clothing",
+    "stock": 200
+  },
+  {
+    "id": 8,
+    "name": "Jeans",
+    "description": "Classic blue jeans with a modern fit.",
+    "price": 49.99,
+    "category": "Clothing",
+    "stock": 150
+  },
+  {
+    "id": 9,
+    "name": "Fiction Novel",
+    "description": "Bestselling fiction novel by a famous author.",
+    "price": 14.99,
+    "category": "Books",
+    "stock": 300
+  },
+  {
+    "id": 10,
+    "name": "Cookbook",
+    "description": "Comprehensive cookbook with 500+ recipes.",
+    "price": 24.99,
+    "category": "Books",
+    "stock": 120
+  },
+  {
+    "id": 11,
+    "name": "Lego Set",
+    "description": "Creative Lego set for kids and adults.",
+    "price": 59.99,
+    "category": "Toys",
+    "stock": 80
+  },
+  {
+    "id": 12,
+    "name": "Action Figure",
+    "description": "Highly detailed action figure from a popular series.",
+    "price": 39.99,
+    "category": "Toys",
+    "stock": 60
+  },
+  {
+    "id": 13,
+    "name": "Car Oil",
+    "description": "Synthetic motor oil for improved engine performance.",
+    "price": 25.99,
+    "category": "Automotive",
+    "stock": 90
+  },
+  {
+    "id": 14,
+    "name": "Car Seat Cover",
+    "description": "Comfortable and durable car seat cover.",
+    "price": 45.99,
+    "category": "Automotive",
+    "stock": 70
+  },
+  {
+    "id": 15,
+    "name": "Face Cream",
+    "description": "Moisturizing face cream for daily use.",
+    "price": 19.99,
+    "category": "Health & Beauty",
+    "stock": 150
+  },
+  {
+    "id": 16,
+    "name": "Shampoo",
+    "description": "Nourishing shampoo for all hair types.",
+    "price": 9.99,
+    "category": "Health & Beauty",
+    "stock": 200
+  },
+  {
+    "id": 17,
+    "name": "Garden Hose",
+    "description": "Flexible and durable garden hose.",
+    "price": 34.99,
+    "category": "Garden",
+    "stock": 50
+  },
+  {
+    "id": 18,
+    "name": "Lawn Mower",
+    "description": "Electric lawn mower with adjustable height.",
+    "price": 299.99,
+    "category": "Garden",
+    "stock": 20
+  },
+  {
+    "id": 19,
+    "name": "Smartwatch",
+    "description": "Feature-packed smartwatch with fitness tracking.",
+    "price": 199.99,
+    "category": "Electronics",
+    "stock": 70
+  },
+  {
+    "id": 20,
+    "name": "Wireless Earbuds",
+    "description": "High-quality wireless earbuds with noise cancellation.",
+    "price": 149.99,
+    "category": "Electronics",
+    "stock": 100
   }
 ]
