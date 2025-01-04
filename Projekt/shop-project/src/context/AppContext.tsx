@@ -35,8 +35,10 @@ interface AppContextProps {
   removeFromCart: (productId: number) => void;
   user: User | null;
   login: (username: string, password: string) => void;
+  logout: () => void;
   accessToken: string | null;
   refreshToken: string | null;
+  isLoggedIn: () => boolean;
 }
 
 export const AppContext = createContext<AppContextProps | undefined>(undefined);
@@ -64,6 +66,16 @@ const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
           alert("Invalid credentials");
         }
       });
+  };
+
+  const logout = () => {
+    setUser(null);
+    setAccessToken(null);
+    setRefreshToken(null);
+  };
+
+  const isLoggedIn = () => {
+    return user !== null && accessToken !== null;
   };
 
   const addToCart = (product: Product, quantity: number) => {
@@ -111,8 +123,10 @@ const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
         removeFromCart,
         user,
         login,
+        logout,
         accessToken,
         refreshToken,
+        isLoggedIn,
       }}
     >
       {children}

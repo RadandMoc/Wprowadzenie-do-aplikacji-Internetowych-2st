@@ -3,7 +3,7 @@ import { AppContext } from "../context/AppContext";
 import { Container, TextField, Button, Typography } from "@mui/material";
 
 const Login: React.FC = () => {
-  const { login } = useContext(AppContext)!;
+  const { login, logout, isLoggedIn, user } = useContext(AppContext)!;
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -17,34 +17,46 @@ const Login: React.FC = () => {
     }
   };
 
+  const handleLogout = () => {
+    logout();
+  };
+
   return (
     <Container>
       <Typography variant="h4" gutterBottom>
-        Login
+        {isLoggedIn() ? `Welcome, ${user?.username}` : "Login"}
       </Typography>
-      <TextField
-        label="Username"
-        fullWidth
-        margin="normal"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-      />
-      <TextField
-        label="Password"
-        type="password"
-        fullWidth
-        margin="normal"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      {error && (
-        <Typography color="error" variant="body2">
-          {error}
-        </Typography>
+      {isLoggedIn() ? (
+        <Button variant="contained" color="primary" onClick={handleLogout}>
+          Logout
+        </Button>
+      ) : (
+        <>
+          <TextField
+            label="Username"
+            fullWidth
+            margin="normal"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          <TextField
+            label="Password"
+            type="password"
+            fullWidth
+            margin="normal"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          {error && (
+            <Typography color="error" variant="body2">
+              {error}
+            </Typography>
+          )}
+          <Button variant="contained" color="primary" onClick={handleLogin}>
+            Login
+          </Button>
+        </>
       )}
-      <Button variant="contained" color="primary" onClick={handleLogin}>
-        Login
-      </Button>
     </Container>
   );
 };
