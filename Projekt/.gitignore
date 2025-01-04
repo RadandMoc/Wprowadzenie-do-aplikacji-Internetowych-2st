@@ -1,0 +1,22 @@
+# Node.js
+node_modules/
+.env
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Vite
+dist/
+.vite/
+*.local
+
+# System plików
+.DS_Store
+Thumbs.db
+
+# IDE/edytory
+.vscode/
+.idea/
+*.swp
+*.sublime-project
+*.sublime-workspace
