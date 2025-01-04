@@ -7,6 +7,7 @@ interface Product {
   price: number;
   category: string;
   stock: number;
+  quantity?: number;
 }
 
 interface User {
@@ -34,7 +35,20 @@ const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const login = (username: string, password: string) => {};
 
   const addToCart = (product: Product, quantity: number) => {
-    setCart((prev) => [...prev, { ...product, quantity }]);
+    const existingProduct = cart.find((item) => item.id === product.id);
+    if (existingProduct) {
+      // Jeśli produkt już jest w koszyku, zwiększ jego ilość
+      setCart((prev) =>
+        prev.map((item) =>
+          item.id === product.id
+            ? { ...item, quantity: (item.quantity || 0) + quantity }
+            : item
+        )
+      );
+    } else {
+      // Jeśli produkt jest nowy, dodaj go z ilością
+      setCart((prev) => [...prev, { ...product, quantity }]);
+    }
   };
 
   const removeFromCart = (productId: number) => {
