@@ -1,4 +1,4 @@
-import React, { createContext, useState, ReactNode } from "react";
+import React, { createContext, useState, ReactNode, useEffect } from "react";
 
 interface Product {
   id: number;
@@ -50,6 +50,18 @@ const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [accessToken, setAccessToken] = useState<string | null>(null);
   const [refreshToken, setRefreshToken] = useState<string | null>(null);
 
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    const storedAccessToken = localStorage.getItem("accessToken");
+    const storedRefreshToken = localStorage.getItem("refreshToken");
+
+    if (storedUser && storedAccessToken && storedRefreshToken) {
+      setUser(JSON.parse(storedUser));
+      setAccessToken(storedAccessToken);
+      setRefreshToken(storedRefreshToken);
+    }
+  }, []);
+
   const login = (username: string, password: string) => {
     fetch("/data/users.json")
       .then((res) => res.json())
@@ -59,9 +71,13 @@ const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
         );
         if (foundUser) {
           setUser(foundUser);
-          // Symulacja generowania tokenów
-          setAccessToken("fakeAccessToken123");
-          setRefreshToken("fakeRefreshToken456");
+          const fakeAccessToken = "fakeAccessToken123";
+          const fakeRefreshToken = "fakeRefreshToken456";
+          setAccessToken(fakeAccessToken);
+          setRefreshToken(fakeRefreshToken);
+          localStorage.setItem("user", JSON.stringify(foundUser));
+          localStorage.setItem("accessToken", fakeAccessToken);
+          localStorage.setItem("refreshToken", fakeRefreshToken);
         } else {
           alert("Invalid credentials");
         }
@@ -72,6 +88,9 @@ const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     setUser(null);
     setAccessToken(null);
     setRefreshToken(null);
+    localStorage.removeItem("user");
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
   };
 
   const isLoggedIn = () => {
