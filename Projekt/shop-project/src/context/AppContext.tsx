@@ -33,6 +33,7 @@ interface AppContextProps {
   addToCart: (product: Product, quantity: number) => void;
   addReview: (productId: number, review: Review) => void;
   removeFromCart: (productId: number) => void;
+  decreaseQuantity: (productId: number) => void;
   user: User | null;
   login: (username: string, password: string) => void;
   logout: () => void;
@@ -116,6 +117,16 @@ const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     setCart((prev) => prev.filter((item) => item.id !== productId));
   };
 
+  const decreaseQuantity = (productId: number) => {
+    setCart((prev) =>
+      prev.map((item) =>
+        item.id === productId && (item.quantity || 1) > 1
+          ? { ...item, quantity: (item.quantity || 1) - 1 }
+          : item
+      )
+    );
+  };
+
   const addReview = (productId: number, review: Review) => {
     setProducts((prevProducts) =>
       prevProducts.map((product) =>
@@ -140,6 +151,7 @@ const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
         addToCart,
         addReview,
         removeFromCart,
+        decreaseQuantity,
         user,
         login,
         logout,

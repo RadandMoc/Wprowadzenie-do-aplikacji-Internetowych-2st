@@ -1,11 +1,21 @@
 import React, { useContext } from "react";
 import { AppContext } from "../context/AppContext";
-import { Container, List, ListItem, ListItemText, Button, Typography } from "@mui/material";
+import {
+  Container,
+  List,
+  ListItem,
+  ListItemText,
+  Button,
+  Typography,
+} from "@mui/material";
 
 const Cart: React.FC = () => {
-  const { cart, removeFromCart } = useContext(AppContext)!;
+  const { cart, removeFromCart, decreaseQuantity } = useContext(AppContext)!;
 
-  const total = cart.reduce((sum, item) => sum + item.price * (item.quantity || 1), 0);
+  const total = cart.reduce(
+    (sum, item) => sum + item.price * (item.quantity || 1),
+    0
+  );
 
   return (
     <Container>
@@ -17,7 +27,9 @@ const Cart: React.FC = () => {
           <ListItem key={item.id}>
             <ListItemText
               primary={item.name}
-              secondary={`Price: $${item.price} | Quantity: ${item.quantity || 1}`}
+              secondary={`Price: $${item.price} | Quantity: ${
+                item.quantity || 1
+              }`}
             />
             <Button
               variant="contained"
@@ -25,6 +37,13 @@ const Cart: React.FC = () => {
               onClick={() => removeFromCart(item.id)}
             >
               Remove
+            </Button>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => decreaseQuantity(item.id)}
+            >
+              Decrease Quantity
             </Button>
           </ListItem>
         ))}
