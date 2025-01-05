@@ -61,6 +61,10 @@ const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
       setUser(JSON.parse(storedUser));
       setAccessToken(storedAccessToken);
       setRefreshToken(storedRefreshToken);
+      const storedCart = localStorage.getItem(`cart_${JSON.parse(storedUser).username}`);
+      if (storedCart) {
+        setCart(JSON.parse(storedCart));
+      }
     }
   }, []);
 
@@ -80,6 +84,12 @@ const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
           localStorage.setItem("user", JSON.stringify(foundUser));
           localStorage.setItem("accessToken", fakeAccessToken);
           localStorage.setItem("refreshToken", fakeRefreshToken);
+          const storedCart = localStorage.getItem(`cart_${username}`);
+          if (storedCart) {
+            setCart(JSON.parse(storedCart));
+          } else {
+            setCart([]);
+          }
         } else {
           alert("Invalid credentials");
         }
@@ -87,9 +97,13 @@ const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   };
 
   const logout = () => {
+    if (user) {
+      localStorage.setItem(`cart_${user.username}`, JSON.stringify(cart));
+    }
     setUser(null);
     setAccessToken(null);
     setRefreshToken(null);
+    setCart([]);
     localStorage.removeItem("user");
     localStorage.removeItem("accessToken");
     localStorage.removeItem("refreshToken");
@@ -112,10 +126,17 @@ const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     } else {
       setCart((prev) => [...prev, { ...product, quantity }]);
     }
+    if (user) {
+      localStorage.setItem(`cart_${user.username}`, JSON.stringify(cart));
+    }
   };
 
   const removeFromCart = (productId: number) => {
-    setCart((prev) => prev.filter((item) => item.id !== productId));
+    const updatedCart = cart.filter((item) => item.id !== productId);
+    setCart(updatedCart);
+    if (user) {
+      localStorage.setItem(`cart_${user.username}`, JSON.stringify(updatedCart));
+    }
   };
 
   const decreaseQuantity = (productId: number) => {
@@ -126,6 +147,9 @@ const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
           : item
       )
     );
+    if (user) {
+      localStorage.setItem(`cart_${user.username}`, JSON.stringify(cart));
+    }
   };
 
   const increaseQuantity = (productId: number) => {
@@ -136,6 +160,9 @@ const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
           : item
       )
     );
+    if (user) {
+      localStorage.setItem(`cart_${user.username}`, JSON.stringify(cart));
+    }
   };
 
   const addReview = (productId: number, review: Review) => {
