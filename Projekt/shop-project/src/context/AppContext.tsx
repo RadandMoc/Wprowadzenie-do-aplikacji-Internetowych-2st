@@ -34,6 +34,7 @@ interface AppContextProps {
   addReview: (productId: number, review: Review) => void;
   removeFromCart: (productId: number) => void;
   decreaseQuantity: (productId: number) => void;
+  increaseQuantity: (productId: number) => void;
   user: User | null;
   login: (username: string, password: string) => void;
   logout: () => void;
@@ -127,6 +128,16 @@ const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     );
   };
 
+  const increaseQuantity = (productId: number) => {
+    setCart((prev) =>
+      prev.map((item) =>
+        item.id === productId
+          ? { ...item, quantity: (item.quantity || 1) + 1 }
+          : item
+      )
+    );
+  };
+
   const addReview = (productId: number, review: Review) => {
     setProducts((prevProducts) =>
       prevProducts.map((product) =>
@@ -152,6 +163,7 @@ const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
         addReview,
         removeFromCart,
         decreaseQuantity,
+        increaseQuantity,
         user,
         login,
         logout,

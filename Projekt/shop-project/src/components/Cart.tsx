@@ -10,7 +10,8 @@ import {
 } from "@mui/material";
 
 const Cart: React.FC = () => {
-  const { cart, removeFromCart, decreaseQuantity } = useContext(AppContext)!;
+  const { cart, removeFromCart, decreaseQuantity, increaseQuantity } =
+    useContext(AppContext)!;
 
   const total = cart.reduce(
     (sum, item) => sum + item.price * (item.quantity || 1),
@@ -44,6 +45,13 @@ const Cart: React.FC = () => {
               onClick={() => decreaseQuantity(item.id)}
             >
               Decrease Quantity
+            </Button>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => increaseQuantity(item.id)}
+            >
+              Increase Quantity
             </Button>
           </ListItem>
         ))}
