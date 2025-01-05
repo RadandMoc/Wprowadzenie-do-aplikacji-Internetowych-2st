@@ -18,6 +18,9 @@ const ProductDetails: React.FC = () => {
 
   const [comment, setComment] = useState("");
   const [rating, setRating] = useState<number | null>(5);
+  const { addToCart } = useContext(AppContext)!;
+
+  const [quantity, setQuantity] = useState<number>(1);
   const [error, setError] = useState("");
 
   if (!product) {
@@ -43,6 +46,12 @@ const ProductDetails: React.FC = () => {
     setRating(5);
     setError("");
   };
+
+  const handleAddToCart = () => {
+    addToCart(product, quantity);
+  };
+
+  const remainingStock = product.stock - (product.quantity || 0);
 
   return (
     <Container>
@@ -87,6 +96,7 @@ const ProductDetails: React.FC = () => {
       <Box sx={{ mt: 4 }}>
         <Typography variant="h5">Add a Review</Typography>
         {error && <Typography color="error">{error}</Typography>}
+
         <Rating
           value={rating}
           onChange={(_, newValue) => setRating(newValue)}
@@ -103,6 +113,38 @@ const ProductDetails: React.FC = () => {
         />
         <Button variant="contained" onClick={handleAddReview}>
           Submit Review
+        </Button>
+        <Typography variant="h6" gutterBottom>
+          Product stock: {product.stock}
+        </Typography>
+        <TextField
+          label="Quantity"
+          fullWidth
+          value={quantity}
+          onChange={(e) => {
+            const value = Number(e.target.value);
+            if (value > remainingStock) {
+              alert(`Cannot add more than ${remainingStock} of this product.`);
+              return;
+            }
+            setQuantity(value);
+          }}
+          type="number"
+          sx={{ mb: 2 }}
+          InputProps={{
+            inputProps: { min: 0 },
+            sx: {
+              "::-webkit-outer-spin-button, ::-webkit-inner-spin-button": {
+                display: "none",
+              },
+              "input[type=number]": {
+                MozAppearance: "textfield",
+              },
+            },
+          }}
+        />
+        <Button variant="contained" onClick={handleAddToCart}>
+          Add to Cart
         </Button>
       </Box>
     </Container>

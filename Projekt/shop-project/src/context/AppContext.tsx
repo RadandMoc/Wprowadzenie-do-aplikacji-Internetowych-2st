@@ -61,7 +61,9 @@ const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
       setUser(JSON.parse(storedUser));
       setAccessToken(storedAccessToken);
       setRefreshToken(storedRefreshToken);
-      const storedCart = localStorage.getItem(`cart_${JSON.parse(storedUser).username}`);
+      const storedCart = localStorage.getItem(
+        `cart_${JSON.parse(storedUser).username}`
+      );
       if (storedCart) {
         setCart(JSON.parse(storedCart));
       }
@@ -121,15 +123,26 @@ const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
 
   const addToCart = (product: Product, quantity: number) => {
     const existingProduct = cart.find((item) => item.id === product.id);
+
     if (existingProduct) {
+      const updatedQuantity = (existingProduct.quantity || 0) + quantity;
+
+      if (updatedQuantity > product.stock) {
+        alert(`Cannot add more than ${product.stock} of this product.`);
+        return;
+      }
+
       setCart((prev) =>
         prev.map((item) =>
-          item.id === product.id
-            ? { ...item, quantity: (item.quantity || 0) + quantity }
-            : item
+          item.id === product.id ? { ...item, quantity: updatedQuantity } : item
         )
       );
     } else {
+      if (quantity > product.stock) {
+        alert(`Cannot add more than ${product.stock} of this product.`);
+        return;
+      }
+
       setCart((prev) => [...prev, { ...product, quantity }]);
     }
   };
@@ -152,7 +165,7 @@ const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const increaseQuantity = (productId: number) => {
     setCart((prev) =>
       prev.map((item) =>
-        item.id === productId
+        item.id === productId && (item.quantity || 1) < item.stock
           ? { ...item, quantity: (item.quantity || 1) + 1 }
           : item
       )
