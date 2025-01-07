@@ -16,10 +16,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from products.views import ProductList
+from products.views import ProductList, UserOrders, ProductReviews, AddReview, AddProduct, UpdateProduct, DecreaseProductStock, AddOrder
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('products/', ProductList.as_view(), name='product-list'),
-    path('api/', include('products.urls')),
+    path('user/<int:user_id>/orders/', UserOrders.as_view(), name='user-orders'),
+    path('product/<int:product_id>/reviews/', ProductReviews.as_view(), name='product-reviews'),
+    path('review/add/', AddReview.as_view(), name='add-review'),
+    path('product/add/', AddProduct.as_view(), name='add-product'),
+    path('product/<int:product_id>/update/', UpdateProduct.as_view(), name='update-product'),
+    path('product/<int:product_id>/decrease-stock/', DecreaseProductStock.as_view(), name='decrease-product-stock'),
+    path('order/add/', AddOrder.as_view(), name='add-order'),
 ]
