@@ -24,7 +24,7 @@ const ProductList: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>(""); // For category filter
 
   useEffect(() => {
-    fetch("/data/products.json")
+    fetch("http://localhost:8000/products/")
       .then((res) => res.json())
       .then((data) => setProducts(data));
   }, [setProducts]);
@@ -98,7 +98,7 @@ const ProductList: React.FC = () => {
                   <CardMedia
                     component="img"
                     height="160"
-                    image={product.image}
+                    image={`http://localhost:8000/media/${product.image}`}  // Użyj poprawnej ścieżki do obrazka
                     alt={product.name}
                   />
                 )}

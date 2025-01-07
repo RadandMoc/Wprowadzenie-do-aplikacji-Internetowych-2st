@@ -10,6 +10,15 @@ class ProductList(APIView):
         serializer = ProductSerializer(products, many=True)
         return Response(serializer.data)
 
+class ProductDetail(APIView):
+    def get(self, request, product_id):
+        try:
+            product = Product.objects.prefetch_related('reviews').get(id=product_id)
+            serializer = ProductSerializer(product)
+            return Response(serializer.data)
+        except Product.DoesNotExist:
+            return Response({"error": "Product not found"}, status=404)
+        
 class UserOrders(APIView):
     def get(self, request, user_id):
         orders = Order.objects.filter(user_id=user_id)

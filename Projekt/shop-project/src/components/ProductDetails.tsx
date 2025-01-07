@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { AppContext } from "../context/AppContext";
 import {
@@ -10,18 +10,29 @@ import {
   Rating,
 } from "@mui/material";
 
+interface Review {
+  id: number;
+  username: string;
+  rating: number;
+  comment: string;
+  date: string;
+}
+
 const ProductDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const { products, addReview } = useContext(AppContext)!;
-
-  const product = products.find((p) => p.id === Number(id));
-
+  const { addReview, addToCart } = useContext(AppContext)!;
+  const [product, setProduct] = useState<any>(null);
   const [comment, setComment] = useState("");
   const [rating, setRating] = useState<number | null>(5);
-  const { addToCart } = useContext(AppContext)!;
-
   const [quantity, setQuantity] = useState<number>(1);
   const [error, setError] = useState("");
+
+  useEffect(() => {
+    fetch(`http://localhost:8000/products/${id}/`)
+      .then((res) => res.json())
+      .then((data) => setProduct(data))
+      .catch((error) => console.error("Error fetching product details:", error));
+  }, [id]);
 
   if (!product) {
     return <Typography>Product not found.</Typography>;
@@ -33,7 +44,7 @@ const ProductDetails: React.FC = () => {
       return;
     }
 
-    const newReview = {
+    const newReview: Review = {
       id: Date.now(),
       username: "current_user", // Tutaj można użyć danych zalogowanego użytkownika
       rating,
@@ -65,7 +76,7 @@ const ProductDetails: React.FC = () => {
       {product.image && (
         <Box sx={{ textAlign: "center", mb: 4 }}>
           <img
-            src={product.image}
+            src={`http://localhost:8000/media/${product.image}`}
             alt={product.name}
             style={{ maxWidth: "100%", height: "auto", borderRadius: "8px" }}
           />
@@ -79,7 +90,7 @@ const ProductDetails: React.FC = () => {
       <Box sx={{ mt: 4 }}>
         <Typography variant="h5">Reviews</Typography>
         {product.reviews && product.reviews.length > 0 ? (
-          product.reviews.map((review) => (
+          product.reviews.map((review: Review) => (
             <Box key={review.id} sx={{ mb: 2, p: 2, border: "1px solid #ddd" }}>
               <Typography>
                 <strong>{review.username}</strong> - {review.date}
