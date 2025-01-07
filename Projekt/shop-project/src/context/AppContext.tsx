@@ -1,4 +1,5 @@
 import React, { createContext, useState, ReactNode, useEffect } from "react";
+import axios from "axios";
 
 interface Product {
   id: number;
@@ -21,6 +22,7 @@ interface Review {
 }
 
 interface User {
+  id: number;
   username: string;
   password: string;
   role: "admin" | "user";
@@ -35,6 +37,7 @@ interface AppContextProps {
   removeFromCart: (productId: number) => void;
   decreaseQuantity: (productId: number) => void;
   increaseQuantity: (productId: number) => void;
+  purchaseAll: () => void;
   user: User | null;
   login: (username: string, password: string) => void;
   logout: () => void;
@@ -187,6 +190,28 @@ const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     );
   };
 
+  const purchaseAll = async () => {
+    if (!user) {
+      alert("You need to be logged in to make a purchase.");
+      return;
+    }
+
+    try {
+      for (const item of cart) {
+        await axios.post("http://localhost:8000/order/add/", {
+          user_id: 1, // Need to change on user.id
+          product_id: item.id,
+          quantity: item.quantity,
+        });
+      }
+      setCart([]);
+      alert("Purchase successful!");
+    } catch (error) {
+      console.error("Error purchasing items:", error);
+      alert("There was an error processing your purchase.");
+    }
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -198,6 +223,7 @@ const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
         removeFromCart,
         decreaseQuantity,
         increaseQuantity,
+        purchaseAll,
         user,
         login,
         logout,

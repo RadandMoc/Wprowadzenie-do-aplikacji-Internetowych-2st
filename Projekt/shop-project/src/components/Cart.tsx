@@ -10,8 +10,13 @@ import {
 } from "@mui/material";
 
 const Cart: React.FC = () => {
-  const { cart, removeFromCart, decreaseQuantity, increaseQuantity } =
-    useContext(AppContext)!;
+  const {
+    cart,
+    removeFromCart,
+    decreaseQuantity,
+    increaseQuantity,
+    purchaseAll,
+  } = useContext(AppContext)!;
 
   const total = cart.reduce(
     (sum, item) => sum + item.price * (item.quantity || 1),
@@ -57,6 +62,14 @@ const Cart: React.FC = () => {
         ))}
       </List>
       <Typography variant="h6">Total: ${total.toFixed(2)}</Typography>
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={purchaseAll}
+        disabled={cart.length === 0}
+      >
+        Purchase All
+      </Button>
     </Container>
   );
 };
