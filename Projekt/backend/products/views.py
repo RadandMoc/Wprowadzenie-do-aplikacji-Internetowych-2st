@@ -2,11 +2,11 @@ from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import Product, Review, Order
-from .serializers import ProductSerializer
-from rest_framework import status
+from .serializers import ProductSerializer,UserSerializer
+from rest_framework import status,generics
 from django.contrib.auth import authenticate
 from rest_framework.authtoken.models import Token
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated,AllowAny
 from rest_framework.authentication import TokenAuthentication
 from django.contrib.auth.models import User
 
@@ -21,6 +21,11 @@ class LoginView(APIView):
         else:
             return Response({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
         
+class RegisterView(generics.CreateAPIView):
+    queryset = User.objects.all()
+    permission_classes = (AllowAny,)
+    serializer_class = UserSerializer
+
 class UserDetailView(APIView):
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]

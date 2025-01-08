@@ -1,12 +1,13 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 import ProductList from "./components/ProductList";
 import ProductDetails from "./components/ProductDetails";
 import Cart from "./components/Cart";
 import Login from "./components/Login";
+import Register from "./components/Register";
 import AdminPanel from "./components/AdminPanel";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
 import AppProvider from "./context/AppContext";
 
 const App: React.FC = () => {
@@ -18,6 +19,7 @@ const App: React.FC = () => {
         <Route path="/product/:id" element={<ProductDetails />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
         <Route path="/admin" element={<AdminPanel />} />
       </Routes>
       <Footer />
