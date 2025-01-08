@@ -80,33 +80,24 @@ const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   }, [cart, user]);
 
   const login = (username: string, password: string) => {
-    fetch("/data/users.json")
-      .then((res) => res.json())
-      .then((users) => {
-        const foundUser = users.find(
-          (u: User) => u.username === username && u.password === password
-        );
-        if (foundUser) {
-          setUser(foundUser);
-          const fakeAccessToken = "fakeAccessToken123";
-          const fakeRefreshToken = "fakeRefreshToken456";
-          setAccessToken(fakeAccessToken);
-          setRefreshToken(fakeRefreshToken);
-          localStorage.setItem("user", JSON.stringify(foundUser));
-          localStorage.setItem("accessToken", fakeAccessToken);
-          localStorage.setItem("refreshToken", fakeRefreshToken);
-          const storedCart = localStorage.getItem(`cart_${username}`);
-          if (storedCart) {
-            setCart(JSON.parse(storedCart));
-          } else {
-            setCart([]);
-          }
-        } else {
-          alert("Invalid credentials");
-        }
+    axios.post('http://localhost:8000/login/', { username, password })
+      .then(response => {
+        const { token } = response.data;
+        setAccessToken(token);
+        localStorage.setItem('accessToken', token);
+        // Pobierz dane użytkownika z bazy danych
+        axios.get('http://localhost:8000/user/', {
+          headers: { Authorization: `Token ${token}` }
+        }).then(userResponse => {
+          setUser(userResponse.data);
+          localStorage.setItem('user', JSON.stringify(userResponse.data));
+        });
+      })
+      .catch(error => {
+        alert('Invalid credentials');
       });
   };
-
+  
   const logout = () => {
     if (user) {
       localStorage.setItem(`cart_${user.username}`, JSON.stringify(cart));
@@ -119,7 +110,7 @@ const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     localStorage.removeItem("accessToken");
     localStorage.removeItem("refreshToken");
   };
-
+  
   const isLoggedIn = () => {
     return user !== null && accessToken !== null;
   };

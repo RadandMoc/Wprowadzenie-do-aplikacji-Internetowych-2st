@@ -1,9 +1,38 @@
 from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .models import Product, Review, Order, User
+from .models import Product, Review, Order
 from .serializers import ProductSerializer
+from rest_framework import status
+from django.contrib.auth import authenticate
+from rest_framework.authtoken.models import Token
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.authentication import TokenAuthentication
+from django.contrib.auth.models import User
 
+class LoginView(APIView):
+    def post(self, request):
+        username = request.data.get('username')
+        password = request.data.get('password')
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            token, created = Token.objects.get_or_create(user=user)
+            return Response({'token': token.key})
+        else:
+            return Response({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
+        
+class UserDetailView(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        user = request.user
+        return Response({
+            'id': user.id,
+            'username': user.username,
+            'is_superuser': user.is_superuser,
+        })
+    
 class ProductList(APIView):
     def get(self, request):
         products = Product.objects.all()
@@ -44,6 +73,8 @@ class AddReview(APIView):
 
 class AddProduct(APIView):
     def post(self, request):
+        if not request.user.is_superuser:
+            return Response({"error": "Permission denied"}, status=status.HTTP_403_FORBIDDEN)
         name = request.data.get('name')
         description = request.data.get('description')
         price = request.data.get('price')
@@ -55,6 +86,8 @@ class AddProduct(APIView):
 
 class UpdateProduct(APIView):
     def post(self, request, product_id):
+        if not request.user.is_superuser:
+            return Response({"error": "Permission denied"}, status=status.HTTP_403_FORBIDDEN)
         product = Product.objects.get(id=product_id)
         product.name = request.data.get('name', product.name)
         product.description = request.data.get('description', product.description)
