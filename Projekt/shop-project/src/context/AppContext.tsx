@@ -80,24 +80,27 @@ const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   }, [cart, user]);
 
   const login = (username: string, password: string) => {
-    axios.post('http://localhost:8000/login/', { username, password })
-      .then(response => {
+    axios
+      .post("http://localhost:8000/login/", { username, password })
+      .then((response) => {
         const { token } = response.data;
         setAccessToken(token);
-        localStorage.setItem('accessToken', token);
+        localStorage.setItem("accessToken", token);
         // Pobierz dane użytkownika z bazy danych
-        axios.get('http://localhost:8000/user/', {
-          headers: { Authorization: `Token ${token}` }
-        }).then(userResponse => {
-          setUser(userResponse.data);
-          localStorage.setItem('user', JSON.stringify(userResponse.data));
-        });
+        axios
+          .get("http://localhost:8000/user/", {
+            headers: { Authorization: `Token ${token}` },
+          })
+          .then((userResponse) => {
+            setUser(userResponse.data);
+            localStorage.setItem("user", JSON.stringify(userResponse.data));
+          });
       })
-      .catch(error => {
-        alert('Invalid credentials');
+      .catch((error) => {
+        alert("Invalid credentials");
       });
   };
-  
+
   const logout = () => {
     if (user) {
       localStorage.setItem(`cart_${user.username}`, JSON.stringify(cart));
@@ -110,7 +113,7 @@ const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     localStorage.removeItem("accessToken");
     localStorage.removeItem("refreshToken");
   };
-  
+
   const isLoggedIn = () => {
     return user !== null && accessToken !== null;
   };
@@ -188,13 +191,13 @@ const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     }
 
     try {
-      for (const item of cart) {
-        await axios.post("http://localhost:8000/order/add/", {
-          user_id: 1, // Need to change on user.id
+      await axios.post("http://localhost:8000/order/addAll/", {
+        user_id: user.id,
+        cart: cart.map((item) => ({
           product_id: item.id,
           quantity: item.quantity,
-        });
-      }
+        })),
+      });
       setCart([]);
       alert("Purchase successful!");
     } catch (error) {

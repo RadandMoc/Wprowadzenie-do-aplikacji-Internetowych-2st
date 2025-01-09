@@ -9,6 +9,8 @@ from rest_framework.authtoken.models import Token
 from rest_framework.permissions import IsAuthenticated,AllowAny
 from rest_framework.authentication import TokenAuthentication
 from django.contrib.auth.models import User
+from django.db import transaction
+
 
 class LoginView(APIView):
     def post(self, request):
@@ -114,9 +116,24 @@ class DecreaseProductStock(APIView):
 class AddOrder(APIView):
     def post(self, request):
         user_id = request.data.get('user_id')
-        product_id = request.data.get('product_id')
-        quantity = request.data.get('quantity')
+        cart = request.data.get('cart')
         user = User.objects.get(id=user_id)
-        product = Product.objects.get(id=product_id)
-        new_order = Order.objects.create(user=user, product=product, quantity=quantity)
-        return Response({"message": "Order added successfully", "order": str(new_order)})
+
+        try:
+            with transaction.atomic():
+                for item in cart:
+                    product_id = item['product_id']
+                    quantity = item['quantity']
+                    product = Product.objects.get(id=product_id)
+                    
+                    if product.stock < quantity:
+                        return Response({"error": f"Not enough stock for {product.name}"}, status=400)
+                    
+                    product.stock -= quantity
+                    product.save()
+                    
+                    Order.objects.create(user=user, product=product, quantity=quantity)
+                
+                return Response({"message": "Order added successfully"})
+        except Exception as e:
+            return Response({"error": str(e)}, status=500)
