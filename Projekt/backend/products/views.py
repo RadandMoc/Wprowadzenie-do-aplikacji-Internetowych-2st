@@ -10,7 +10,7 @@ from rest_framework.permissions import IsAuthenticated,AllowAny
 from rest_framework.authentication import TokenAuthentication
 from django.contrib.auth.models import User
 from django.db import transaction
-
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 class LoginView(APIView):
     def post(self, request):
