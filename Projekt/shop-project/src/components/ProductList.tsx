@@ -69,7 +69,7 @@ const ProductList: React.FC = () => {
           onChange={handleSearchChange}
         />
         <FormControl fullWidth>
-          <InputLabel>Filter by Category</InputLabel>
+          <InputLabel shrink>Filter by Category</InputLabel>
           <Select
             value={selectedCategory}
             onChange={handleCategoryChange}
