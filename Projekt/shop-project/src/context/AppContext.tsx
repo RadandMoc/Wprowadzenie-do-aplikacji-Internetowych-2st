@@ -25,7 +25,7 @@ interface User {
   id: number;
   username: string;
   password: string;
-  role: "admin" | "user";
+  is_superuser: boolean;
 }
 
 interface AppContextProps {
@@ -59,7 +59,7 @@ const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     const storedUser = localStorage.getItem("user");
     const storedAccessToken = localStorage.getItem("accessToken");
     const storedRefreshToken = localStorage.getItem("refreshToken");
-
+  
     if (storedUser && storedAccessToken && storedRefreshToken) {
       setUser(JSON.parse(storedUser));
       setAccessToken(storedAccessToken);
@@ -70,6 +70,22 @@ const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
       if (storedCart) {
         setCart(JSON.parse(storedCart));
       }
+    } else if (storedAccessToken) {
+      // Jeśli jest token, ale nie ma danych użytkownika, pobierz dane użytkownika
+      axios
+        .get("http://localhost:8000/user/", {
+          headers: { Authorization: `Token ${storedAccessToken}` },
+        })
+        .then((response) => {
+          setUser(response.data);
+          localStorage.setItem("user", JSON.stringify(response.data));
+          setAccessToken(storedAccessToken);
+          setRefreshToken(storedRefreshToken);
+        })
+        .catch((error) => {
+          console.error("Error fetching user data:", error);
+          logout();
+        });
     }
   }, []);
 

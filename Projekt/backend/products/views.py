@@ -13,6 +13,8 @@ from django.db import transaction
 
 
 class LoginView(APIView):
+    permission_classes = [AllowAny]
+    
     def post(self, request):
         username = request.data.get('username')
         password = request.data.get('password')
@@ -41,6 +43,7 @@ class UserDetailView(APIView):
         })
     
 class ProductList(APIView):
+    permission_classes = [AllowAny]
     def get(self, request):
         products = Product.objects.all()
         serializer = ProductSerializer(products, many=True)
