@@ -56,15 +56,15 @@ const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [refreshToken, setRefreshToken] = useState<string | null>(null);
 
   useEffect(() => {
-    const storedUser = sessionStorage.getItem("user");
-    const storedAccessToken = sessionStorage.getItem("accessToken");
-    const storedRefreshToken = sessionStorage.getItem("refreshToken");
+    const storedUser = localStorage.getItem("user");
+    const storedAccessToken = localStorage.getItem("accessToken");
+    const storedRefreshToken = localStorage.getItem("refreshToken");
 
     if (storedUser && storedAccessToken && storedRefreshToken) {
       setUser(JSON.parse(storedUser));
       setAccessToken(storedAccessToken);
       setRefreshToken(storedRefreshToken);
-      const storedCart = sessionStorage.getItem(
+      const storedCart = localStorage.getItem(
         `cart_${JSON.parse(storedUser).username}`
       );
       if (storedCart) {
@@ -75,7 +75,7 @@ const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
 
   useEffect(() => {
     if (user) {
-      sessionStorage.setItem(`cart_${user.username}`, JSON.stringify(cart));
+      localStorage.setItem(`cart_${user.username}`, JSON.stringify(cart));
     }
   }, [cart, user]);
 
@@ -85,14 +85,16 @@ const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
       .then((response) => {
         const { token } = response.data;
         setAccessToken(token);
-        sessionStorage.setItem('accessToken', token);
+        localStorage.setItem("accessToken", token);
         // Pobierz dane użytkownika z bazy danych
-        axios.get('http://localhost:8000/user/', {
-          headers: { Authorization: `Token ${token}` }
-        }).then(userResponse => {
-          setUser(userResponse.data);
-          sessionStorage.setItem('user', JSON.stringify(userResponse.data));
-        });
+        axios
+          .get("http://localhost:8000/user/", {
+            headers: { Authorization: `Token ${token}` },
+          })
+          .then((userResponse) => {
+            setUser(userResponse.data);
+            localStorage.setItem("user", JSON.stringify(userResponse.data));
+          });
       })
       .catch((error) => {
         alert("Invalid credentials");
@@ -101,15 +103,15 @@ const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
 
   const logout = () => {
     if (user) {
-      sessionStorage.setItem(`cart_${user.username}`, JSON.stringify(cart));
+      localStorage.setItem(`cart_${user.username}`, JSON.stringify(cart));
     }
     setUser(null);
     setAccessToken(null);
     setRefreshToken(null);
     setCart([]);
-    sessionStorage.removeItem("user");
-    sessionStorage.removeItem("accessToken");
-    sessionStorage.removeItem("refreshToken");
+    localStorage.removeItem("user");
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
   };
 
   const isLoggedIn = () => {
