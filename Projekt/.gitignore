@@ -20,4 +20,6 @@ Thumbs.db
 *.swp
 *.sublime-project
 *.sublime-workspace
-.pyc
+
+# Pycache
+*.pyc
