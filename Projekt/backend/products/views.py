@@ -43,9 +43,15 @@ class UserDetailView(APIView):
         })
     
 class ProductList(APIView):
+    authentication_classes = [TokenAuthentication]
     permission_classes = [AllowAny]
+
     def get(self, request):
         products = Product.objects.all()
+        
+        if not request.user.is_superuser:
+            products = products.filter(stock__gt=0)
+        
         serializer = ProductSerializer(products, many=True)
         return Response(serializer.data)
 
