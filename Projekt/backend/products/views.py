@@ -50,6 +50,7 @@ class ProductList(APIView):
         return Response(serializer.data)
 
 class ProductDetail(APIView):
+    permission_classes = [AllowAny]
     def get(self, request, product_id):
         try:
             product = Product.objects.prefetch_related('reviews').get(id=product_id)
@@ -109,6 +110,8 @@ class UpdateProduct(APIView):
         return Response({"message": "Product updated successfully", "product": str(product)})
 
 class DecreaseProductStock(APIView):
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [TokenAuthentication]
     def post(self, request, product_id):
         product = Product.objects.get(id=product_id)
         decrease_amount = int(request.data.get('decrease_amount', 0))
@@ -117,6 +120,8 @@ class DecreaseProductStock(APIView):
         return Response({"message": "Product stock decreased successfully", "product": str(product)})
 
 class AddOrder(APIView):
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [TokenAuthentication]
     def post(self, request):
         user_id = request.data.get('user_id')
         cart = request.data.get('cart')

@@ -110,6 +110,13 @@ const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
           .then((userResponse) => {
             setUser(userResponse.data);
             localStorage.setItem("user", JSON.stringify(userResponse.data));
+            // Wczytaj istniejący koszyk z localStorage
+            const storedCart = localStorage.getItem(
+              `cart_${userResponse.data.username}`
+            );
+            if (storedCart) {
+              setCart(JSON.parse(storedCart));
+            }
           });
       })
       .catch((error) => {
@@ -201,24 +208,36 @@ const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   };
 
   const purchaseAll = async () => {
-    if (!user) {
+    if (!user || !accessToken) {
       alert("You need to be logged in to make a purchase.");
       return;
     }
-
+  
     try {
-      await axios.post("http://localhost:8000/order/addAll/", {
-        user_id: user.id,
-        cart: cart.map((item) => ({
-          product_id: item.id,
-          quantity: item.quantity,
-        })),
-      });
-      setCart([]);
-      alert("Purchase successful!");
+      const response = await axios.post(
+        "http://localhost:8000/order/addAll/",
+        {
+          user_id: user.id,
+          cart: cart.map((item) => ({
+            product_id: item.id,
+            quantity: item.quantity,
+          })),
+        },
+        {
+          headers: {
+            Authorization: `Token ${accessToken}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+  
+      if (response.status === 200) {
+        alert("Purchase successful!");
+        setCart([]);
+      }
     } catch (error) {
-      console.error("Error purchasing items:", error);
-      alert("There was an error processing your purchase.");
+      console.error("Error making purchase:", error);
+      alert("Failed to make purchase. Please try again.");
     }
   };
 
