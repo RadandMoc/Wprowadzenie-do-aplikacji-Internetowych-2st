@@ -81,6 +81,13 @@ const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
           localStorage.setItem("user", JSON.stringify(response.data));
           setAccessToken(storedAccessToken);
           setRefreshToken(storedRefreshToken);
+          // Wczytaj istniejący koszyk z localStorage
+          const storedCart = localStorage.getItem(
+            `cart_${response.data.username}`
+          );
+          if (storedCart) {
+            setCart(JSON.parse(storedCart));
+          }
         })
         .catch((error) => {
           console.error("Error fetching user data:", error);
@@ -148,45 +155,41 @@ const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
       const updatedQuantity = (existingProduct.quantity || 0) + quantity;
 
       if (updatedQuantity > product.stock) {
-        alert(`Cannot add more than ${product.stock} of this product.`);
+        alert("Not enough stock available");
         return;
       }
 
-      setCart((prev) =>
-        prev.map((item) =>
-          item.id === product.id ? { ...item, quantity: updatedQuantity } : item
+      setCart((prevCart) =>
+        prevCart.map((item) =>
+          item.id === product.id
+            ? { ...item, quantity: updatedQuantity }
+            : item
         )
       );
     } else {
-      if (quantity > product.stock) {
-        alert(`Cannot add more than ${product.stock} of this product.`);
-        return;
-      }
-
-      setCart((prev) => [...prev, { ...product, quantity }]);
+      setCart((prevCart) => [...prevCart, { ...product, quantity }]);
     }
   };
 
   const removeFromCart = (productId: number) => {
-    const updatedCart = cart.filter((item) => item.id !== productId);
-    setCart(updatedCart);
+    setCart((prevCart) => prevCart.filter((item) => item.id !== productId));
   };
 
   const decreaseQuantity = (productId: number) => {
-    setCart((prev) =>
-      prev.map((item) =>
-        item.id === productId && (item.quantity || 1) > 1
-          ? { ...item, quantity: (item.quantity || 1) - 1 }
+    setCart((prevCart) =>
+      prevCart.map((item) =>
+        item.id === productId
+          ? { ...item, quantity: (item.quantity || 0) - 1 }
           : item
       )
     );
   };
 
   const increaseQuantity = (productId: number) => {
-    setCart((prev) =>
-      prev.map((item) =>
-        item.id === productId && (item.quantity || 1) < item.stock
-          ? { ...item, quantity: (item.quantity || 1) + 1 }
+    setCart((prevCart) =>
+      prevCart.map((item) =>
+        item.id === productId
+          ? { ...item, quantity: (item.quantity || 0) + 1 }
           : item
       )
     );
@@ -196,12 +199,7 @@ const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     setProducts((prevProducts) =>
       prevProducts.map((product) =>
         product.id === productId
-          ? {
-              ...product,
-              reviews: product.reviews
-                ? [...product.reviews, review]
-                : [review],
-            }
+          ? { ...product, reviews: [...(product.reviews || []), review] }
           : product
       )
     );
