@@ -5,7 +5,7 @@ import { Container, Typography, List, ListItem, ListItemText, Button } from "@mu
 const AdminPanel: React.FC = () => {
   const { products, setProducts, user } = useContext(AppContext)!;
 
-  if (user?.role !== "admin") {
+  if (!user?.is_superuser) {
     return <Typography>You do not have access to this page.</Typography>;
   }
 
