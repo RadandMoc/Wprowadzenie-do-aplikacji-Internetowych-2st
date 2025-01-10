@@ -70,8 +70,35 @@ const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
       if (storedCart) {
         setCart(JSON.parse(storedCart));
       }
+    } else if (storedAccessToken) {
+      axios
+        .get("http://localhost:8000/user/", {
+          headers: { Authorization: `Bearer ${storedAccessToken}` },
+        })
+        .then((response) => {
+          setUser(response.data);
+          localStorage.setItem("user", JSON.stringify(response.data));
+          setAccessToken(storedAccessToken);
+          setRefreshToken(storedRefreshToken);
+          const storedCart = localStorage.getItem(
+            `cart_${response.data.username}`
+          );
+          if (storedCart) {
+            setCart(JSON.parse(storedCart));
+          }
+        })
+        .catch((error) => {
+          console.error("Error fetching user data:", error);
+          logout();
+        });
     }
   }, []);
+
+  useEffect(() => {
+    if (user) {
+      localStorage.setItem(`cart_${user.username}`, JSON.stringify(cart));
+    }
+  }, [cart, user]);
 
   const login = async (username: string, password: string) => {
     try {
@@ -92,12 +119,19 @@ const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
       const user = userResponse.data;
       setUser(user);
       localStorage.setItem("user", JSON.stringify(user));
+      const storedCart = localStorage.getItem(`cart_${user.username}`);
+      if (storedCart) {
+        setCart(JSON.parse(storedCart));
+      }
     } catch (error) {
       console.error("Login error:", error);
     }
   };
 
   const logout = () => {
+    if (user) {
+      localStorage.setItem(`cart_${user.username}`, JSON.stringify(cart));
+    }
     setUser(null);
     setAccessToken(null);
     setRefreshToken(null);
@@ -105,10 +139,6 @@ const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     localStorage.removeItem("user");
     localStorage.removeItem("accessToken");
     localStorage.removeItem("refreshToken");
-  };
-
-  const isLoggedIn = () => {
-    return user !== null && accessToken !== null;
   };
 
   const addToCart = (product: Product, quantity: number) => {
@@ -138,13 +168,12 @@ const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   };
 
   const removeFromCart = (productId: number) => {
-    const updatedCart = cart.filter((item) => item.id !== productId);
-    setCart(updatedCart);
+    setCart((prev) => prev.filter((item) => item.id !== productId));
   };
 
   const decreaseQuantity = (productId: number) => {
-    setCart((prevCart) =>
-      prevCart.map((item) =>
+    setCart((prev) =>
+      prev.map((item) =>
         item.id === productId
           ? {
               ...item,
@@ -185,7 +214,6 @@ const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
           headers: { Authorization: `Bearer ${accessToken}` },
         }
       );
-      // Aktualizujemy lokalnie (lub można wywołać GET, by pobrać świeże dane)
       setProducts((prevProducts) =>
         prevProducts.map((p) =>
           p.id === productId
@@ -252,7 +280,7 @@ const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
         logout,
         accessToken,
         refreshToken,
-        isLoggedIn,
+        isLoggedIn: () => !!user,
       }}
     >
       {children}
