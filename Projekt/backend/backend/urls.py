@@ -16,11 +16,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from products.views import ProductList, UserOrders, ProductReviews, AddReview, AddProduct, UpdateProduct, DecreaseProductStock, AddOrder,ProductDetail,LoginView,UserDetailView,RegisterView
+from products.views import CustomTokenObtainPairView, ProductList, UserOrders, ProductReviews, AddReview, AddProduct, UpdateProduct, AddOrder,ProductDetail,LoginView,UserDetailView,RegisterView
 from django.conf import settings
 from django.conf.urls.static import static
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
 
 urlpatterns = [
+    path('api/token/', CustomTokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('admin/', admin.site.urls),
     path('products/', ProductList.as_view(), name='product-list'),
     path('products/<int:product_id>/', ProductDetail.as_view(), name='product-detail'),
@@ -29,8 +35,7 @@ urlpatterns = [
     path('review/add/', AddReview.as_view(), name='add-review'),
     path('product/add/', AddProduct.as_view(), name='add-product'),
     path('product/<int:product_id>/update/', UpdateProduct.as_view(), name='update-product'),
-    path('product/<int:product_id>/decrease-stock/', DecreaseProductStock.as_view(), name='decrease-product-stock'),
-    path('order/addAll/', AddOrder.as_view(), name='add-order'),
+    path('order/add/', AddOrder.as_view(), name='add-order'),
     path('login/', LoginView.as_view(), name='login'),
     path('user/', UserDetailView.as_view(), name='user-detail'),
     path('register/', RegisterView.as_view(), name='register'),

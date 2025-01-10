@@ -26,11 +26,12 @@ const ProductList: React.FC = () => {
 
   useEffect(() => {
     const fetchProducts = async () => {
-      const token = localStorage.getItem("accessToken");
       try {
+        const token = localStorage.getItem("accessToken");
+        console.log("token", token);
         const response = await axios.get("http://localhost:8000/products/", {
           headers: {
-            Authorization: token ? `Token ${token}` : "",
+            Authorization: token ? `Bearer ${token}` : "",
           },
         });
         setProducts(response.data);

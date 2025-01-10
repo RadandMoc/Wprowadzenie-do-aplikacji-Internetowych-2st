@@ -10,7 +10,13 @@ from rest_framework.permissions import IsAuthenticated,AllowAny
 from rest_framework.authentication import TokenAuthentication
 from django.contrib.auth.models import User
 from django.db import transaction
+from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework_simplejwt.authentication import JWTAuthentication
 
+
+
+class CustomTokenObtainPairView(TokenObtainPairView):
+    permission_classes = (AllowAny,)
 
 class LoginView(APIView):
     permission_classes = [AllowAny]
@@ -31,7 +37,7 @@ class RegisterView(generics.CreateAPIView):
     serializer_class = UserSerializer
 
 class UserDetailView(APIView):
-    authentication_classes = [TokenAuthentication]
+    authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
@@ -43,7 +49,7 @@ class UserDetailView(APIView):
         })
     
 class ProductList(APIView):
-    authentication_classes = [TokenAuthentication]
+    authentication_classes = [JWTAuthentication]
     permission_classes = [AllowAny]
 
     def get(self, request):
@@ -78,6 +84,9 @@ class ProductReviews(APIView):
         return Response(reviews_data)
 
 class AddReview(APIView):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
+
     def post(self, request):
         product_id = request.data.get('product_id')
         username = request.data.get('username')
@@ -127,15 +136,6 @@ class UpdateProduct(APIView):
         product.save()
         return Response({"message": "Product updated successfully", "product": str(product)})
 
-class DecreaseProductStock(APIView):
-    permission_classes = [IsAuthenticated]
-    authentication_classes = [TokenAuthentication]
-    def post(self, request, product_id):
-        product = Product.objects.get(id=product_id)
-        decrease_amount = int(request.data.get('decrease_amount', 0))
-        product.stock -= decrease_amount
-        product.save()
-        return Response({"message": "Product stock decreased successfully", "product": str(product)})
 
 class AddOrder(APIView):
     permission_classes = [IsAuthenticated]

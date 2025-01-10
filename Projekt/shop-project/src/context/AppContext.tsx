@@ -1,4 +1,4 @@
-import React, { createContext, useState, ReactNode, useEffect } from "react";
+import React, { createContext, useState, useEffect, ReactNode } from "react";
 import axios from "axios";
 
 interface Product {
@@ -9,8 +9,8 @@ interface Product {
   category: string;
   stock: number;
   image?: string;
-  quantity?: number; // Ilość produktu w koszyku (opcjonalne)
-  reviews?: Review[]; // Tablica recenzji (opcjonalna)
+  quantity?: number;
+  reviews?: Review[];
 }
 
 interface Review {
@@ -59,7 +59,7 @@ const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     const storedUser = localStorage.getItem("user");
     const storedAccessToken = localStorage.getItem("accessToken");
     const storedRefreshToken = localStorage.getItem("refreshToken");
-  
+
     if (storedUser && storedAccessToken && storedRefreshToken) {
       setUser(JSON.parse(storedUser));
       setAccessToken(storedAccessToken);
@@ -70,71 +70,34 @@ const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
       if (storedCart) {
         setCart(JSON.parse(storedCart));
       }
-    } else if (storedAccessToken) {
-      // Jeśli jest token, ale nie ma danych użytkownika, pobierz dane użytkownika
-      axios
-        .get("http://localhost:8000/user/", {
-          headers: { Authorization: `Token ${storedAccessToken}` },
-        })
-        .then((response) => {
-          setUser(response.data);
-          localStorage.setItem("user", JSON.stringify(response.data));
-          setAccessToken(storedAccessToken);
-          setRefreshToken(storedRefreshToken);
-          // Wczytaj istniejący koszyk z localStorage
-          const storedCart = localStorage.getItem(
-            `cart_${response.data.username}`
-          );
-          if (storedCart) {
-            setCart(JSON.parse(storedCart));
-          }
-        })
-        .catch((error) => {
-          console.error("Error fetching user data:", error);
-          logout();
-        });
     }
   }, []);
 
-  useEffect(() => {
-    if (user) {
-      localStorage.setItem(`cart_${user.username}`, JSON.stringify(cart));
-    }
-  }, [cart, user]);
-
-  const login = (username: string, password: string) => {
-    axios
-      .post("http://localhost:8000/login/", { username, password })
-      .then((response) => {
-        const { token } = response.data;
-        setAccessToken(token);
-        localStorage.setItem("accessToken", token);
-        // Pobierz dane użytkownika z bazy danych
-        axios
-          .get("http://localhost:8000/user/", {
-            headers: { Authorization: `Token ${token}` },
-          })
-          .then((userResponse) => {
-            setUser(userResponse.data);
-            localStorage.setItem("user", JSON.stringify(userResponse.data));
-            // Wczytaj istniejący koszyk z localStorage
-            const storedCart = localStorage.getItem(
-              `cart_${userResponse.data.username}`
-            );
-            if (storedCart) {
-              setCart(JSON.parse(storedCart));
-            }
-          });
-      })
-      .catch((error) => {
-        alert("Invalid credentials");
+  const login = async (username: string, password: string) => {
+    try {
+      const response = await axios.post("http://localhost:8000/api/token/", {
+        username,
+        password,
       });
+      const { access, refresh } = response.data;
+      setAccessToken(access);
+      setRefreshToken(refresh);
+      localStorage.setItem("accessToken", access);
+      localStorage.setItem("refreshToken", refresh);
+      const userResponse = await axios.get("http://localhost:8000/user/", {
+        headers: {
+          Authorization: `Bearer ${access}`,
+        },
+      });
+      const user = userResponse.data;
+      setUser(user);
+      localStorage.setItem("user", JSON.stringify(user));
+    } catch (error) {
+      console.error("Login error:", error);
+    }
   };
 
   const logout = () => {
-    if (user) {
-      localStorage.setItem(`cart_${user.username}`, JSON.stringify(cart));
-    }
     setUser(null);
     setAccessToken(null);
     setRefreshToken(null);
@@ -155,41 +118,49 @@ const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
       const updatedQuantity = (existingProduct.quantity || 0) + quantity;
 
       if (updatedQuantity > product.stock) {
-        alert("Not enough stock available");
+        alert(`Cannot add more than ${product.stock} of this product.`);
         return;
       }
 
-      setCart((prevCart) =>
-        prevCart.map((item) =>
-          item.id === product.id
-            ? { ...item, quantity: updatedQuantity }
-            : item
+      setCart((prev) =>
+        prev.map((item) =>
+          item.id === product.id ? { ...item, quantity: updatedQuantity } : item
         )
       );
     } else {
-      setCart((prevCart) => [...prevCart, { ...product, quantity }]);
+      if (quantity > product.stock) {
+        alert(`Cannot add more than ${product.stock} of this product.`);
+        return;
+      }
+
+      setCart((prev) => [...prev, { ...product, quantity }]);
     }
   };
 
   const removeFromCart = (productId: number) => {
-    setCart((prevCart) => prevCart.filter((item) => item.id !== productId));
+    const updatedCart = cart.filter((item) => item.id !== productId);
+    setCart(updatedCart);
   };
 
   const decreaseQuantity = (productId: number) => {
     setCart((prevCart) =>
       prevCart.map((item) =>
         item.id === productId
-          ? { ...item, quantity: item.quantity && item.quantity > 1 ? item.quantity - 1 : 1 }
+          ? {
+              ...item,
+              quantity:
+                item.quantity && item.quantity > 1 ? item.quantity - 1 : 1,
+            }
           : item
       )
     );
   };
 
   const increaseQuantity = (productId: number) => {
-    setCart((prevCart) =>
-      prevCart.map((item) =>
-        item.id === productId
-          ? { ...item, quantity: (item.quantity || 0) + 1 }
+    setCart((prev) =>
+      prev.map((item) =>
+        item.id === productId && (item.quantity || 1) < item.stock
+          ? { ...item, quantity: (item.quantity || 1) + 1 }
           : item
       )
     );
@@ -211,7 +182,7 @@ const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
           date: review.date,
         },
         {
-          headers: { Authorization: `Token ${accessToken}` },
+          headers: { Authorization: `Bearer ${accessToken}` },
         }
       );
       // Aktualizujemy lokalnie (lub można wywołać GET, by pobrać świeże dane)
@@ -232,6 +203,7 @@ const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
 
   const purchaseAll = async () => {
     if (!user || !accessToken) {
+    if (!user) {
       alert("You need to be logged in to make a purchase.");
       return;
     }
