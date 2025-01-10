@@ -17,6 +17,7 @@ import {
   CardActionArea,
   CardMedia,
 } from "@mui/material";
+import axios from "axios";
 
 const ProductList: React.FC = () => {
   const { products, setProducts, addToCart } = useContext(AppContext)!;
@@ -24,9 +25,21 @@ const ProductList: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>(""); // For category filter
 
   useEffect(() => {
-    fetch("http://localhost:8000/products/")
-      .then((res) => res.json())
-      .then((data) => setProducts(data));
+    const fetchProducts = async () => {
+      const token = localStorage.getItem("accessToken");
+      try {
+        const response = await axios.get("http://localhost:8000/products/", {
+          headers: {
+            Authorization: token ? `Token ${token}` : "",
+          },
+        });
+        setProducts(response.data);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
+    };
+
+    fetchProducts();
   }, [setProducts]);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -98,7 +111,7 @@ const ProductList: React.FC = () => {
                   <CardMedia
                     component="img"
                     height="160"
-                    image={`http://localhost:8000/media/${product.image}`}  // Użyj poprawnej ścieżki do obrazka
+                    image={`http://localhost:8000/media/${product.image}`} // Użyj poprawnej ścieżki do obrazka
                     alt={product.name}
                   />
                 )}
