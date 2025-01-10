@@ -22,6 +22,9 @@ class Review(models.Model):
     rating = models.PositiveSmallIntegerField()
     date = models.DateField()
 
+    class Meta:
+        unique_together = ('product', 'username')
+        
     def __str__(self):
         return f"Review by {self.username} for {self.product.name}"
     

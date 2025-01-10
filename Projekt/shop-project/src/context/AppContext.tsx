@@ -179,7 +179,7 @@ const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     setCart((prevCart) =>
       prevCart.map((item) =>
         item.id === productId
-          ? { ...item, quantity: (item.quantity || 0) - 1 }
+          ? { ...item, quantity: item.quantity && item.quantity > 1 ? item.quantity - 1 : 1 }
           : item
       )
     );
@@ -195,14 +195,39 @@ const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     );
   };
 
-  const addReview = (productId: number, review: Review) => {
-    setProducts((prevProducts) =>
-      prevProducts.map((product) =>
-        product.id === productId
-          ? { ...product, reviews: [...(product.reviews || []), review] }
-          : product
-      )
-    );
+  const addReview = async (productId: number, review: Review) => {
+    if (!accessToken) {
+      console.error("Brak tokenu uwierzytelniającego.");
+      return;
+    }
+    try {
+      await axios.post(
+        "http://localhost:8000/review/add/",
+        {
+          product_id: productId,
+          username: review.username,
+          rating: review.rating,
+          comment: review.comment,
+          date: review.date,
+        },
+        {
+          headers: { Authorization: `Token ${accessToken}` },
+        }
+      );
+      // Aktualizujemy lokalnie (lub można wywołać GET, by pobrać świeże dane)
+      setProducts((prevProducts) =>
+        prevProducts.map((p) =>
+          p.id === productId
+            ? {
+                ...p,
+                reviews: [...(p.reviews || []), review],
+              }
+            : p
+        )
+      );
+    } catch (error) {
+      console.error("Błąd dodawania recenzji:", error);
+    }
   };
 
   const purchaseAll = async () => {

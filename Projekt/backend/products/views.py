@@ -84,9 +84,21 @@ class AddReview(APIView):
         comment = request.data.get('comment')
         rating = request.data.get('rating')
         date = request.data.get('date')
+
         product = Product.objects.get(id=product_id)
-        new_review = Review.objects.create(product=product, username=username, comment=comment, rating=rating, date=date)
-        return Response({"message": "Review added successfully", "review": str(new_review)})
+
+        try:
+            existing_review = Review.objects.get(product_id=product_id, username=username)
+            return Response({"message": "Review already exists"})
+        except Review.DoesNotExist:
+            new_review = Review.objects.create(
+                product=product,
+                username=username,
+                comment=comment,
+                rating=rating,
+                date=date
+            )
+            return Response({"message": "Review added successfully", "review": str(new_review)})
 
 class AddProduct(APIView):
     def post(self, request):

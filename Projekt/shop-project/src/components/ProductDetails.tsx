@@ -20,7 +20,7 @@ interface Review {
 
 const ProductDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const { addReview, addToCart } = useContext(AppContext)!;
+  const { addReview, addToCart, user } = useContext(AppContext)!;
   const [product, setProduct] = useState<any>(null);
   const [comment, setComment] = useState("");
   const [rating, setRating] = useState<number | null>(5);
@@ -46,10 +46,10 @@ const ProductDetails: React.FC = () => {
 
     const newReview: Review = {
       id: Date.now(),
-      username: "current_user", // Tutaj można użyć danych zalogowanego użytkownika
+      username: user?.username || "Guest",
       rating,
       comment,
-      date: new Date().toISOString(),
+      date: new Date().toISOString().split("T")[0],
     };
 
     addReview(product.id, newReview);
