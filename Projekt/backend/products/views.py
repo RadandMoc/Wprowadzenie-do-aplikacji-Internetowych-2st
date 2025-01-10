@@ -139,7 +139,8 @@ class UpdateProduct(APIView):
 
 class AddOrder(APIView):
     permission_classes = [IsAuthenticated]
-    authentication_classes = [TokenAuthentication]
+    authentication_classes = [JWTAuthentication]
+
     def post(self, request):
         user_id = request.data.get('user_id')
         cart = request.data.get('cart')

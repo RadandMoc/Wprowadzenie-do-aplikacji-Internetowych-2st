@@ -203,14 +203,13 @@ const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
 
   const purchaseAll = async () => {
     if (!user || !accessToken) {
-    if (!user) {
       alert("You need to be logged in to make a purchase.");
       return;
     }
-  
+
     try {
       const response = await axios.post(
-        "http://localhost:8000/order/addAll/",
+        "http://localhost:8000/order/add/",
         {
           user_id: user.id,
           cart: cart.map((item) => ({
@@ -220,12 +219,12 @@ const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
         },
         {
           headers: {
-            Authorization: `Token ${accessToken}`,
+            Authorization: `Bearer ${accessToken}`,
             "Content-Type": "application/json",
           },
         }
       );
-  
+
       if (response.status === 200) {
         alert("Purchase successful!");
         setCart([]);
