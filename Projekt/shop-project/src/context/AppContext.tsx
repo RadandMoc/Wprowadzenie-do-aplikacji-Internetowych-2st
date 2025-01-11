@@ -34,6 +34,7 @@ interface AppContextProps {
   cart: Product[];
   addToCart: (product: Product, quantity: number) => void;
   addReview: (productId: number, review: Review) => void;
+  deleteReview: (reviewId: number) => void;
   removeFromCart: (productId: number) => void;
   decreaseQuantity: (productId: number) => void;
   increaseQuantity: (productId: number) => void;
@@ -229,6 +230,26 @@ const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     }
   };
 
+  const deleteReview = async (reviewId: number) => {
+    if (!accessToken) {
+      console.error("Brak tokenu uwierzytelniającego.");
+      return;
+    }
+    try {
+      await axios.delete(`http://localhost:8000/review/delete/${reviewId}/`, {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      });
+      setProducts((prevProducts) =>
+        prevProducts.map((product) => ({
+          ...product,
+          reviews: product.reviews?.filter((review) => review.id !== reviewId),
+        }))
+      );
+    } catch (error) {
+      console.error("Błąd usuwania recenzji:", error);
+    }
+  };
+
   const purchaseAll = async () => {
     if (!user || !accessToken) {
       alert("You need to be logged in to make a purchase.");
@@ -271,6 +292,7 @@ const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
         cart,
         addToCart,
         addReview,
+        deleteReview,
         removeFromCart,
         decreaseQuantity,
         increaseQuantity,

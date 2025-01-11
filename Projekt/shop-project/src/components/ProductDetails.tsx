@@ -20,7 +20,7 @@ interface Review {
 
 const ProductDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const { addReview, addToCart, user } = useContext(AppContext)!;
+  const { addReview, addToCart, deleteReview, user } = useContext(AppContext)!;
   const [product, setProduct] = useState<any>(null);
   const [comment, setComment] = useState("");
   const [rating, setRating] = useState<number | null>(5);
@@ -31,7 +31,9 @@ const ProductDetails: React.FC = () => {
     fetch(`http://localhost:8000/products/${id}/`)
       .then((res) => res.json())
       .then((data) => setProduct(data))
-      .catch((error) => console.error("Error fetching product details:", error));
+      .catch((error) =>
+        console.error("Error fetching product details:", error)
+      );
   }, [id]);
 
   if (!product) {
@@ -53,6 +55,14 @@ const ProductDetails: React.FC = () => {
     };
 
     addReview(product.id, newReview);
+
+    // Następnie aktualizujemy lokalnie listę recenzji, żeby natychmiast wyświetlić nowy komentarz:
+    setProduct({
+      ...product,
+      reviews: [...product.reviews, newReview], // dołączamy nowy review
+    });
+
+    // Resetujemy formularz
     setComment("");
     setRating(5);
     setError("");
@@ -60,6 +70,17 @@ const ProductDetails: React.FC = () => {
 
   const handleAddToCart = () => {
     addToCart(product, quantity);
+  };
+
+  const handleDeleteReview = (reviewId: number) => {
+    deleteReview(reviewId);
+
+    setProduct((prevProduct: any) => ({
+      ...prevProduct,
+      reviews: prevProduct.reviews.filter(
+        (review: Review) => review.id !== reviewId
+      ),
+    }));
   };
 
   const remainingStock = product.stock - (product.quantity || 0);
@@ -97,6 +118,15 @@ const ProductDetails: React.FC = () => {
               </Typography>
               <Rating value={review.rating} readOnly />
               <Typography>{review.comment}</Typography>
+              {(user?.is_superuser || user?.username === review.username) && (
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  onClick={() => handleDeleteReview(review.id)}
+                >
+                  Delete
+                </Button>
+              )}
             </Box>
           ))
         ) : (

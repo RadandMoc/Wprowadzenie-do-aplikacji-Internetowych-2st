@@ -6,7 +6,7 @@ from .serializers import ProductSerializer,UserSerializer
 from rest_framework import status,generics
 from django.contrib.auth import authenticate
 from rest_framework.authtoken.models import Token
-from rest_framework.permissions import IsAuthenticated,AllowAny
+from rest_framework.permissions import IsAuthenticated,AllowAny, IsAdminUser
 from rest_framework.authentication import TokenAuthentication
 from django.contrib.auth.models import User
 from django.db import transaction
@@ -164,3 +164,15 @@ class AddOrder(APIView):
                 return Response({"message": "Order added successfully"})
         except Exception as e:
             return Response({"error": str(e)}, status=500)
+
+class DeleteReview(APIView):
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [JWTAuthentication]
+
+    def delete(self, request, review_id):
+        try:
+            review = Review.objects.get(id=review_id)
+            review.delete()
+            return Response({"message": "Review deleted successfully"}, status=status.HTTP_204_NO_CONTENT)
+        except Review.DoesNotExist:
+            return Response({"error": "Review not found"}, status=status.HTTP_404_NOT_FOUND)
