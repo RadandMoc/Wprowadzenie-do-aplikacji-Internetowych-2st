@@ -10,6 +10,7 @@ import Register from "./components/Register";
 import AdminPanel from "./components/AdminPanel";
 import AppProvider from "./context/AppContext";
 import OrderHistory from "./components/OrderHistory";
+import AddProductPage from "./components/AddProduct"; // Import nowego komponentu
 
 const App: React.FC = () => {
   return (
@@ -23,6 +24,7 @@ const App: React.FC = () => {
         <Route path="/register" element={<Register />} />
         <Route path="/admin" element={<AdminPanel />} />
         <Route path="/orderHistory" element={<OrderHistory />} />
+        <Route path="/addProduct" element={<AddProductPage />} />
       </Routes>
       <Footer />
     </AppProvider>

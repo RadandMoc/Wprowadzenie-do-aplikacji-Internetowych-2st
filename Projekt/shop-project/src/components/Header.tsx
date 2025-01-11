@@ -25,7 +25,11 @@ const Header: React.FC = () => {
             Cart
           </Button>
         )}
-        
+        {user?.is_superuser && (
+          <Button color="inherit" component={Link} to="/addProduct">
+            Add Product
+          </Button>
+        )}
         <Button color="inherit" component={Link} to="/login">
           {user ? "Logout" : "Login"}
         </Button>

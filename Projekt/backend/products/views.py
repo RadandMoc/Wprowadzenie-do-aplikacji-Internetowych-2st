@@ -113,18 +113,25 @@ class AddReview(APIView):
             return Response({"message": "Review added successfully", "review": str(new_review)})
 
 class AddProduct(APIView):
+    permission_classes = [IsAdminUser]
+
     def post(self, request):
-        if not request.user.is_superuser:
-            return Response({"error": "Permission denied"}, status=status.HTTP_403_FORBIDDEN)
         name = request.data.get('name')
         description = request.data.get('description')
         price = request.data.get('price')
         category = request.data.get('category')
         stock = request.data.get('stock')
-        image = request.data.get('image')
-        new_product = Product.objects.create(name=name, description=description, price=price, category=category, stock=stock, image=image)
+        image = request.FILES.get('image')  # Upewnij się, że korzystasz z request.FILES
+        new_product = Product.objects.create(
+            name=name,
+            description=description,
+            price=price,
+            category=category,
+            stock=stock,
+            image=image
+        )
         return Response({"message": "Product added successfully", "product": str(new_product)})
-
+    
 class UpdateProduct(APIView):
     def post(self, request, product_id):
         if not request.user.is_superuser:
