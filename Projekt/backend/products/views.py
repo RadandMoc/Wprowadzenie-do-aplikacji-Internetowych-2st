@@ -196,7 +196,6 @@ class HasPurchasedProduct(APIView):
 class UserOrderHistory(APIView):
     permission_classes = [IsAuthenticated]
     authentication_classes = [JWTAuthentication]
-
     def get(self, request):
         user = request.user
         orders = Order.objects.filter(user=user).order_by('order_date')
@@ -209,26 +208,34 @@ class UserOrderHistory(APIView):
             }
             for order in orders
         ]
-
         groups = []
         max_diff = timedelta(seconds=2)
-
         for order in order_data:
             if len(groups) == 0:
                 groups.append([order])
                 continue
-            
             add_to_group = False
-
             for group in groups:
                 time_diff = order["order_date"] - group[0]["order_date"]    
                 if time_diff < max_diff:
                     group.append(order)
                     add_to_group = True
                     break
-
             if not add_to_group:
                 groups.append([order])
+        return Response(groups, status=status.HTTP_200_OK)
 
     
-        return Response(groups, status=status.HTTP_200_OK)
+class UpdateReview(APIView):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def put(self, request, review_id):
+        try:
+            review = Review.objects.get(id=review_id, username=request.user.username)
+            review.rating = request.data.get('rating', review.rating)
+            review.comment = request.data.get('comment', review.comment)
+            review.save()
+            return Response({'message': 'Review updated.'}, status=status.HTTP_200_OK)
+        except Review.DoesNotExist:
+            return Response({'error': 'Not found.'}, status=status.HTTP_404_NOT_FOUND)

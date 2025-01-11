@@ -29,7 +29,10 @@ const ProductDetails: React.FC = () => {
   const [error, setError] = useState("");
   const [hasPurchased, setHasPurchased] = useState(false);
   const [hasReviewed, setHasReviewed] = useState(false);
-
+  const [editingReviewId, setEditingReviewId] = useState<number | null>(null);
+  const [editingRating, setEditingRating] = useState<number | null>(null);
+  const [editingComment, setEditingComment] = useState("");
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -119,6 +122,27 @@ const ProductDetails: React.FC = () => {
   window.location.reload();
   };
 
+  const handleEditReview = (review: Review) => {
+    setEditingReviewId(review.id);
+    setEditingRating(review.rating);
+    setEditingComment(review.comment);
+  };
+
+  const handleUpdateReview = async (reviewId: number) => {
+    try {
+      // przykładowy PUT do backendu (endpoint wg dodanego widoku UpdateReview)
+      const accessToken = localStorage.getItem("accessToken");
+      await axios.put(
+        `http://localhost:8000/review/update/${reviewId}/`,
+        { rating: editingRating, comment: editingComment },
+        { headers: { Authorization: `Bearer ${accessToken}` } }
+      );
+      window.location.reload();
+    } catch (error) {
+      console.error("Review update error:", error);
+    }
+  };
+
   const remainingStock = product.stock - (product.quantity || 0);
 
   return (
@@ -147,27 +171,58 @@ const ProductDetails: React.FC = () => {
       <Box sx={{ mt: 4 }}>
         <Typography variant="h5">Reviews</Typography>
         {product.reviews && product.reviews.length > 0 ? (
-          product.reviews.map((review: Review) => (
-            <Box key={review.id} sx={{ mb: 2, p: 2, border: "1px solid #ddd" }}>
-              <Typography>
-                <strong>{review.username}</strong> - {review.date}
-              </Typography>
-              <Rating value={review.rating} readOnly />
-              <Typography>{review.comment}</Typography>
-              {(user?.is_superuser || user?.username === review.username) && (
-                <Button
-                  variant="contained"
-                  color="secondary"
-                  onClick={() => handleDeleteReview(review.id)}
-                >
-                  Delete
-                </Button>
-              )}
-            </Box>
-          ))
-        ) : (
-          <Typography>No reviews yet.</Typography>
-        )}
+  product.reviews.map((review: Review) => (
+    <Box key={review.id} sx={{ mb: 2, p: 2, border: "1px solid #ddd" }}>
+      {(editingReviewId === review.id) ? (
+        <>
+          <Rating
+            value={editingRating}
+            onChange={(_, newValue) => setEditingRating(newValue)}
+          />
+          <TextField
+            fullWidth
+            multiline
+            rows={2}
+            value={editingComment}
+            onChange={(e) => setEditingComment(e.target.value)}
+            sx={{ mb: 2 }}
+          />
+          <Button variant="contained" onClick={() => handleUpdateReview(review.id)}>
+            Save
+          </Button>
+        </>
+      ) : (
+        <>
+          <Typography>
+            <strong>{review.username}</strong> - {review.date}
+          </Typography>
+          <Rating value={review.rating} readOnly />
+          <Typography>{review.comment}</Typography>
+          {(user?.is_superuser || user?.username === review.username) && (
+            <>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={() => handleEditReview(review)}
+              >
+                Edit
+              </Button>
+              <Button
+                variant="contained"
+                color="secondary"
+                onClick={() => handleDeleteReview(review.id)}
+              >
+                Delete
+              </Button>
+            </>
+          )}
+        </>
+      )}
+    </Box>
+  ))
+) : (
+  <Typography>No reviews yet.</Typography>
+)}
       </Box>
 
       {hasPurchased && !hasReviewed && (

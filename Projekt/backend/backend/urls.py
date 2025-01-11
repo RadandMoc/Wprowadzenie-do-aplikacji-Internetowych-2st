@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from products.views import CustomTokenObtainPairView, DeleteReview, ProductList, UserOrderHistory ,UserOrders, ProductReviews, HasPurchasedProduct, AddReview, AddProduct, UpdateProduct, AddOrder,ProductDetail,LoginView,UserDetailView,RegisterView
+from products.views import CustomTokenObtainPairView, DeleteReview, ProductList, UserOrderHistory ,UserOrders, ProductReviews, HasPurchasedProduct, AddReview, AddProduct, UpdateProduct, AddOrder,ProductDetail,LoginView,UserDetailView,RegisterView,UpdateReview
 from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework_simplejwt.views import (
@@ -42,4 +42,5 @@ urlpatterns = [
     path('user/orders/', UserOrderHistory.as_view(), name='user-order-history'),
     path('user/', UserDetailView.as_view(), name='user-detail'),
     path('register/', RegisterView.as_view(), name='register'),
+    path('review/update/<int:review_id>/', UpdateReview.as_view(), name='update-review'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
