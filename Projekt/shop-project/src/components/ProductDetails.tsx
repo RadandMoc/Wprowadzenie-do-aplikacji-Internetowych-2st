@@ -96,6 +96,9 @@ const ProductDetails: React.FC = () => {
     setComment("");
     setRating(5);
     setError("");
+
+    // Po pomyślnym dodaniu recenzji
+  window.location.reload();
   };
 
   const handleAddToCart = () => {
@@ -111,6 +114,9 @@ const ProductDetails: React.FC = () => {
         (review: Review) => review.id !== reviewId
       ),
     }));
+    
+    // Po pomyślnym dodaniu recenzji
+  window.location.reload();
   };
 
   const remainingStock = product.stock - (product.quantity || 0);
