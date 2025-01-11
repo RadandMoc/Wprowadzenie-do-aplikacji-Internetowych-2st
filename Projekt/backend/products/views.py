@@ -176,3 +176,17 @@ class DeleteReview(APIView):
             return Response({"message": "Review deleted successfully"}, status=status.HTTP_204_NO_CONTENT)
         except Review.DoesNotExist:
             return Response({"error": "Review not found"}, status=status.HTTP_404_NOT_FOUND)
+        
+
+class HasPurchasedProduct(APIView):
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [JWTAuthentication]
+
+    def get(self, request, product_id):
+        user = request.user
+       
+        product = Product.objects.get(id=product_id)
+        user_orders = Order.objects.filter(user=user, product=product)
+        has_purchased = user_orders.exists()
+        return Response({"hasPurchased": has_purchased}, status=status.HTTP_200_OK)
+        

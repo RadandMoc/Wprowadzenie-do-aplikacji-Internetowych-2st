@@ -9,6 +9,7 @@ import {
   Button,
   Rating,
 } from "@mui/material";
+import axios from "axios";
 
 interface Review {
   id: number;
@@ -26,15 +27,44 @@ const ProductDetails: React.FC = () => {
   const [rating, setRating] = useState<number | null>(5);
   const [quantity, setQuantity] = useState<number>(1);
   const [error, setError] = useState("");
+  const [hasPurchased, setHasPurchased] = useState(false);
+  const [hasReviewed, setHasReviewed] = useState(false);
 
   useEffect(() => {
-    fetch(`http://localhost:8000/products/${id}/`)
-      .then((res) => res.json())
-      .then((data) => setProduct(data))
-      .catch((error) =>
-        console.error("Error fetching product details:", error)
-      );
-  }, [id]);
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`http://localhost:8000/products/${id}/`);
+        const productData = await response.json();
+        setProduct(productData);
+
+        const accessToken = localStorage.getItem("accessToken");
+        if (user && accessToken) {
+          const purchaseResponse = await axios.get(
+            `http://localhost:8000/product/${id}/has_purchased/`,
+            {
+              headers: { Authorization: `Bearer ${accessToken}` },
+            }
+          );
+          console.log(purchaseResponse.data.hasPurchased);
+          setHasPurchased(purchaseResponse.data.hasPurchased);
+        }
+
+        if (user) {
+          const userReview = productData.reviews.find(
+            (review: any) => review.username === user.username
+          );
+          setHasReviewed(!!userReview);
+        }
+      } catch (error) {
+        console.error(
+          "Error fetching product or checking purchase status:",
+          error
+        );
+      }
+    };
+
+    fetchData();
+  }, [id, user]);
 
   if (!product) {
     return <Typography>Product not found.</Typography>;
@@ -134,27 +164,30 @@ const ProductDetails: React.FC = () => {
         )}
       </Box>
 
+      {hasPurchased && !hasReviewed && (
+        <Box sx={{ mt: 4 }}>
+          <Typography variant="h5">Add a Review</Typography>
+          {error && <Typography color="error">{error}</Typography>}
+          <Rating
+            value={rating}
+            onChange={(_, newValue) => setRating(newValue)}
+            sx={{ mb: 2 }}
+          />
+          <TextField
+            label="Comment"
+            fullWidth
+            multiline
+            rows={4}
+            value={comment}
+            onChange={(e) => setComment(e.target.value)}
+            sx={{ mb: 2 }}
+          />
+          <Button variant="contained" onClick={handleAddReview}>
+            Submit Review
+          </Button>
+        </Box>
+      )}
       <Box sx={{ mt: 4 }}>
-        <Typography variant="h5">Add a Review</Typography>
-        {error && <Typography color="error">{error}</Typography>}
-
-        <Rating
-          value={rating}
-          onChange={(_, newValue) => setRating(newValue)}
-          sx={{ mb: 2 }}
-        />
-        <TextField
-          label="Comment"
-          fullWidth
-          multiline
-          rows={4}
-          value={comment}
-          onChange={(e) => setComment(e.target.value)}
-          sx={{ mb: 2 }}
-        />
-        <Button variant="contained" onClick={handleAddReview}>
-          Submit Review
-        </Button>
         <Typography variant="h6" gutterBottom>
           Product stock: {product.stock}
         </Typography>
