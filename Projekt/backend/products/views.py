@@ -12,6 +12,9 @@ from django.contrib.auth.models import User
 from django.db import transaction
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework_simplejwt.authentication import JWTAuthentication
+from itertools import groupby
+from operator import itemgetter
+from datetime import datetime, timedelta
 
 
 
@@ -196,14 +199,36 @@ class UserOrderHistory(APIView):
 
     def get(self, request):
         user = request.user
-        orders = Order.objects.filter(user=user)
+        orders = Order.objects.filter(user=user).order_by('order_date')
         order_data = [
             {
                 "id": order.id,
                 "product": order.product.name,
                 "quantity": order.quantity,
-                "date": order.order_date,
+                "order_date": order.order_date,
             }
             for order in orders
         ]
-        return Response(order_data, status=status.HTTP_200_OK)
+
+        groups = []
+        max_diff = timedelta(seconds=2)
+
+        for order in order_data:
+            if len(groups) == 0:
+                groups.append([order])
+                continue
+            
+            add_to_group = False
+
+            for group in groups:
+                time_diff = order["order_date"] - group[0]["order_date"]    
+                if time_diff < max_diff:
+                    group.append(order)
+                    add_to_group = True
+                    break
+
+            if not add_to_group:
+                groups.append([order])
+
+    
+        return Response(groups, status=status.HTTP_200_OK)
