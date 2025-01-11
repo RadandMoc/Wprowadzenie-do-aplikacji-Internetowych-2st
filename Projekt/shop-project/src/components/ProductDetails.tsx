@@ -198,23 +198,24 @@ const ProductDetails: React.FC = () => {
           </Typography>
           <Rating value={review.rating} readOnly />
           <Typography>{review.comment}</Typography>
+          {/* Admin edytuje tylko własne opinie; usuwać może dalej wszystko */}
+          {(user && user.username === review.username) && (
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => handleEditReview(review)}
+            >
+              Edit
+            </Button>
+          )}
           {(user?.is_superuser || user?.username === review.username) && (
-            <>
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={() => handleEditReview(review)}
-              >
-                Edit
-              </Button>
-              <Button
-                variant="contained"
-                color="secondary"
-                onClick={() => handleDeleteReview(review.id)}
-              >
-                Delete
-              </Button>
-            </>
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={() => handleDeleteReview(review.id)}
+            >
+              Delete
+            </Button>
           )}
         </>
       )}
