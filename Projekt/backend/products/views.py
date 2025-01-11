@@ -189,4 +189,21 @@ class HasPurchasedProduct(APIView):
         user_orders = Order.objects.filter(user=user, product=product)
         has_purchased = user_orders.exists()
         return Response({"hasPurchased": has_purchased}, status=status.HTTP_200_OK)
-        
+
+class UserOrderHistory(APIView):
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [JWTAuthentication]
+
+    def get(self, request):
+        user = request.user
+        orders = Order.objects.filter(user=user)
+        order_data = [
+            {
+                "id": order.id,
+                "product": order.product.name,
+                "quantity": order.quantity,
+                "date": order.order_date,
+            }
+            for order in orders
+        ]
+        return Response(order_data, status=status.HTTP_200_OK)

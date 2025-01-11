@@ -9,6 +9,7 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import AdminPanel from "./components/AdminPanel";
 import AppProvider from "./context/AppContext";
+import OrderHistory from "./components/OrderHistory";
 
 const App: React.FC = () => {
   return (
@@ -21,6 +22,7 @@ const App: React.FC = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/admin" element={<AdminPanel />} />
+        <Route path="/orderHistory" element={<OrderHistory />} />
       </Routes>
       <Footer />
     </AppProvider>

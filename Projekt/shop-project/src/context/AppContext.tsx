@@ -34,6 +34,7 @@ interface AppContextProps {
   cart: Product[];
   addToCart: (product: Product, quantity: number) => void;
   addReview: (productId: number, review: Review) => void;
+  fetchOrderHistory: () => Promise<any[]>;
   deleteReview: (reviewId: number) => void;
   removeFromCart: (productId: number) => void;
   decreaseQuantity: (productId: number) => void;
@@ -140,6 +141,23 @@ const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     localStorage.removeItem("user");
     localStorage.removeItem("accessToken");
     localStorage.removeItem("refreshToken");
+  };
+
+  const fetchOrderHistory = async () => {
+    if (!accessToken) {
+      console.error("Brak tokenu uwierzytelniającego.");
+      return;
+    }
+    try {
+      console.log(accessToken);
+      const response = await axios.get("http://localhost:8000/user/orders/", {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      });
+      return response.data;
+    } catch (error) {
+      console.error("Błąd pobierania historii zamówień:", error);
+      return [];
+    }
   };
 
   const addToCart = (product: Product, quantity: number) => {
@@ -292,6 +310,7 @@ const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
         cart,
         addToCart,
         addReview,
+        fetchOrderHistory,
         deleteReview,
         removeFromCart,
         decreaseQuantity,
