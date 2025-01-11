@@ -34,6 +34,7 @@ interface AppContextProps {
   cart: Product[];
   addToCart: (product: Product, quantity: number) => void;
   addReview: (productId: number, review: Review) => void;
+  refreshAccessToken: () => void;
   fetchOrderHistory: () => Promise<any[]>;
   deleteReview: (reviewId: number) => void;
   removeFromCart: (productId: number) => void;
@@ -127,6 +128,23 @@ const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
       }
     } catch (error) {
       console.error("Login error:", error);
+    }
+  };
+
+  const refreshAccessToken = async () => {
+    try {
+      const response = await axios.post(
+        "http://localhost:8000/api/token/refresh/",
+        {
+          refresh: refreshToken,
+        }
+      );
+      const newAccessToken = response.data.access;
+      setAccessToken(newAccessToken);
+      localStorage.setItem("accessToken", newAccessToken);
+      console.log("Access token refreshed successfully");
+    } catch (error) {
+      console.error("Error refreshing access token:", error);
     }
   };
 
@@ -319,6 +337,7 @@ const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
         user,
         login,
         logout,
+        refreshAccessToken,
         accessToken,
         refreshToken,
         isLoggedIn: () => !!user,
