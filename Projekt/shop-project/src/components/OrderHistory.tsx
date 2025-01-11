@@ -23,14 +23,12 @@ type OrderGroup = Order[];
 const OrderHistory: React.FC = () => {
   const { fetchOrderHistory } = useContext(AppContext)!;
 
-  // Ponieważ mamy wiele grup, a każda grupa to tablica obiektów Order
   const [groupedOrders, setGroupedOrders] = useState<OrderGroup[]>([]);
   const [expandedGroup, setExpandedGroup] = useState<number | null>(null);
 
   useEffect(() => {
     const getOrderHistory = async () => {
       const orderHistory = await fetchOrderHistory();
-      // Załóżmy, że backend zwraca tablicę tablic (czyli OrderGroup[])
       setGroupedOrders(orderHistory);
     };
 

@@ -32,7 +32,7 @@ const ProductDetails: React.FC = () => {
   const [editingReviewId, setEditingReviewId] = useState<number | null>(null);
   const [editingRating, setEditingRating] = useState<number | null>(null);
   const [editingComment, setEditingComment] = useState("");
-  
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -101,7 +101,7 @@ const ProductDetails: React.FC = () => {
     setError("");
 
     // Po pomyślnym dodaniu recenzji
-  window.location.reload();
+    window.location.reload();
   };
 
   const handleAddToCart = () => {
@@ -117,9 +117,9 @@ const ProductDetails: React.FC = () => {
         (review: Review) => review.id !== reviewId
       ),
     }));
-    
+
     // Po pomyślnym dodaniu recenzji
-  window.location.reload();
+    window.location.reload();
   };
 
   const handleEditReview = (review: Review) => {
@@ -171,59 +171,63 @@ const ProductDetails: React.FC = () => {
       <Box sx={{ mt: 4 }}>
         <Typography variant="h5">Reviews</Typography>
         {product.reviews && product.reviews.length > 0 ? (
-  product.reviews.map((review: Review) => (
-    <Box key={review.id} sx={{ mb: 2, p: 2, border: "1px solid #ddd" }}>
-      {(editingReviewId === review.id) ? (
-        <>
-          <Rating
-            value={editingRating}
-            onChange={(_, newValue) => setEditingRating(newValue)}
-          />
-          <TextField
-            fullWidth
-            multiline
-            rows={2}
-            value={editingComment}
-            onChange={(e) => setEditingComment(e.target.value)}
-            sx={{ mb: 2 }}
-          />
-          <Button variant="contained" onClick={() => handleUpdateReview(review.id)}>
-            Save
-          </Button>
-        </>
-      ) : (
-        <>
-          <Typography>
-            <strong>{review.username}</strong> - {review.date}
-          </Typography>
-          <Rating value={review.rating} readOnly />
-          <Typography>{review.comment}</Typography>
-          {/* Admin edytuje tylko własne opinie; usuwać może dalej wszystko */}
-          {(user && user.username === review.username) && (
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={() => handleEditReview(review)}
-            >
-              Edit
-            </Button>
-          )}
-          {(user?.is_superuser || user?.username === review.username) && (
-            <Button
-              variant="contained"
-              color="secondary"
-              onClick={() => handleDeleteReview(review.id)}
-            >
-              Delete
-            </Button>
-          )}
-        </>
-      )}
-    </Box>
-  ))
-) : (
-  <Typography>No reviews yet.</Typography>
-)}
+          product.reviews.map((review: Review) => (
+            <Box key={review.id} sx={{ mb: 2, p: 2, border: "1px solid #ddd" }}>
+              {editingReviewId === review.id ? (
+                <>
+                  <Rating
+                    value={editingRating}
+                    onChange={(_, newValue) => setEditingRating(newValue)}
+                  />
+                  <TextField
+                    fullWidth
+                    multiline
+                    rows={2}
+                    value={editingComment}
+                    onChange={(e) => setEditingComment(e.target.value)}
+                    sx={{ mb: 2 }}
+                  />
+                  <Button
+                    variant="contained"
+                    onClick={() => handleUpdateReview(review.id)}
+                  >
+                    Save
+                  </Button>
+                </>
+              ) : (
+                <>
+                  <Typography>
+                    <strong>{review.username}</strong> - {review.date}
+                  </Typography>
+                  <Rating value={review.rating} readOnly />
+                  <Typography>{review.comment}</Typography>
+                  {/* Admin edytuje tylko własne opinie; usuwać może dalej wszystko */}
+                  {user && user.username === review.username && (
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={() => handleEditReview(review)}
+                    >
+                      Edit
+                    </Button>
+                  )}
+                  {(user?.is_superuser ||
+                    user?.username === review.username) && (
+                    <Button
+                      variant="contained"
+                      color="secondary"
+                      onClick={() => handleDeleteReview(review.id)}
+                    >
+                      Delete
+                    </Button>
+                  )}
+                </>
+              )}
+            </Box>
+          ))
+        ) : (
+          <Typography>No reviews yet.</Typography>
+        )}
       </Box>
 
       {hasPurchased && !hasReviewed && (
@@ -253,35 +257,42 @@ const ProductDetails: React.FC = () => {
         <Typography variant="h6" gutterBottom>
           Product stock: {product.stock}
         </Typography>
-        <TextField
-          label="Quantity"
-          fullWidth
-          value={quantity}
-          onChange={(e) => {
-            const value = Number(e.target.value);
-            if (value > remainingStock) {
-              alert(`Cannot add more than ${remainingStock} of this product.`);
-              return;
-            }
-            setQuantity(value);
-          }}
-          type="number"
-          sx={{ mb: 2 }}
-          InputProps={{
-            inputProps: { min: 0 },
-            sx: {
-              "::-webkit-outer-spin-button, ::-webkit-inner-spin-button": {
-                display: "none",
-              },
-              "input[type=number]": {
-                MozAppearance: "textfield",
-              },
-            },
-          }}
-        />
-        <Button variant="contained" onClick={handleAddToCart}>
-          Add to Cart
-        </Button>
+
+        {user && (
+          <>
+            <TextField
+              label="Quantity"
+              fullWidth
+              value={quantity}
+              onChange={(e) => {
+                const value = Number(e.target.value);
+                if (value > remainingStock) {
+                  alert(
+                    `Cannot add more than ${remainingStock} of this product.`
+                  );
+                  return;
+                }
+                setQuantity(value);
+              }}
+              type="number"
+              sx={{ mb: 2 }}
+              InputProps={{
+                inputProps: { min: 0 },
+                sx: {
+                  "::-webkit-outer-spin-button, ::-webkit-inner-spin-button": {
+                    display: "none",
+                  },
+                  "input[type=number]": {
+                    MozAppearance: "textfield",
+                  },
+                },
+              }}
+            />
+            <Button variant="contained" onClick={handleAddToCart}>
+              Add to Cart
+            </Button>
+          </>
+        )}
       </Box>
     </Container>
   );

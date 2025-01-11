@@ -20,7 +20,7 @@ import {
 import axios from "axios";
 
 const ProductList: React.FC = () => {
-  const { products, setProducts, addToCart } = useContext(AppContext)!;
+  const { products, user, setProducts, addToCart } = useContext(AppContext)!;
   const [searchTerm, setSearchTerm] = useState<string>(""); // For product name search
   const [selectedCategory, setSelectedCategory] = useState<string>(""); // For category filter
 
@@ -129,13 +129,15 @@ const ProductList: React.FC = () => {
                 </CardContent>
               </CardActionArea>
               <CardContent>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={() => addToCart(product, 1)}
-                >
-                  Add to Cart
-                </Button>
+                {user && (
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={() => addToCart(product, 1)}
+                  >
+                    Add to Cart
+                  </Button>
+                )}
               </CardContent>
             </Card>
           </Grid>
