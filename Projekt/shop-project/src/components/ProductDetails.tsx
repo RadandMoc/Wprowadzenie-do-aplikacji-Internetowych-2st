@@ -157,7 +157,7 @@ const ProductDetails: React.FC = () => {
       {product.image && (
         <Box sx={{ textAlign: "center", mb: 4 }}>
           <img
-            src={`http://localhost:8000/media/${product.image}`}
+            src={`http://localhost:8000/${product.image}`}
             alt={product.name}
             style={{ maxWidth: "100%", height: "auto", borderRadius: "8px" }}
           />

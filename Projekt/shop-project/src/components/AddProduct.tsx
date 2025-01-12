@@ -9,8 +9,29 @@ const AddProductPage: React.FC = () => {
   const [category, setCategory] = useState("");
   const [stock, setStock] = useState("");
   const [image, setImage] = useState<string | File>("");
+  const [error, setError] = useState("");
+
+  const validateInputs = () => {
+    if (!name || !description || !price || !category || !stock) {
+      setError("Wszystkie pola są wymagane.");
+      return false;
+    }
+    if (!/^\d+(\.\d{1,2})?$/.test(price)) {
+      setError("Cena musi być liczbą z maksymalnie dwoma miejscami po przecinku.");
+      return false;
+    }
+    if (!/^\d+$/.test(stock)) {
+      setError("Stan musi być liczbą całkowitą.");
+      return false;
+    }
+    return true;
+  };
 
   const handleSubmit = async () => {
+    if (!validateInputs()) {
+      return;
+    }
+
     try {
       const accessToken = localStorage.getItem("accessToken");
       const formData = new FormData();
@@ -34,6 +55,7 @@ const AddProductPage: React.FC = () => {
   return (
     <Container maxWidth="sm">
       <Typography variant="h5">Dodaj nowy produkt</Typography>
+      {error && <Typography color="error">{error}</Typography>}
       <TextField
         label="Nazwa"
         value={name}

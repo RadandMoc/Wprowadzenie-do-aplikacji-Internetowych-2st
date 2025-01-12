@@ -112,7 +112,7 @@ const ProductList: React.FC = () => {
                   <CardMedia
                     component="img"
                     height="160"
-                    image={`http://localhost:8000/media/${product.image}`} // Użyj poprawnej ścieżki do obrazka
+                    image={`http://localhost:8000/${product.image}`} // Użyj poprawnej ścieżki do obrazka
                     alt={product.name}
                   />
                 )}
