@@ -58,3 +58,6 @@ Dodano przykładowych użytkowników do bazy danych. Podane zostaną w formie Lo
 superadmin/123/admin
 Tomek/tz/user
 Radek/rm/user
+
+!!! WAŻNE !!!
+Login uwzględnia wielkość liter. Jeśli jakiś login zaczyna się z wielkiej, to logowanie wymaga również wielkiej litery na początku. Tak samo w przypadku dalszych znaków.
