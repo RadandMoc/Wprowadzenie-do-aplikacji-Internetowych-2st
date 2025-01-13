@@ -143,8 +143,11 @@ const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
       setAccessToken(newAccessToken);
       localStorage.setItem("accessToken", newAccessToken);
       console.log("Access token refreshed successfully");
+      return newAccessToken;
     } catch (error) {
       console.error("Error refreshing access token:", error);
+      logout();
+      return null;
     }
   };
 

@@ -10,12 +10,14 @@ import Register from "./components/Register";
 import AdminPanel from "./components/AdminPanel";
 import AppProvider from "./context/AppContext";
 import OrderHistory from "./components/OrderHistory";
-import AddProductPage from "./components/AddProduct"; // Import nowego komponentu
+import AddProductPage from "./components/AddProduct";
+import AxiosSetup from "./axiosSetup";
 
 const App: React.FC = () => {
   return (
     <AppProvider>
       <Header />
+      <AxiosSetup />
       <Routes>
         <Route path="/" element={<ProductList />} />
         <Route path="/product/:id" element={<ProductDetails />} />

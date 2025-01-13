@@ -35,7 +35,6 @@ urlpatterns = [
     path('review/add/', AddReview.as_view(), name='add-review'),
     path('review/delete/<int:review_id>/', DeleteReview.as_view(), name='delete-review'),
     path('product/add/', AddProduct.as_view(), name='add-product'),
-    path('product/<int:product_id>/update/', UpdateProduct.as_view(), name='update-product'),
     path('product/<int:product_id>/has_purchased/', HasPurchasedProduct.as_view(), name='has-purchased-product'),
     path('order/add/', AddOrder.as_view(), name='add-order'),
     path('login/', LoginView.as_view(), name='login'),
