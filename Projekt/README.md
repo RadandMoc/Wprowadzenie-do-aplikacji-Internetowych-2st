@@ -14,7 +14,6 @@ npm run dev
 
 należy wejść na link z terminalu frontendu i cieszyć się aplikacją.
 
-
 2. Użyta technologia i biblioteki
 
 Backend:
@@ -28,7 +27,6 @@ TypeScript: Język programowania będący nadzbiorem JavaScript, dodający staty
 Vite: Narzędzie do budowania aplikacji frontendowych.
 Material-UI: Biblioteka komponentów UI dla React.
 Axios: Biblioteka do wykonywania zapytań HTTP.
-
 
 3. Opis funkcjonalności:
 
@@ -45,11 +43,9 @@ Administrator (to samo co użytkownik plus):
 Dodawanie produktów: Administratorzy mogą dodawać nowe produkty do sklepu. RM
 Zarządzanie recenzjami: Administratorzy mogą usuwać recenzje produktów. TZ
 
-
 Autorzy:
 RM - Radosław Mocarski
 TZ - Tomasz Zapart
-
 
 4. Użytkownicy z bazy danych:
 
@@ -65,3 +61,6 @@ Login uwzględnia wielkość liter. Jeśli jakiś login zaczyna się z wielkiej,
 Żeby dodać admina, należy w terminalu backendu (podczas nie dzialania servera) wpisać:
 python manage.py createsuperuser
 i podążać za instrukcjami
+
+POSTMAN:
+https://restless-station-985514.postman.co/workspace/New-Team-Workspace~1e63cc91-1ede-4e38-afb4-9c69aabd420e/collection/40115069-bc83342a-1053-4478-85f2-414b7600d170?action=share&creator=40115069
