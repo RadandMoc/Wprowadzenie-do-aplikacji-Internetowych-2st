@@ -61,3 +61,7 @@ Radek/rm/user
 
 !!! WAŻNE !!!
 Login uwzględnia wielkość liter. Jeśli jakiś login zaczyna się z wielkiej, to logowanie wymaga również wielkiej litery na początku. Tak samo w przypadku dalszych znaków.
+
+Żeby dodać admina, należy w terminalu backendu (podczas nie dzialania servera) wpisać:
+python manage.py createsuperuser
+i podążać za instrukcjami
