@@ -216,7 +216,7 @@ button {
     height: 50px; /* Wysokość przycisku */
     display: flex;
     align-items: center;
-    justify-content: flex-start; /* Wyrównanie tekstu do lewej */
+    justify-content: center; /* Wycentrowanie tekstu */
     border-radius: 25px; /* Zaokrąglone boki */
     background-color: #333;
     color: white;
@@ -224,13 +224,14 @@ button {
     font-size: 16px;
     font-weight: bold;
     margin: 5px 0; /* Odstęp między przyciskami */
-    padding-left: 10px; /* Odstęp od lewej krawędzi */
+    padding: 0; /* Brak odstępu od krawędzi */
 }
 
 .side-buttons a::first-letter {
     display: inline-block;
     width: 50px; /* Szerokość pierwszej litery */
     text-align: center;
+    line-height: 50px; /* Wycentrowanie pionowe */
 }
 
 .side-buttons a::after {
@@ -264,12 +265,12 @@ button {
     display: block;
     width: 100%;
     height: 100%;
-    text-align: left; /* Wyrównanie tekstu do lewej */
+    text-align: center; /* Wycentrowanie tekstu */
     line-height: 50px;
     border-radius: 25px; /* Zaokrąglone boki */
     cursor: pointer;
     z-index: 101;
-    padding-left: 10px; /* Odstęp od lewej krawędzi */
+    padding: 0; /* Brak odstępu od krawędzi */
 }
 
 .circle-btn:hover {
