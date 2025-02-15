@@ -202,23 +202,74 @@ button {
     top: 40%;
     right: 10px;
     z-index: 100;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; /* Ustawienie przycisków do prawej strony */
+}
+
+.side-buttons a {
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap;
+    transition: width 0.3s ease-in-out;
+    width: 50px; /* Początkowa szerokość */
+    height: 50px; /* Wysokość przycisku */
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Wyrównanie tekstu do lewej */
+    border-radius: 25px; /* Zaokrąglone boki */
+    background-color: #333;
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 5px 0; /* Odstęp między przyciskami */
+    padding-left: 10px; /* Odstęp od lewej krawędzi */
+}
+
+.side-buttons a::first-letter {
+    display: inline-block;
+    width: 50px; /* Szerokość pierwszej litery */
+    text-align: center;
+}
+
+.side-buttons a::after {
+    content: attr(data-text);
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 0;
+    transition: width 0.3s ease-in-out;
+}
+
+.side-buttons a:hover::after {
+    width: auto;
+    padding-left: 0; /* Brak odstępu między literą a tekstem */
+}
+
+.side-buttons a:hover {
+    width: 150px; /* Szerokość po najechaniu */
+}
+
+.side-buttons a span {
+    display: none;
+    margin-left: 5px; /* Odstęp między literą a tekstem */
+}
+
+.side-buttons a:hover span {
+    display: inline;
 }
 
 .circle-btn {
     display: block;
-    margin: 10px 0;
-    width: 50px;
-    height: 50px;
-    background-color: #333;
-    color: white;
-    text-align: center;
+    width: 100%;
+    height: 100%;
+    text-align: left; /* Wyrównanie tekstu do lewej */
     line-height: 50px;
-    border-radius: 50%;
-    text-decoration: none;
-    font-size: 16px;
-    font-weight: bold;
+    border-radius: 25px; /* Zaokrąglone boki */
     cursor: pointer;
     z-index: 101;
+    padding-left: 10px; /* Odstęp od lewej krawędzi */
 }
 
 .circle-btn:hover {
