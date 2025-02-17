@@ -398,10 +398,18 @@ form#contactForm input[type="submit"]:hover {
         max-width: 65vw;
         position-area: bottom;
         }
+
+        .side-buttons {
+        display: none;
+    }
 }
 
 @media (min-width:620px) and (max-width:940px){
     .circle-btn {
+        display: none;
+    }
+
+    .side-buttons {
         display: none;
     }
     
