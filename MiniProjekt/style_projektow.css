@@ -1,0 +1,214 @@
+@import url('common-header-footer.css');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=DynaPuff:wght@400..700&family=Playwrite+GB+S:ital,wght@0,100..400;1,100..400&display=swap');
+
+main {
+    padding: 20px;
+    position: relative;
+    min-width: 70vw;
+    max-width: 800px;
+    margin: 50px auto;
+    background-color: #fff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    flex: 1;
+}
+
+.other-text-style{
+    font-family: "Cinzel", serif;
+}
+
+.content-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+
+.alt-background {
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    align-items: center;
+    padding: 20px;
+}
+
+.text-left, .text-right {
+    width: 50%;
+}
+
+.center-header {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.centered-heading {
+    text-align: center;
+}
+
+.small-margin {
+    margin: 3px;
+}
+
+.max-height250 {
+    max-height: 250px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+}
+
+.image-right {
+    width: 60%;
+    display: flex;
+    justify-content: right;
+}
+
+.image-left {
+    width: 60%;
+    display: flex;
+    justify-content: left;
+}
+
+.rounded-image {
+    border-radius: 10px;
+    width: 90%;
+}
+
+.side-buttons {
+    position: fixed;
+    top: 40%;
+    right: 10px;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.side-buttons a {
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap;
+    transition: width 0.3s ease-in-out;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 25px;
+    background-color: #333;
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 5px 0;
+    padding: 0;
+}
+
+.side-buttons a::first-letter {
+    display: inline-block;
+    width: 50px;
+    text-align: center;
+    line-height: 50px;
+}
+
+.side-buttons a::after {
+    content: attr(data-text);
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 0;
+    transition: width 0.3s ease-in-out;
+}
+
+.side-buttons a:hover::after {
+    width: auto;
+    padding-left: 0;
+}
+
+.side-buttons a:hover {
+    width: 150px;
+}
+
+.side-buttons a span {
+    display: none;
+    margin-left: 5px;
+}
+
+.side-buttons a:hover span {
+    display: inline;
+}
+
+.circle-btn {
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    line-height: 50px;
+    border-radius: 25px;
+    cursor: pointer;
+    z-index: 101;
+    padding: 0;
+}
+
+.circle-btn:hover {
+    background-color: #555;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+@media (max-width: 620px) {
+    .circle-btn {
+        display: none;
+    }
+
+    .rounded-image {
+        width: 100%;
+    }
+    
+    .content-section {
+        display: revert;
+        justify-items: center;
+    }
+    
+    .text-left {
+        width: 90%;
+    }
+
+    .text-right {
+        width: 90%;
+    }
+    
+    .image-right {
+        width: 100%;
+    }
+
+    .image-left {
+        width: 100%;
+    }
+
+    .job-summary {
+        max-width: 65vw;
+        position-area: bottom;
+    }
+
+    .side-buttons {
+        display: none;
+    }
+}
+
+@media (min-width: 620px) and (max-width: 940px) {
+    .circle-btn {
+        display: none;
+    }
+
+    .side-buttons {
+        display: none;
+    }
+    
+    .job-summary {
+        max-width: 33vw;
+    }
+}
