@@ -91,11 +91,11 @@ main {
     overflow: hidden;
     white-space: nowrap;
     transition: width 0.3s ease-in-out;
-    width: 50px;
+    width: 40px;
     height: 50px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start; /* Zmiana z center na flex-start */
     border-radius: 25px;
     background-color: #333;
     color: white;
@@ -103,7 +103,7 @@ main {
     font-size: 16px;
     font-weight: bold;
     margin: 5px 0;
-    padding: 0;
+    padding: 0 5px; /* Dodanie paddingu */
 }
 
 .side-buttons a::first-letter {
@@ -123,14 +123,10 @@ main {
 }
 
 .side-buttons a img {
-    width: 100%;
-    height: 100%;
+    width: 40px; /* Zmniejszenie szerokości obrazka */
+    height: 40px; /* Zmniejszenie wysokości obrazka */
     object-fit: contain;
     border-radius: 25px;
-}
-
-.side-buttons a:hover img {
-    display: none;
 }
 
 .side-buttons a:hover::after {
