@@ -122,9 +122,20 @@ main {
     transition: width 0.3s ease-in-out;
 }
 
+.side-buttons a img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 25px;
+}
+
+.side-buttons a:hover img {
+    display: none;
+}
+
 .side-buttons a:hover::after {
     width: auto;
-    padding-left: 0;
+    padding-left: 10px;
 }
 
 .side-buttons a:hover {
