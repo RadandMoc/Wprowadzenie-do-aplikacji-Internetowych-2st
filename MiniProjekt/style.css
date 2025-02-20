@@ -303,7 +303,7 @@ form#contactForm input[type="submit"] {
 
 form#contactForm input[type="submit"]:hover {
     background-color: #555;
-    transform: scale(1.05);
+    transform: scale(1.04);
 }
 
 @media (max-width: 620px) {
