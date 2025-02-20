@@ -44,6 +44,8 @@
 
     
     <main>
+        <button class="toggle-all-btn" onclick="toggleAll()">Pokaż/ukryj technologie wszystkich kart</button>
+
         <h1 id="py" class="center-header other-text-style">Python</h1>
         <!-- First Project Block -->
         <div class="content-section">
@@ -68,16 +70,46 @@
                     <a href="firma1.html" class="btn">Szczegóły</a>
                 </div>
             </div>
-            <div class="image-right">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/f/f7/MnistExamplesModified.png" alt="Studia licencjackie" class="rounded-image">
-            </div>
+            <div class="flip-card" onclick="toggleFlip(this)" data-flipped="false">
+                <div class="flip-card-inner">
+                  <div class="flip-card-front card-right">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/f/f7/MnistExamplesModified.png" alt="Studia licencjackie" class="rounded-image">
+                  </div>
+                  <div class="flip-card-back card-right">
+                    <div class="distance"></div>
+                    <div class="alt-background card-back">
+                        <h3>Technologie:</h3>
+                        <ul>
+                          <li>Python</li>
+                          <li>NumPy</li>
+                          <li>Pandas</li>
+                        </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
         </div>
     
         <!-- Second Project Block -->
-        <div class="content-section">
-            <div class="image-left">
-                <img src="https://viso.ai/wp-content/uploads/2024/04/Visual-Representation-1-1060x596.png" alt="Studia magisterskie" class="rounded-image">
-            </div>
+        <div class="content-section">            
+            <div class="flip-card" onclick="toggleFlip(this)" data-flipped="false">
+                <div class="flip-card-inner">
+                  <div class="flip-card-front card-left">
+                    <img src="https://viso.ai/wp-content/uploads/2024/04/Visual-Representation-1-1060x596.png" alt="Studia magisterskie" class="rounded-image">
+                  </div>
+                  <div class="flip-card-back card-left">
+                    <div class="alt-background card-back">
+                        <h3>Technologie:</h3>
+                        <ul>
+                          <li>Python</li>
+                          <li>NumPy</li>
+                          <li>Pandas</li>
+                        </ul>
+                    </div>
+                    <div class="distance"></div>
+                  </div>
+                </div>
+              </div>
             <div class="text-right alt-background">
                 <h2 class="centered-heading">Graf decyzyjny</h2>
                 <h3 class="centered-heading small-margin"><i>Jakie pytanie należy zadać, żeby zadać ich najmniej?</i></h3>
@@ -112,5 +144,6 @@
     </footer>
 
     <script src="script.js"></script>
+    <script src="projskrypt.js"></script>
 </body>
 </html>
