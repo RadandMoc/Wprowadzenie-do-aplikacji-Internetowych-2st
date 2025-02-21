@@ -25,17 +25,18 @@ main {
     padding: 20px;
     margin-bottom: 15px;
     margin-top: 15px;
+    gap: 20px; /* Dodane - stały odstęp między elementami */
 }
 
 .alt-background {
     background-color: #f0f0f0;
     border-radius: 10px;
     align-items: center;
-    padding: 20px;
+    padding: 13px;
 }
 
 .text-left, .text-right {
-    width: 50%;
+    width: 45%; /* Zmniejszone z 50% żeby zmieścić gap */
 }
 
 .center-header {
@@ -67,7 +68,7 @@ main {
 
 .rounded-image {
     border-radius: 10px;
-    width: 90%;
+    width: 100%;
     height: auto;
     object-fit: contain;
 }
@@ -173,7 +174,7 @@ html {
 .btn {
     background-color: #333;
     color: white;
-    padding: 10px 20px;
+    padding: 10px 15px;
     margin: 0 10px;
     text-decoration: none;
     border-radius: 5px;
@@ -186,11 +187,11 @@ html {
 }
 
 .flip-card {
-    width: 60%;
+    width: 45%; /* Zmienione z 60% żeby było tak samo jak text */
     min-height: 150px;
     perspective: 1000px;
     cursor: pointer;
-    margin: 0 auto;
+    margin: 0;  /* Usunięte auto */
     position: relative;
 }
 
@@ -213,34 +214,32 @@ html {
     backface-visibility: hidden;
     display: flex;
     flex-direction: column;
+    align-items: center; /* Dodane */
 }
 
 .flip-card-back {
     position: absolute;
-    width: 90%;
+    width: 100%; /* Zmienione z 90% */
     height: 100%;
     backface-visibility: hidden;
     display: flex;
     flex-direction: column;
+    align-items: center; /* Dodane */
 }
 
 .card-back{
-    width: 90%;
+    width: 100%; /* Zmienione z 90% */
 }
 
 .distance{
-    width: 10%;
-    height: 13px;
+    display: none;
+    height: 12px;
 }
 
-.card-left{
+.card-left, .card-right {
+    width: 100%;
     display: flex;
-    justify-content: left;
-}
-
-.card-right{
-    display: flex;
-    justify-content: right;
+    justify-content: center;
 }
 
 .flip-card-back {
@@ -263,23 +262,18 @@ html {
     .flip-card-back {
         width: 100%;
     }
-    .rounded-image {
-        width: 100%;
-    }
     
     .content-section {
         display: revert;
         justify-items: center;
+        flex-direction: column;
+        gap: 10px;
     }
     
-    .text-left {
-        width: 90%;
+    .text-left, .text-right, .flip-card {
+        width: 100%;
     }
 
-    .text-right {
-        width: 90%;
-    }
-    
     .image-right {
         width: 100%;
     }
@@ -298,6 +292,7 @@ html {
 
     .distance{
         width: 0%;
+        height: 12px;
     }
 }
 
