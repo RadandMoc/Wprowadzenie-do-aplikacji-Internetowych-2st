@@ -106,6 +106,8 @@
                           <li>Anytree</li>
                           <li>Graphviz</li>
                           <li>Math</li>
+                          <li>AI / ML / Decision Tree</li>
+                          <li>Entropy</li>
                         </ul>
                     </div>
                     <div class="distance"></div>
@@ -184,44 +186,46 @@
         <div class="content-section">            
             <div class="flip-card" onclick="toggleFlip(this)" data-flipped="false">
                 <div class="flip-card-inner">
-                  <div class="flip-card-front card-left">
-                    <img src="https://viso.ai/wp-content/uploads/2024/04/Visual-Representation-1-1060x596.png" alt="Drzewo decyzyjne" class="rounded-image">
-                  </div>
-                  <div class="flip-card-back card-left">
-                    <div class="alt-background card-back">
-                        <h3>Technologie:</h3>
-                        <ul>
-                          <li>Python</li>
-                          <li>Pandas</li>
-                          <li>Anytree</li>
-                          <li>Graphviz</li>
-                          <li>Math</li>
-                        </ul>
+                    <div class="flip-card-front card-left">
+                        <img src="https://miro.medium.com/v2/resize:fit:1160/0*zFDg-m9EizUt5N-W.gif" alt="MNIST Neural Network" class="rounded-image">
                     </div>
-                    <div class="distance"></div>
-                  </div>
+                    <div class="flip-card-back card-left">
+                        <div class="alt-background card-back">
+                            <h3>Technologie:</h3>
+                            <ul>
+                                <li>Python</li>
+                                <li>NumPy</li>
+                                <li>Pandas</li>
+                                <li>Enum</li>
+                                <li>ML / AI / Artificial Neural Networks</li>
+                            </ul>
+                        </div>
+                        <div class="distance"></div>
+                    </div>
                 </div>
-              </div>
+            </div>
             <div class="text-right alt-background">
-                <h2 class="centered-heading">Proste sieci neuronowe</h2>
-                <h3 class="centered-heading small-margin"><i>Jak zbudować optymalny system pytań dla rekomendacji?</i></h3>
+                <h2 class="centered-heading">Implementacja sieci neuronowej dla MNIST</h2>
+                <h3 class="centered-heading small-margin"><i>Rozpoznawanie ręcznie pisanych cyfr z wysoką skutecznością</i></h3>
                 <p class="centered-heading small-margin">
-                    Program implementuje system rekomendacji oparty o drzewa decyzyjne, który może pomóc w wyborze typu filmów do obejrzenia na podstawie informacji o użytkowniku. Główne funkcje:
+                    Projekt implementuje wielowarstwową sieć neuronową do klasyfikacji cyfr ze zbioru MNIST. 
+                    Główne funkcjonalności:
                 </p>
                 <ul class="centered-list">
-                    <li>Budowa dwóch drzew decyzyjnych (dla pełnych i niepełnych danych)</li>
-                    <li>Automatyczny wybór optymalnych pytań z wykorzystaniem entropii</li>
-                    <li>Generowanie wizualizacji drzew w plikach graf.png i graf2.png</li>
-                    <li>Analiza skuteczności przewidywania dla obu modeli</li>
+                    <li>Konfigurowalna architektura sieci</li>
+                    <li>Różne metody inicjalizacji wag (He, Xavier/Glorot, Random)</li>
+                    <li>Zaawansowane strategie doboru próbek (Random, Stratified, Bootstrap)</li>
+                    <li>Multiple funkcje aktywacji (ReLU, Softmax, Sigmoid, Tanh)</li>
+                    <li>Mechanizmy early stopping i walidacji krzyżowej</li>
                 </ul>
                 <p class="centered-heading">
-                    Program przetwarza dane z plików CSV, tworzy struktury drzew i generuje ich czytelne wizualizacje. Projekt został w całości wykonany w pythonie z pomocą bibliotek i narzędzia Graphviz.
+                    Projekt osiąga wysoką skuteczność w rozpoznawaniu cyfr dzięki zastosowaniu zaawansowanych technik uczenia maszynowego.
+                    Szczegółowa dokumentacja dostępna w pliku "DokumentacjaSSN.pdf".
                     <br>
-                    <em>Projekt został zrealizowany we współpracy z Tomaszem Zapart.</em>
+                    <em>Projekt został zrealizowany we współpracy z: Tomasz Zapart, Mateusz Strojek, Adrian Żyła, Anna Rubin.</em>
                 </p>
                 <div class="button-container">
-                    <a href="https://github.com/RadandMoc/Decision-Tree" class="btn">Repozytorium</a>
-                    <!--<a href="firma1.html" class="btn">Szczegóły</a>-->
+                    <a href="https://github.com/RadandMoc/Inteligencja-Obliczeniowa/tree/main/NeuralNetwork" class="btn">Repozytorium</a>
                 </div>
             </div>
         </div>
