@@ -6,6 +6,7 @@ main {
     position: relative;
     min-width: 70vw;
     max-width: 800px;
+    width: calc(100% - 40px);
     margin: 50px auto;
     background-color: #fff;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
@@ -229,6 +230,7 @@ html {
 
 .distance{
     width: 10%;
+    height: 13px;
 }
 
 .card-left{
@@ -258,6 +260,9 @@ html {
         display: none;
     }
 
+    .flip-card-back {
+        width: 100%;
+    }
     .rounded-image {
         width: 100%;
     }
