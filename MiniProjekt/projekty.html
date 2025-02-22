@@ -47,50 +47,8 @@
         <button class="toggle-all-btn" onclick="toggleAll()" title="Pokaż/ukryj technologie"></button>
 
         <h1 id="py" class="center-header other-text-style">Python</h1>
-        <!-- First Project Block -->
-        <div class="content-section">
-            <div class="text-left alt-background">
-                <h2 class="centered-heading">statystyczna analiza danych</h2>
-                <h3 class="centered-heading small-margin"><i>Jeśli znalezienie optimum zajmie za dużo czasu, możesz spróbować znaleźć po prostu dobre rozwiązanie</i></h3>
-                <h4 class="centered-heading small-margin">Projekt porównywał skuteczność kilku popularnych metaheurystyk</h4>
-                <p class="centered-heading small-margin">
-                    W repozytorium zostały upublicznione metaheurystyki, których jestem współautorem. Przetestowaliśmy tekie algorytmy jak:
-                </p>
-                    <ul>
-                        <li>genetyczny</li>
-                        <li>tabu search</li>
-                        <li>wspinaczki</li>
-                        <li>wyżarzania</li>
-                    </ul>
-                <p class="centered-heading">
-                    Dodatkowo, w tym repozytorium stworzyliśmy prostą sieć neuronową i przystosowaliśmy ją do analizy danych ze zbioru mnist. Rozpoznaje on z tamtego zbioru cyfry z błędem na poziomie kilku procent.
-                </p>
-                <div class="button-container">
-                    <a href="https://github.com/RadandMoc/Inteligencja-Obliczeniowa" class="btn">Repozytorium</a>
-                    <!--<a href="firma1.html" class="btn">Szczegóły</a>-->
-                </div>
-            </div>
-            <div class="flip-card" onclick="toggleFlip(this)" data-flipped="false">
-                <div class="flip-card-inner">
-                  <div class="flip-card-front card-right">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/f/f7/MnistExamplesModified.png" alt="Studia licencjackie" class="rounded-image">
-                  </div>
-                  <div class="flip-card-back card-right">
-                    <div class="distance"></div>
-                    <div class="alt-background card-back">
-                        <h3>Technologie:</h3>
-                        <ul>
-                          <li>Python</li>
-                          <li>NumPy</li>
-                          <li>Pandas</li>
-                        </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-        </div>
-    
-        <!-- Second Project Block -->
+        
+        
         <div class="content-section">            
             <div class="flip-card" onclick="toggleFlip(this)" data-flipped="false">
                 <div class="flip-card-inner">
@@ -107,7 +65,6 @@
                           <li>Graphviz</li>
                           <li>Math</li>
                           <li>AI / ML / Decision Tree</li>
-                          <li>Entropy</li>
                         </ul>
                     </div>
                     <div class="distance"></div>
@@ -226,6 +183,101 @@
                 </p>
                 <div class="button-container">
                     <a href="https://github.com/RadandMoc/Inteligencja-Obliczeniowa/tree/main/NeuralNetwork" class="btn">Repozytorium</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <div class="text-left alt-background">
+                <h2 class="centered-heading">Statystyczna analiza danych</h2>
+                <h3 class="centered-heading small-margin"><i>Wielokryterialna ocena telefonów i analiza skupień</i></h3>
+                <p class="centered-heading small-margin">
+                    Projekt dotyczy wielowymiarowej analizy parametrów telefonów komórkowych, 
+                    obejmującej metody Hellwiga i TOPSIS oraz algorytmy k-średnich, k-medoidów i hierarchiczną analizę skupień.
+                </p>
+                <ul class="centered-list">
+                    <li>Wczytywanie i standaryzacja danych (CSV)</li>
+                    <li>Metody oceny skupień (silhouette, elbow, Davies-Bouldin)</li>
+                    <li>Przekształcanie destymulant w stymulanty</li>
+                    <li>Wizualizacja macierzy korelacji i dendrogramów</li>
+                </ul>
+                <p class="centered-heading">
+                    Szczegóły zawarte w pliku "Dokumentacja.pdf". 
+                    <br>
+                    <em>Projekt współtworzony z Tomaszem Zapart.</em>
+                </p>
+                <div class="button-container">
+                    <a href="https://github.com/RadandMoc/Statystyczna-analiza-danych/tree/main/Projekt1" class="btn">Repozytorium</a>
+                </div>
+            </div>
+
+            <div class="flip-card" onclick="toggleFlip(this)" data-flipped="false">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front card-right">
+                        <img src="images/macierz_korelacji.png" alt="Analiza statystyczna" class="rounded-image">
+                    </div>
+                    <div class="flip-card-back card-right">
+                        <div class="alt-background card-back">
+                            <h3>Technologie:</h3>
+                            <ul>
+                                <li>Python</li>
+                                <li>NumPy</li>
+                                <li>Pandas</li>
+                                <li>Scikit-learn</li>
+                                <li>Matplotlib</li>
+                                <li>Seaborn</li>
+                            </ul>
+                        </div>
+                        <div class="distance"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="content-section">            
+            <div class="flip-card" onclick="toggleFlip(this)" data-flipped="false">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front card-left">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Normal_Distribution_PDF.svg/640px-Normal_Distribution_PDF.svg.png" alt="Testy normalności i ANOVA" class="rounded-image">
+                    </div>
+                    <div class="flip-card-back card-left">
+                        <div class="alt-background card-back">
+                            <h3>Technologie:</h3>
+                            <ul>
+                                <li>Python</li>
+                                <li>NumPy</li>
+                                <li>Pandas</li>
+                                <li>SciPy</li>
+                                <li>Statsmodels</li>
+                                <li>Matplotlib</li>
+                                <li>Enum</li>
+                            </ul>
+                        </div>
+                        <div class="distance"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-right alt-background">
+                <h2 class="centered-heading">Analiza testów normalności i ANOVA</h2>
+                <h3 class="centered-heading small-margin"><i>Badanie mocy testów i analiza wariancji dla danych telefonów</i></h3>
+                <p class="centered-heading small-margin">
+                    Projekt łączy kompleksową analizę testów normalności z wieloczynnikową analizą wariancji (ANOVA) 
+                    dla danych telefonów komórkowych.
+                </p>
+                <ul class="centered-list">
+                    <li>Implementacja 4 testów normalności (Shapiro-Wilk, Anderson-Darling, Lilliefors, Jarque-Bera)</li>
+                    <li>Analiza mocy testów dla różnych rozkładów i parametrów</li>
+                    <li>ANOVA dla cen telefonów względem koloru i producenta</li>
+                    <li>Testy Bartletta i Kruskala-Wallisa</li>
+                    <li>Wizualizacja wyników i generowanie raportów</li>
+                </ul>
+                <p class="centered-heading">
+                    Szczegółowa dokumentacja dostępna w pliku "Telefony_z_ANOVA_Mocarski_Zapart.pdf".
+                    <br>
+                    <em>Projekt współtworzony z Tomaszem Zapart.</em>
+                </p>
+                <div class="button-container">
+                    <a href="https://github.com/RadandMoc/Statystyczna-analiza-danych/tree/main/Projekt2" class="btn">Repozytorium</a>
                 </div>
             </div>
         </div>
