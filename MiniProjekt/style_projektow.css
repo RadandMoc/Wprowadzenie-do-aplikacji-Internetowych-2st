@@ -319,14 +319,35 @@ html {
     }
     
     .content-section {
-        display: revert;
-        justify-items: center;
+        display: flex;
         flex-direction: column;
+        align-items: center;
         gap: 10px;
+        width: 100%;
+        padding: 10px;
+        box-sizing: border-box; /* Dodane */
+        margin: 0; /* Dodane */
     }
     
     .text-left, .text-right, .flip-card {
+        width: 90%;
+        margin: 0 auto;
+        box-sizing: border-box; /* Dodane */
+    }
+
+    .alt-background {
+        width: 90%; /* Zmienione ze 100% */
+        margin: 0 auto;
+        box-sizing: border-box; /* Dodane */
+        padding: 10px; /* Zmniejszony padding */
+    }
+
+    /* Dodane - zabezpieczenie przed poziomym scrollowaniem */
+    main {
+        overflow-x: hidden;
         width: 100%;
+        box-sizing: border-box;
+        padding: 10px;
     }
 
     .image-right {
