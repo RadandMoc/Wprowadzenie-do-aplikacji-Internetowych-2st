@@ -33,10 +33,18 @@ main {
     border-radius: 10px;
     align-items: center;
     padding: 13px;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
+    word-wrap: break-word;
 }
 
 .text-left, .text-right {
     width: 45%; /* Zmniejszone z 50% żeby zmieścić gap */
+    hyphens: auto;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
+    word-wrap: break-word;
 }
 
 .center-header {
