@@ -50,3 +50,21 @@ header nav ul li a:hover {
     opacity: 0.7;
     text-decoration: none;
 }
+
+.long-nav-text {
+    display: inline;
+}
+
+.short-nav-text {
+    display: none;
+}
+
+@media (max-width: 620px) {
+    .long-nav-text {
+        display: none;
+    }
+    
+    .short-nav-text {
+        display: inline;
+    }
+}
