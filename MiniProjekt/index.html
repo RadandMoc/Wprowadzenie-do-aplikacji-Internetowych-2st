@@ -257,55 +257,102 @@
         <!-- First Project Block -->
         <div class="content-section">
             <div class="text-left alt-background">
-                <h2 class="centered-heading">
-                    Metaheurestyki
+                <h2 class="centered-heading"
+                    onmouseover="showSummary('project1-summary')"
+                    onmouseout="hideSummary('project1-summary')">
+                    Sieć neuronowa dla MNIST
                 </h2>
-                <h3 class="centered-heading small-margin"><i>Jeśli znalezienie optimum zajmie za dużo czasu, możesz spróbować znaleźć po prostu dobre rozwiązanie</i></h3>
-                <h4 class="centered-heading small-margin">Projekt porównywał skuteczność kilku popularnych metaheurystyk</h4>
-                <p class="centered-heading small-margin">
-                    W repozytorium zostały upublicznione metaheurystyki, których jestem współautorem. Przetestowaliśmy tekie algorytmy jak:
-                </p>
-                    <ul>
-                        <li>genetyczny</li>
-                        <li>tabu search</li>
-                        <li>wspinaczki</li>
-                        <li>wyżarzania</li>
-                    </ul>
+                <div id="project1-summary" class="job-summary centered-heading">
+                    <b>Rozpoznawanie ręcznie pisanych cyfr</b>,
+                    <i>Python</i>
+                    <br/>
+                    <u>Technologie:</u>
+                    <p>
+                        Python, NumPy, Pandas, Enum, Artificial Neural Networks, Fully Connected Layers / Multi Layer Perceptron (MLP)
+                    </p>
+                </div>
+                <h3 class="centered-heading small-margin"><i>Rozpoznawanie ręcznie pisanych cyfr</i></h3>
+                <h4 class="centered-heading small-margin">wykorzystuje sieci fully connected bez bibliotek do AI</h4>
                 <p class="centered-heading">
-                    Dodatkowo, w tym repozytorium stworzyliśmy prostą sieć neuronową i przystosowaliśmy ją do analizy danych ze zbioru mnist. Rozpoznaje on z tamtego zbioru cyfry z błędem na poziomie kilku procent.
+                    Projekt tworzy wielowarstwową sieć neuronową do klasyfikacji cyfr ze zbioru MNIST. 
+                    Główne funkcjonalności to konfigurowalna architektura sieci, różne metody inicjalizacji wag 
+                    oraz zaawansowane strategie doboru próbek. Projekt osiąga wysoką skuteczność w rozpoznawaniu cyfr 
+                    dzięki zastosowaniu prostych technik uczenia maszynowego.
                 </p>
                 <div class="button-container">
                     <!--<a href="" class="btn">Detale</a>-->
-                    <a href="https://github.com/RadandMoc/Inteligencja-Obliczeniowa" class="btn">Repozytorium</a>
+                    <a href="https://github.com/RadandMoc/Inteligencja-Obliczeniowa/tree/main/NeuralNetwork" class="btn">Repozytorium</a>
                 </div>
             </div>
             <div class="image-right">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/f/f7/MnistExamplesModified.png" alt="Studia licencjackie" class="rounded-image">
+                <img src="https://miro.medium.com/v2/resize:fit:1160/0*zFDg-m9EizUt5N-W.gif" alt="MNIST Neural Network" class="rounded-image">
             </div>
         </div>
-    
-        <!-- Second Project Block -->
+
         <div class="content-section">
             <div class="image-left">
-                <img src="https://viso.ai/wp-content/uploads/2024/04/Visual-Representation-1-1060x596.png" alt="Studia magisterskie" class="rounded-image">
+                <img src="https://ecsmedia.pl/c/16899595503444966-jpg-gallery.big-iext133443783.jpg" alt="Super Farmer Game" class="rounded-image">
             </div>
             <div class="text-right alt-background">
-                <h2 class="centered-heading">
-                    Graf decyzyjny
+                <h2 class="centered-heading"
+                onmouseover="showSummary('project2-summary')"
+                onmouseout="hideSummary('project2-summary')">
+                    Super Farmer
                 </h2>
-                <h3 class="centered-heading small-margin"><i>Jakie pytanie należy zadać, żeby zadać ich najmniej?</i></h3>
-                <h4 class="centered-heading small-margin">A jeśli nie mamy pełnej informacji decyzyjności, to jaka odpowiedź będzie najbardziej odpowiednia?</h4>
+                <div id="project2-summary" class="job-summary centered-heading">
+                    <b>Cyfrowa adaptacja gry planszowej</b>,
+                    <i>C#</i>
+                    <br/>
+                    <u>Technologie:</u>
+                    <p>
+                        C#, Unity Engine 2021.3, Unity UI System, Unity 2D, Binary Serialization (Save System)
+                    </p>
+                </div>
+                <h3 class="centered-heading small-margin"><i>Cyfrowa adaptacja popularnej gry planszowej</i></h3>
                 <p class="centered-heading small-margin">
-                    W repozytorium jest stworzony program, który rysuje dwa grafy zarówno w konsoli, jak i w folderze w pliku png. graf.png jest grafem dla decyzyjności dla pełnych danych i jest drukowany na konsoli jako pierwszy. graf2.png jest grafem dla danych niepełnych i jest drukowany jako drugi.
-                    <br>
-                    Program na samym końcu komunikatów na konsoli drukuje skuteczność przewidywania odpowiedzi dla tych danych.
+                    Projekt jest pełną implementacją gry planszowej Super Farmer w formie aplikacji na systemy Windows.
+                    Oferuje rozgrywkę wieloosobową zgodną z oryginalnymi zasadami, system zapisu i wczytywania stanu gry,
+                    intuicyjny interfejs użytkownika, oraz pełną dokumentację zasad gry. Projekt został zrealizowany 
+                    w ciągu zaledwie 4 dni na potrzeby rekrutacji.
                 </p>
                 <div class="button-container">
-                    <!--<a href="" class="btn">Detale</a>-->
-                    <a href="https://github.com/RadandMoc/Decision-Tree" class="btn">Repozytorium</a>
+                    <a href="https://github.com/RadandMoc/SuperFarmer" class="btn">Repozytorium</a>
                 </div>
             </div>
         </div>
+        
+        <!-- Darwin World Project Block -->
+        <div class="content-section">
+            <div class="text-left alt-background">
+                <h2 class="centered-heading"
+                onmouseover="showSummary('project3-summary')"
+                onmouseout="hideSummary('project3-summary')">
+                    Darwin World
+                </h2>
+                <div id="project3-summary" class="job-summary centered-heading">
+                    <b>Wielowątkowa symulacja ewolucji</b>,
+                    <i>Java</i>
+                    <br/>
+                    <u>Technologie:</u>
+                    <p>
+                        Java, JavaFX, Multithreading, Object-Oriented Design, Design Patterns, SOLID
+                    </p>
+                </div>
+                <h3 class="centered-heading small-margin"><i>Wielowątkowa symulacja ewolucji zwierząt</i></h3>
+                <p class="centered-heading small-margin">
+                    Symulacja świata zwierząt roślinożernych z systemem dziedziczenia genów zachowania.
+                    Każda symulacja działa w osobnym wątku z możliwością śledzenia. Projekt oferuje system 
+                    dziedziczenia "DNA" determinującego zachowanie, wielowątkową obsługę symulacji, 
+                    interaktywny interfejs użytkownika, oraz możliwość generowania historii statystyk.
+                </p>
+                <div class="button-container">
+                    <a href="https://github.com/RadandMoc/PO_2024_PT1315_Mocarski/tree/main/projekt" class="btn">Repozytorium</a>
+                </div>
+            </div>
+            <div class="image-right">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/f/fb/Darwin_image_evolution_from_random_patches.gif" alt="Darwin World Simulation" class="rounded-image">
+            </div>
+
         <div id="contactForm"></div>
     </main>
 
