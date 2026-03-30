@@ -22,6 +22,9 @@
 
     <!-- Boczne przyciski do nawigacji po sekcjach -->
     <div class="side-buttons">
+        <a href="#ai" class="circle-btn" data-text="AI / SI / ML">
+            <img src="images/ai_logo.png" alt="Artificial Intelligence">
+        </a>
         <a href="#py" class="circle-btn" data-text="Python">
             <img src="images/python.png" alt="Python">
         </a>
@@ -49,8 +52,101 @@
     <main>
         <button class="toggle-all-btn" onclick="toggleAll()" title="Pokaż/ukryj technologie"></button>
 
+        <h1 id="ai" class="center-header other-text-style">Artificial Intelligence / Machine Learning</h1>
+
+        <div class="content-section">            
+            <div class="flip-card" onclick="toggleFlip(this)" data-flipped="false">
+                <div class="flip-card-inner">
+                  <div class="flip-card-front card-left">
+                    <img src="images/mlops.jpg" alt="MLOps" class="rounded-image">
+                  </div>
+                  <div class="flip-card-back card-left">
+                    <div class="alt-background card-back">
+                        <h3>Technologie:</h3>
+                        <ul>
+                          <li>Python</li>
+                        </ul>
+                        <h3>Koncepty:</h3>
+                        <ul>
+                            <li>AI / SI / ML</li>
+                        </ul>
+                    </div>
+                    <div class="distance"></div>
+                  </div>
+                </div>
+              </div>
+            <div class="text-right alt-background">
+                <h2 class="centered-heading">MLOps</h2>
+                <h3 class="centered-heading small-margin"><i>Metody wdrażania i utrzymywania systemów ML</i></h3>
+                <p class="centered-heading small-margin">
+                    W repozytorium znajdują się ćwiczenia z laboratoriów dotyczących MLOps, obejmujące różnorodne aspekty wdrażania i utrzymywania systemów uczenia maszynowego. Dotyczą naprawdę dużego materiału, dlatego mają specjalną dodatkową stronę ze szczegółami repozytorium. Między innymi w tym projekcie:
+                </p>
+                <ul class="centered-list">
+                    <li>Stosowałem pre-commit hooks do walidowania kodu</li>
+                    <li>Tworzyłem pipeline CI/CD do automatycznego testowania i wdrażania modeli</li>
+                    <li>Używałem narzędzi do monitorowania wydajności modeli w produkcji</li>
+                    <li>Implementowałem systemy zarządzania wersjami danych i modeli</li>
+                    <li>Stosowałem techniki drift detection (data drift i concept drift) do identyfikacji problemów z jakością danych</li>
+                    <li>Stosowałem guardrailse do zapewnienia zgodności z zasadami bezpieczeństwa i etyki</li>
+                    <li>Implementowałem RAG przy użyciu gotowych narzędzi</li>
+                </ul>
+                <p class="centered-heading">
+                    
+                    <br>
+                    <em>Projekt został zrealizowany samodzielnie, na podstawie materiałów Jakuba Adamczyka i Jakuba Nowaka.</em>
+                </p>
+                <div class="button-container">
+                    <a href="https://github.com/RadandMoc/MLOps" class="btn">Repozytorium</a>
+                    <a href="mlops.html" class="btn">Szczegóły</a>
+                </div>
+            </div>
+        </div>
+        <!--
+        <div class="content-section">
+            <div class="text-left alt-background">
+                <h2 class="centered-heading">Lingwistyka obliczeniowa</h2>
+                <h3 class="centered-heading small-margin"><i> </i></h3>
+                <p class="centered-heading small-margin">
+                    Projekt zawiera implementacje różnych algorytmów metaheurystycznych do rozwiązywania problemu komiwojażera (TSP). 
+                    Zaimplementowane algorytmy to:
+                </p>
+                <ul class="centered-list">
+                    <li>Algorytm Genetyczny (selekcja turniejowa, krzyżowanie, mutacja)</li>
+                    <li>Symulowane Wyżarzanie (różne metody redukcji temperatury)</li>
+                    <li>Przeszukiwanie z Tabu (adaptowalna lista tabu)</li>
+                    <li>Algorytm Wspinaczkowy (różne metody przeszukiwania sąsiedztwa)</li>
+                    <li>Algorytm Najbliższego Sąsiada (podejście zachłanne)</li>
+                </ul>
+                <p class="centered-heading">
+                    Do niektórych algorytmów zostały zaimplementowane mechanizmy optymalizacji, w tym dynamiczną adaptację parametrów i różne strategie modyfikacji tras.
+                    Projekt został szczegółowo udokumentowany w pliku "Projekt-TSP.pdf".
+                    <br>
+                    <em>Projekt został zrealizowany we współpracy z: Tomasz Zapart, Mateusz Strojek, Adrian Żyła, Anna Rubin.</em>
+                </p>
+                <div class="button-container">
+                    <a href="" class="btn">Repozytorium</a>
+                </div>
+            </div>
+            <div class="flip-card" onclick="toggleFlip(this)" data-flipped="false">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front card-right">
+                        <img src="" alt="Lingwistyka obliczeniowa" class="rounded-image">
+                    </div>
+                    <div class="flip-card-back card-right">
+                        <div class="distance"></div>
+                        <div class="alt-background card-back">
+                            <h3>Technologie:</h3>
+                            <ul>
+                                <li>Python</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+-->
+
         <h1 id="py" class="center-header other-text-style">Python</h1>
-        
         
         <div class="content-section">            
             <div class="flip-card" onclick="toggleFlip(this)" data-flipped="false">
