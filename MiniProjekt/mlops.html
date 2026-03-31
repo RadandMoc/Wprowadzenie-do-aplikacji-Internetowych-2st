@@ -251,106 +251,97 @@
         <h2>Branch: Homework4</h2>
         <h3>Co zrobiłem?</h3>
         <p>
-            
+            W ramach tego zadania zbudowałem system wyszukiwania obrazów oparty na ich zawartości semantycznej (tzw. wyszukiwanie obrazu tekstem). 
+            Na początku przetworzyłem metadane zbioru obrazów i odfiltrowałem je, aby pracować na grafikach o odpowiednio wysokiej rozdzielczości. 
+            Wykorzystałem model wizyjny oparty na architekturze Transformer (CLIP), aby wygenerować wektorowe reprezentacje (embeddings) 
+            dla zestawu zdjęć. Zautomatyzowałem proces wsadowego wczytywania i wektoryzacji obrazów oraz ich zapisu do relacyjnej bazy danych 
+            wspierającej operacje na wektorach. Na koniec zaimplementowałem klasę wyszukiwarki, która przekształca wprowadzony opis tekstowy 
+            na wektor i na podstawie dystansu cosinusowego odnajduje oraz od razu wyświetla na wykresie najbardziej pasujące grafiki.
         </p>
         <h3>Czego użyłem?</h3>
         <ul>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
+            <li><b>Pillow (PIL)</b> do dynamicznego wczytywania i obsługi plików graficznych niezbędnych w procesie generowania embeddingów oraz do wyświetlania wyników wyszukiwania.</li>
+            <li>Technologie i biblioteki wykorzystane ponownie w tych samych lub podobnych celach: <b>Python, Docker Compose, PostgreSQL</b> z rozszerzeniem <b>Pgvector</b> (uruchomiony za pomocą obrazu TimescaleDB), <b>Jupyter Notebook, Polars, Sentence-Transformers, SQLAlchemy, Matplotlib, Joblib</b> (do określenia rozmiaru wsadu na podstawie rdzeni procesora) oraz <b>tqdm</b>.</li>
         </ul>
 
         <h2>Branch: Lab5</h2>
         <h3>Co zrobiłem?</h3>
         <p>
-            
+            W ramach tego laboratorium skupiłem się na profesjonalnym wdrażaniu zasad odtwarzalności eksperymentów i wersjonowania za pomocą DVC 
+            i MLflow. Zintegrowałem projekt z narzędziem DVC, co pozwoliło na śledzenie i zarządzanie zmianami w dużych zbiorach danych 
+            niczym w tradycyjnym repozytorium Git. Przeprowadziłem operacje czyszczenia danych i zastępowania brakujących wartości. 
+            Uruchomiłem lokalny serwer MLflow i wykorzystałem go do śledzenia parametrów i metryk uczenia maszynowego w dwóch wariantach: 
+            automatycznym (autologging) dla wielu zróżnicowanych klasycznych modeli oraz ręcznym w przypadku budowy i optymalizacji 
+            prostej sieci neuronowej (MLP) wraz ze stworzeniem niestandardowej klasy trenującej. Wykorzystałem interfejs MLflow do 
+            porównania rezultatów poszczególnych iteracji optymalizacji hiperparametrów.
         </p>
         <h3>Czego użyłem?</h3>
         <ul>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
+            <li><b>DVC (Data Version Control)</b> jako dedykowanego systemu typu Git dla danych do wersjonowania plików modeli i dużych zbiorów danych w oderwaniu od samego kodu.</li>
+            <li><b>MLflow</b> do systematycznego i zautomatyzowanego śledzenia cyklu życia modeli uczenia maszynowego, monitorowania przebiegów, logowania hiperparametrów i oceny eksperymentów.</li>
+            <li><b>Click</b> służącego do sprawnego zbudowania interfejsów wiersza poleceń (CLI) do skryptów uruchomieniowych.</li>
+            <li>Biblioteki <b>feature-engine</b> wspierającej inżynierię cech (m.in. obsługę rzadkich etykiet) w procesie transformacji danych.</li>
+            <li>Technologie i narzędzia wykorzystane ponownie w tych samych lub podobnych celach:<b> Python, Jupyter Notebook, Pandas, PyTorch, Scikit-learn</b> oraz <b>NumPy</b>.</li>
         </ul>
 
         <h2>Branch: Lab6</h2>
         <h3>Co zrobiłem?</h3>
         <p>
-            
+            W ramach tego zadania skupiłem się na analizie jakości danych oraz kompleksowym audycie modeli NLP. Na początku przeanalizowałem zbiór danych tekstowych, usuwając duplikaty i wykorzystując dedykowane narzędzia do automatycznego wykrywania błędnych etykiet oraz odstających obserwacji (tzw. outlierów). Następnie dostroiłem (fine-tuning) wstępnie wyuczony model językowy (DistilBERT) do zadania wieloklasowej klasyfikacji tekstu. Ostatnim etapem było przeprowadzenie zautomatyzowanych testów modelu, co pozwoliło wygenerować szczegółowy raport ujawniający m.in. wrażliwość predykcji na specyficzne transformacje tekstu (np. literówki czy zmianę płci), stronniczość (bias) oraz korelacje pozorne.
         </p>
         <h3>Czego użyłem?</h3>
         <ul>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
+            <li><b>Cleanlab</b> do zastosowania podejścia data-centric AI, co pozwoliło na programowe odnajdywanie błędnie przypisanych klas i problematycznych próbek w zbiorze uczącym.</li>
+            <li><b>Transformers (Hugging Face)</b> do szybkiego załadowania, tokenizacji i wytrenowania modelu opartego na architekturze DistilBERT przy użyciu wbudowanej klasy Trainer.</li>
+            <li><b>Giskard</b> jako kompleksowego frameworka testowego do walidacji modelu uczenia maszynowego, skanowania jego luk niezawodności i generowania czytelnych raportów HTML.</li>
+            <li>Technologie i biblioteki wykorzystane ponownie: <b>Python, Polars, NumPy, PyTorch (torch), Scikit-learn, Matplotlib, Seaborn, Jupyter Notebook, Hugging Face Datasets</b> oraz <b>Sentence-Transformers</b>.</li>
         </ul>
 
         <h2>Branch: Lab7</h2>
         <h3>Co zrobiłem?</h3>
         <p>
-            
+            W ramach tego zadania zająłem się optymalizacją wydajności inferencji oraz zmniejszaniem rozmiaru zaawansowanego modelu językowego (z rodziny Sentence Transformers). Przeprowadziłem kompleksowe testy porównawcze różnych metod przyspieszania predykcji, badając wpływ podstawowych optymalizacji (takich jak torch.inference_mode), a następnie analizując czasy wykonania przy użyciu kompilatora grafu obliczeniowego w środowisku PyTorch (torch.compile) w zróżnicowanych wariantach dostrajania (np. tryb max-autotune). Zastosowałem operację dynamicznej kwantyzacji wag modelu do formatu 8-bitowego (INT8), co zaowocowało redukcją rozmiaru modelu o blisko 60% oraz niemal trzykrotnym przyspieszeniem wnioskowania na procesorze (CPU). Na koniec przetestowałem model na karcie graficznej (GPU), analizując wpływ mniejszej precyzji obliczeń poprzez ręczną konwersję wag do 16-bitów (FP16) oraz zastosowanie mechanizmu automatycznej precyzji mieszanej (AMP - Automatic Mixed Precision).
         </p>
         <h3>Czego użyłem?</h3>
         <ul>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
+            <li><b>Transformers (Hugging Face)</b> do sprawnego załadowania, tokenizacji i uruchamiania badanego modelu językowego (opartego na architekturze <b>MPNet</b>).</li>
+            <li><b>PyTorch (torch)</b> z wykorzystaniem jego zaawansowanych modułów optymalizacyjnych do kwantyzacji (torch.ao.quantization), kompilacji modeli (<b>JIT</b>) oraz zarządzania precyzją mieszaną (torch.autocast).</li>
+            <li>Technologie i biblioteki wykorzystane ponownie w tych samych lub podobnych celach: <b>Python, Jupyter Notebook</b></li>
         </ul>
 
         <h2>Branch: Lab8</h2>
         <h3>Co zrobiłem?</h3>
         <p>
-            
+            W ramach tego zadania zająłem się tematyką monitorowania danych oraz modeli w produkcji (tzw. Data and Model Monitoring), ze szczególnym uwzględnieniem zjawiska dryfu danych (data drift). Na początku wygenerowałem zautomatyzowane raporty analizujące rozkłady, uprzednio dzieląc zbiór na dane referencyjne (historyczne) oraz najnowsze. Następnie zaimplementowałem własną, niestandardową metrykę do oceny dryfu w danych tekstowych (recenzjach) przy użyciu klasyfikatora domenowego (domain classifier). Proces ten obejmował przekształcenie tekstów na reprezentacje wektorowe, przypisanie odpowiednich etykiet pochodzenia (zbiór referencyjny lub aktualny), a wreszcie wytrenowanie modelu regresji logistycznej, który za pomocą wskaźnika ROC AUC oceniał różnice pomiędzy tymi zbiorami jako wynik dryfu.
         </p>
         <h3>Czego użyłem?</h3>
         <ul>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
+            <li><b>Evidently</b> jako głównego frameworka do monitorowania uczenia maszynowego, generowania interaktywnych raportów wizualnych (m.in. przy użyciu gotowego profilu DataDriftPreset) oraz integracji z niestandardowymi metrykami i testami.</li>
+            <li>Technologie i biblioteki wykorzystane ponownie w tych samych lub podobnych celach co w poprzednich projektach: <b>Python, Jupyter Notebook, Sentence-Transformers, Scikit-learn, Pandas</b> oraz <b>NumPy.</b></li>
         </ul>
 
         <h2>Branch: Lab9</h2>
         <h3>Co zrobiłem?</h3>
         <p>
-            
+            W ramach tego laboratorium wdrożyłem aplikację uczenia maszynowego serwującą analizę sentymentu do chmury obliczeniowej AWS. Zabezpieczyłem dostęp do usług za pomocą konfiguracji uprawnień w IAM oraz przygotowałem automatyczne pobieranie potrzebnych modeli i danych ze skalowalnego magazynu S3. Aplikację skonteneryzowałem, a gotowy obraz przesłałem do prywatnego rejestru Elastic Container Registry (ECR). Zaprojektowałem bezpieczną architekturę sieciową, tworząc Virtual Private Cloud (VPC) z odizolowanymi podsieciami publicznymi i prywatnymi, tablicami routingu oraz odpowiednimi bramami (NAT Gateway, Internet Gateway). Na koniec uruchomiłem system w bezserwerowym środowisku AWS Fargate (w ramach orkiestracji ECS), podpinając go pod balanser obciążenia ruchu (Application Load Balancer), a poprawność działania chmurowych endpointów zweryfikowałem za pomocą testów.
         </p>
         <h3>Czego użyłem?</h3>
         <ul>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
+            <li>Ekosystemu <b>Amazon Web Services (AWS)</b> – w tym <b>IAM, S3, ECR, VPC, ECS (Fargate), ALB</b> oraz <b>CloudWatch</b> – do kompleksowego wdrożenia, zabezpieczenia infrastruktury sieciowej, orkiestracji kontenerów, dystrybucji ruchu i monitorowania usług chmurowych.</li>
+            <li><b>Boto3</b> jako chmurowego pakietu SDK umożliwiającego zarządzanie usługami AWS bezpośrednio z poziomu kodu (np. do komunikacji z bucketami S3).</li>
+            <li>Technologie i biblioteki wykorzystane ponownie w tych samych lub podobnych celach: <b>Python (>=3.12), Docker, FastAPI, Uvicorn, Sentence-Transformers, Transformers, PyTorch (torch), Scikit-learn, Joblib, Requests</b> oraz biblioteki testowe (<b>FastAPI TestClient</b>).</li>
         </ul>
 
         <h2>Branch: Lab10</h2>
         <h3>Co zrobiłem?</h3>
         <p>
-            
+            W ramach tego zadania wdrożyłem podejście Infrastructure as Code (IaC) do automatyzacji powoływania i zarządzania zasobami. Za pomocą kodu zadeklarowałem i utworzyłem infrastrukturę chmurową, w tym skalowalne zasobniki (buckety) w usłudze AWS S3, wykorzystując zmienne i wartości wyjściowe do parametryzacji. Zautomatyzowałem również proces tworzenia i konfiguracji repozytorium bezpośrednio na platformie GitHub. Ostatnim etapem była optymalizacja kodu poprzez wydzielenie definicji infrastruktury do reużywalnych modułów (np. dedykowany moduł dla S3), co znacznie ułatwia skalowanie i utrzymanie spójności architektury.
         </p>
         <h3>Czego użyłem?</h3>
         <ul>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
+            <li><b>Terraform</b> jako głównego narzędzia klasy Infrastructure as Code (IaC) do deklaratywnego definiowania, wdrażania i wersjonowania infrastruktury.</li>
+            <li><b>Terraform Providers (AWS, GitHub)</b> jako wtyczek pozwalających narzędziu Terraform na komunikację z zewnętrznymi interfejsami API i bezpośrednie zarządzanie ich zasobami.</li>
+            <li>Technologie i usługi wykorzystane ponownie w tych samych lub podobnych celach co w poprzednich projektach: <b>AWS (S3)</b>.</li>
         </ul>
 
         <h2>Branch: Lab11</h2>
