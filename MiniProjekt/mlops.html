@@ -137,17 +137,15 @@
             Stworzyłem aplikację uczenia maszynowego, która trenuje model drzewa decyzyjnego na klasycznym zbiorze danych Iris i zapisuje go do późniejszego wykorzystania. Zaimplementowałem mechanizm bezpiecznego zarządzania konfiguracją, zmiennymi środowiskowymi i sekretami, który dynamicznie dostosowuje się do wybranego środowiska pracy (deweloperskie, testowe lub produkcyjne). Całość aplikacji, w tym serwer API, została przygotowana do łatwego wdrożenia poprzez konteneryzację.
         </p>
         <h3>Czego użyłem?</h3>
-        <p>
-            <ul>
-                <li>Python (>=3.12)</li>
-                <li><b>Scikit-learn</b> do budowy modelu uczenia maszynowego oraz <b>Joblib</b> do jego eksportu.</li>
-                <li><b>FastAPI</b> oraz <b>Uvicorn</b> do stworzenia i serwowania interfejsu API.</li>
-                <li><b>Docker Compose</b> do konteneryzacji i zarządzania uruchamianiem usług.</li>
-                <li><b>Pydantic (pydantic-settings)</b>, <b>python-dotenv</b> oraz <b>PyYAML</b> do ładowania i walidacji ustawień oraz sekretów aplikacji z plików .env i .yaml.</li>
-                <li><b>Pytest</b> jako środowiska do testowania rozwiązań.</li>
-                <li><b>Pre-commit</b> do dbania o jakość i formatowanie kodu przed utworzeniem commita.</li>
-            </ul>
-        </p>
+        <ul>
+            <li>Python (>=3.12)</li>
+            <li><b>Scikit-learn</b> do budowy modelu uczenia maszynowego oraz <b>Joblib</b> do jego eksportu.</li>
+            <li><b>FastAPI</b> oraz <b>Uvicorn</b> do stworzenia i serwowania interfejsu API.</li>
+            <li><b>Docker Compose</b> do konteneryzacji i zarządzania uruchamianiem usług.</li>
+            <li><b>Pydantic (pydantic-settings)</b>, <b>python-dotenv</b> oraz <b>PyYAML</b> do ładowania i walidacji ustawień oraz sekretów aplikacji z plików .env i .yaml.</li>
+            <li><b>Pytest</b> jako środowiska do testowania rozwiązań.</li>
+            <li><b>Pre-commit</b> do dbania o jakość i formatowanie kodu przed utworzeniem commita.</li>
+        </ul>
 
         <h2>Branch: Homework1</h2>
         <h3>Co zrobiłem?</h3>
@@ -175,7 +173,7 @@
         <ul>
             <li><b>PostgreSQL</b> jako potężnej relacyjnej bazy danych do przechowywania i odpytywania danych.</li>
             <li><b>Psycopg</b> jako sterownika służącego do nawiązywania bezpiecznych połączeń i wykonywania zapytań SQL na bazie PostgreSQL z poziomu skryptów.</li>
-            <li><b>DuckDB</b> jako wydajnego, analitycznego systemu bazodanowego do przetwarzania plików lokalnych (CSV, Parquet, JSON), zaawansowanej analizy danych oraz płynnej integracji z istniejącą bazą PostgreSQL.</li>
+            <li><b>DuckDB</b> jako wydajnego, analitycznego systemu bazodanowego do przetwarzania plików lokalnych (CSV, <b>Parquet</b>, JSON), zaawansowanej analizy danych oraz płynnej integracji z istniejącą bazą PostgreSQL.</li>
             <li><b>Jupyter Notebook</b> do zaprezentowania wyników programu.</li>
             <li><b>Pandas</b> do operacji na data fremach oraz <b>Matplotlib</b> do wygenerowania wizualizacji z przeanalizowanych statystyk.</li>
             <li>Narzędzia i technologie wykorzystane ponownie w tym samym celu co w poprzednich projektach: <b>Python</b>, <b>Docker Compose</b>, <b>Pytest</b> oraz <b>Pre-commit</b>.</li>
@@ -206,7 +204,7 @@
         </p>
         <h3>Czego użyłem?</h3>
         <ul>
-            <li><b>Polars</b> jako głównej, wielowątkowej biblioteki zastępującej Pandas do błyskawicznej manipulacji i analizy danych (DataFrames).</li>
+            <li><b>Polars</b> zarówno w trybie hot jak i lazy, jako głównej, wielowątkowej biblioteki zastępującej Pandas do błyskawicznej manipulacji i analizy danych (DataFrames).</li>
             <li>Technologie i narzędzia wykorzystane ponownie w tych samych celach, co w poprzednich projektach: <b>Python (>=3.11), Jupyter Notebook, Pandas, Matplotlib, PyArrow</b> oraz <b>Ruff.</b></li>
         </ul>
 
@@ -221,14 +219,14 @@
         </p>
         <h3>Czego użyłem?</h3>
         <ul>
-            <li><b>Seaborn</b> jako biblioteki statystycznej służącej do wygenerowania czytelnych i estetycznych wykresów na podstawie utworzonych data frame'ów.</li>
+            <li><b>Seaborn</b> jako biblioteki wizualizacyjnej służącej do wygenerowania czytelnych i estetycznych wykresów na podstawie utworzonych data frame'ów.</li>
             <li>Technologie i narzędzia wykorzystane ponownie w tych samych celach, co w poprzednich etapach: <b>Python (>=3.11), Jupyter Notebook, Polars, Pandas, Matplotlib, PyArrow</b> oraz <b>Ruff.</b></li>
         </ul>
 
         <h2>Branch: Lab4</h2>
         <h3>Co zrobiłem?</h3>
         <p>
-            W ramach tego laba zaimplementowałem mechanizmy wyszukiwania semantycznego oraz system Retrieval-Augmented Generation (RAG). 
+            W ramach tego laba zaimplementowałem mechanizmy wyszukiwania semantycznego oraz system Retrieval-Augmented Generation (<b>RAG</b>). 
             W pierwszej części stworzyłem aplikację wyszukującą gry (na podstawie zbioru danych z platformy Steam), 
             która dzięki wektoryzacji opisów umożliwia znajdowanie odpowiednich tytułów za pomocą zapytań w języku naturalnym, 
             wykorzystując rozszerzenia wektorowe dla relacyjnej bazy danych. Następnie zbudowałem pełny potok RAG: 
@@ -300,13 +298,15 @@
         <h2>Branch: Lab7</h2>
         <h3>Co zrobiłem?</h3>
         <p>
-            W ramach tego zadania zająłem się optymalizacją wydajności inferencji oraz zmniejszaniem rozmiaru zaawansowanego modelu językowego (z rodziny Sentence Transformers). Przeprowadziłem kompleksowe testy porównawcze różnych metod przyspieszania predykcji, badając wpływ podstawowych optymalizacji (takich jak torch.inference_mode), a następnie analizując czasy wykonania przy użyciu kompilatora grafu obliczeniowego w środowisku PyTorch (torch.compile) w zróżnicowanych wariantach dostrajania (np. tryb max-autotune). Zastosowałem operację dynamicznej kwantyzacji wag modelu do formatu 8-bitowego (INT8), co zaowocowało redukcją rozmiaru modelu o blisko 60% oraz niemal trzykrotnym przyspieszeniem wnioskowania na procesorze (CPU). Na koniec przetestowałem model na karcie graficznej (GPU), analizując wpływ mniejszej precyzji obliczeń poprzez ręczną konwersję wag do 16-bitów (FP16) oraz zastosowanie mechanizmu automatycznej precyzji mieszanej (AMP - Automatic Mixed Precision).
+            W ramach tego zadania zająłem się optymalizacją wydajności inferencji oraz zmniejszaniem rozmiaru zaawansowanego modelu językowego (z rodziny Sentence Transformers). Przeprowadziłem kompleksowe testy porównawcze różnych metod przyspieszania predykcji, badając wpływ podstawowych optymalizacji (takich jak <code>torch.inference_mode</code> oraz <code>torch.no_grad</code>), a następnie analizując czasy wykonania przy użyciu kompilatora grafu obliczeniowego w środowisku PyTorch (<code>torch.compile</code>) w zróżnicowanych wariantach dostrajania (np. tryb <code>max-autotune</code>) – w tym w zależności od długości sekwencji wejściowej. Zastosowałem operację dynamicznej kwantyzacji wag modelu do formatu 8-bitowego (INT8), co zaowocowało redukcją rozmiaru modelu o blisko 60% oraz niemal trzykrotnym przyspieszeniem wnioskowania na procesorze (CPU). Przetestowałem model na karcie graficznej (GPU), analizując wpływ mniejszej precyzji obliczeń poprzez ręczną konwersję wag do 16-bitów (FP16) oraz zastosowanie mechanizmu automatycznej precyzji mieszanej (AMP - Automatic Mixed Precision). Dodatkowo zintegrowałem ze środowiskiem pracy format <b>ONNX</b>, przygotowując projekt do wysokowydajnej inferencji w ustandaryzowanej architekturze.
         </p>
+        
         <h3>Czego użyłem?</h3>
         <ul>
             <li><b>Transformers (Hugging Face)</b> do sprawnego załadowania, tokenizacji i uruchamiania badanego modelu językowego (opartego na architekturze <b>MPNet</b>).</li>
-            <li><b>PyTorch (torch)</b> z wykorzystaniem jego zaawansowanych modułów optymalizacyjnych do kwantyzacji (torch.ao.quantization), kompilacji modeli (<b>JIT</b>) oraz zarządzania precyzją mieszaną (torch.autocast).</li>
-            <li>Technologie i biblioteki wykorzystane ponownie w tych samych lub podobnych celach: <b>Python, Jupyter Notebook</b></li>
+            <li><b>PyTorch (torch)</b> z wykorzystaniem jego zaawansowanych modułów optymalizacyjnych do kwantyzacji (<code>torch.ao.quantization</code>), kompilacji modeli (<b>JIT</b>), zarządzania precyzją mieszaną (<code>torch.autocast</code>) oraz wyłączania obliczania gradientów (<code>torch.no_grad</code>).</li>
+            <li><b>ONNX</b> oraz <b>ONNX Runtime</b> służących jako zoptymalizowany standard zapisu grafu modelu oraz wysokowydajny silnik do jego serwowania niezależnie od specyfiki frameworka treningowego.</li>
+            <li>Technologie i biblioteki wykorzystane ponownie w tych samych lub podobnych celach: <b>Python, Jupyter Notebook</b> oraz <b>NumPy</b>.</li>
         </ul>
 
         <h2>Branch: Lab8</h2>
@@ -347,76 +347,84 @@
         <h2>Branch: Lab11</h2>
         <h3>Co zrobiłem?</h3>
         <p>
-            
+            W ramach tego zadania zoptymalizowałem aplikację do analizy sentymentu i przygotowałem ją do wdrożenia w chmurowej architekturze bezserwerowej (serverless). Proces rozpocząłem od konwersji głównego modelu językowego (z rodziny Transformer) oraz klasyfikatora do lekkiego, wysoce wydajnego formatu ONNX. Dzięki temu zbudowałem logikę inferencji, która na produkcji nie wymaga ładowania ciężkich frameworków treningowych (takich jak PyTorch). Następnie dostosowałem gotowe API do uruchamiania w środowisku AWS Lambda za pomocą odpowiedniego adaptera i zaplanowałem wdrożenie tej usługi z wykorzystaniem obrazów kontenerowych i infrastruktury zdefiniowanej jako kod (IaC) przy użyciu szablonu SAM.
         </p>
         <h3>Czego użyłem?</h3>
         <ul>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
+            <li><b>ONNX</b> (wraz z <b>ONNX Runtime</b>, <b>skl2onnx</b> i <b>onnxscript</b>) do eksportu grafów modeli uczenia maszynowego do zoptymalizowanego, uniwersalnego formatu oraz zapewnienia błyskawicznego wnioskowania w aplikacji.</li>
+            <li><b>AWS SAM</b> (<b>Serverless Application Model</b>) służącego jako framework IaC do zdefiniowania, skonfigurowania i wdrożenia funkcji <b>AWS Lambda</b> oraz <b>API Gateway</b>.</li>
+            <li><b>Mangum</b> jako specjalnego adaptera, który pozwala spakować i uruchomić asynchroniczną aplikację FastAPI w bezserwerowym środowisku uruchomieniowym AWS Lambda.</li>
+            <li><b>Tokenizers</b> do odizolowanego, szybkiego przetwarzania tekstu na tokeny na podstawie wczytanego pliku konfiguracyjnego (z pominięciem ładowania całego środowiska Transformers w kodzie produkcyjnym).</li>
+            <li>Technologie, biblioteki i usługi chmurowe wykorzystane ponownie:<b> Python, FastAPI, Uvicorn, PyTorch (torch), Transformers, Boto3, Joblib, Pydantic</b> oraz ekosystem <b>AWS</b> (<b>Lambda, API Gateway</b>).</li>
         </ul>
 
         <h2>Branch: Lab12</h2>
         <h3>Co zrobiłem?</h3>
         <p>
-            
+            W ramach tego zadania skupiłem się na automatyzacji i orkiestracji procesów przetwarzania danych (ETL) przy użyciu platformy 
+            <b>Apache Airflow</b> uruchomionej w środowisku kontenerowym. Zaimplementowałem przepływy pracy (tzw. DAG-i), które cyklicznie 
+            pobierają dane pogodowe z zewnętrznego API, poddają je transformacjom (np. ograniczaniu skrajnych wartości temperatur), a następnie 
+            zapisują przetworzony zbiór. Logikę tę przygotowałem na dwa sposoby: klasycznie, wykorzystując standardowe operatory (PythonOperator), 
+            oraz z użyciem nowoczesnego i bardziej elastycznego interfejsu <b>TaskFlow API</b>. Dodatkowo skonfigurowałem środowisko z użyciem 
+            <b>CeleryExecutor</b> do rozproszonego i wielowątkowego wykonywania zadań przez wydzielone procesy (workery). 
+            Całość zintegrowałem z magazynem obiektowym kompatybilnym z AWS S3, który był emulowany lokalnie dla bezkosztowego testowania 
+            zapisu plików CSV z wynikami.
         </p>
         <h3>Czego użyłem?</h3>
         <ul>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
+            <li><b>Apache Airflow</b> jako potężnego frameworka do programistycznego definiowania, harmonogramowania i zarządzania potokami danych (data pipelines).</li>
+            <li><b>Celery</b> w połączeniu z <b>Valkey</b> (otwartoźródłowym brokerem wiadomości typu in-memory, alternatywą dla Redis) do obsługi systemu kolejek i rozproszonego wykonywania zadań.</li>
+            <li><b>LocalStack</b> do pełnej, lokalnej emulacji środowiska chmurowego AWS (usługi S3), pozwalającej na testowanie kodu z interfejsami AWS bez uderzania do rzeczywistych serwerów i generowania kosztów.</li>
+            <li>Technologie, biblioteki i usługi wykorzystane ponownie w tych samych lub podobnych celach co w poprzednich laboratoriach: <b>Python, Docker Compose, PostgreSQL, Pandas, Requests</b>, ekosystem <b>AWS (S3)</b> (wspierany pakietami <b>s3fs</b> i <b>apache-airflow-providers-amazon</b>) oraz <b>Ruff</b>.</li>
         </ul>
 
         <h2>Branch: Homework12</h2>
         <h3>Co zrobiłem?</h3>
         <p>
-            
+            W ramach tego zadania zintegrowałem procesy inżynierii danych i uczenia maszynowego, tworząc zautomatyzowane potoki (DAGi) do 
+            analizy informacji o przejazdach nowojorskich taksówek. Pierwszy potok odpowiada za pobranie surowych danych, ich wstępne 
+            oczyszczenie (np. odfiltrowanie przejazdów z zerową liczbą pasażerów) oraz zapis gotowego zbioru w formacie Parquet do magazynu S3. 
+            Drugi potok automatycznie pobiera te dane, generuje nowe cechy (obliczając czas trwania przejazdów z dostępnych dat) i na ich 
+            podstawie trenuje zaawansowany model regresyjny. Cały ten przepływ uczenia maszynowego zintegrowałem ze śledzeniem eksperymentów – 
+            serwer MLflow uruchomiony wraz z resztą infrastruktury automatycznie loguje parametry, metryki ewaluacyjne (np. RMSE, R<sup>2</sup>) 
+            oraz zapisuje gotowe modele bezpośrednio podczas wykonywania zadania przez Airflow.
         </p>
         <h3>Czego użyłem?</h3>
         <ul>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
+            <li><b>CatBoost</b> jako biblioteki do uczenia maszynowego opartej na drzewach decyzyjnych (gradient boosting), wykorzystanej do budowy i trenowania modelu regresyjnego.</li>
+            <li>Technologie, biblioteki i narzędzia wykorzystane ponownie w tych samych lub podobnych celach co w poprzednich etapach: <b>Python, Apache Airflow, MLflow, Docker Compose, PostgreSQL, LocalStack (AWS S3), Pandas, PyArrow</b> (do formatu <b>Parquet</b>), <b>Requests</b> oraz <b>Scikit-learn</b>.</li>
         </ul>
 
         <h2>Branch: Lab13</h2>
         <h3>Co zrobiłem?</h3>
         <p>
-            
+            W ramach tego zadania skupiłem się na wdrażaniu i optymalizacji serwowania dużych modeli językowych (LLM) oraz ich integracji z 
+            zewnętrznymi narzędziami (<b>agent AI</b>). Uruchomiłem silnik wnioskowania (<b>vLLM</b>) z API kompatybilnym z OpenAI dla modelu z rodziny Qwen oraz 
+            stworzyłem dedykowany skrypt testowy (benchmark) do pomiaru szybkości generowania odpowiedzi na zróżnicowane zapytania. 
+            Ponadto, zbudowałem serwer wykorzystujący architekturę Model Context Protocol (<b>MCP</b>), który rozszerza możliwości modelu 
+            językowego, dostarczając mu zewnętrzne narzędzia (np. funkcje pobierające aktualną datę i czas w czasie rzeczywistym). 
+            Wykorzystałem również mechanizmy zabezpieczające wyjście modelu (tzw. <b>guardrails</b>), aby kontrolować jakość i bezpieczeństwo 
+            generowanych treści.
         </p>
         <h3>Czego użyłem?</h3>
         <ul>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
+            <li><b>vLLM</b> jako wysokowydajnego silnika do serwowania i szybkiego wnioskowania dużych modeli językowych.</li>
+            <li><b>FastMCP</b> do sprawnego zbudowania serwera Model Context Protocol, udostępniającego Pythonowe funkcje jako narzędzia (tools) wywoływane przez LLM.</li>
+            <li><b>OpenAI SDK (Python)</b> do zintegrowania skryptów klienckich z lokalnie uruchomionym modelem i wysyłania ustandaryzowanych zapytań API.</li>
+            <li><b>Guardrails AI</b> do implementacji warstwy walidacyjnej, pilnującej poprawności i bezpieczeństwa odpowiedzi generowanych przez AI.</li>
+            <li>Technologie, biblioteki i narzędzia wykorzystane ponownie w tych samych lub podobnych celach co w poprzednich zadaniach: <b>Python, Transformers, PyTorch (torch), Polars</b> oraz <b>Requests</b>.</li>
         </ul>
 
         <h2>Branch: Homework13</h2>
         <h3>Co zrobiłem?</h3>
         <p>
-            
+            W ramach tego projektu zbudowałem inteligentnego asystenta podróży (Trip Planner) wykorzystującego duże modele językowe (LLM) zintegrowane z zewnętrznymi API. Zaimplementowałem architekturę Model Context Protocol (MCP), udostępniając modelowi narzędzia do dynamicznego wyszukiwania informacji w internecie oraz sprawdzania prognozy pogody dla wybranych miast. Aplikację wyposażyłem w autorski mechanizm obronny (guardrail) realizowany przez sam model językowy, który w czasie rzeczywistym klasyfikuje zapytania i odrzuca te, które wykraczają poza tematykę podróżniczą. Cały system, włączając w to serwer wnioskowania (vLLM) obsługujący funkcję wywoływania narzędzi (tool calling) przez model Qwen, został skonteneryzowany i skonfigurowany pod kątem akceleracji GPU.
         </p>
         <h3>Czego użyłem?</h3>
         <ul>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
+            <li><b>Tavily API (tavily-python)</b> jako wyszukiwarki zoptymalizowanej pod kątem LLM, do umożliwienia agentowi AI przeszukiwania aktualnych informacji, miejsc i wydarzeń w internecie.</li>
+            <li><b>OpenWeather API</b> do dynamicznego pobierania i strukturyzowania danych o prognozie pogody przekazywanych następnie do modelu.</li>
+            <li>Technologie, narzędzia i biblioteki wykorzystane ponownie w tych samych lub podobnych celach co w poprzednich etapach: <b>Python, vLLM, FastMCP, OpenAI SDK, Docker Compose, Requests</b> oraz <b>python-dotenv</b>.</li>
         </ul>
 
     </main>
