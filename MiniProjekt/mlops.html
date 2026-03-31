@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Firma X — Szczegóły pracy</title>
+    <title>MLOps - laboratoria</title>
     <link rel="stylesheet" href="styles.css">
     <!-- Importujemy czcionkę z Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
@@ -57,6 +57,11 @@
             text-align: center;
         }
 
+        h2, h3 {
+            color: #333;
+            text-align: center;
+        }
+
         p {
             font-size: 1.1rem;
             line-height: 1.6;
@@ -90,6 +95,23 @@
             margin-top: 50px;
             border-radius: 0 0 10px 10px;
         }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+    }
+
+    .btn {
+        background-color: #333;
+        color: white;
+        padding: 10px 15px;
+        margin: 0 10px;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s, transform 0.2s;
+    }
+    
     </style>
 </head>
 <body>
@@ -104,7 +126,308 @@
     </header>
 
     <main>
-        <h1>Whoops. Work in progress...</h1>
+        
+        <h1>MLOps</h1>
+        <div class="button-container">
+            <a href="https://github.com/RadandMoc/MLOps" class="btn">Repozytorium</a>
+        </div>
+        <h2>Branch: Lab1</h2>
+        <h3>Co zrobiłem?</h3>
+        <p>
+            Stworzyłem aplikację uczenia maszynowego, która trenuje model drzewa decyzyjnego na klasycznym zbiorze danych Iris i zapisuje go do późniejszego wykorzystania. Zaimplementowałem mechanizm bezpiecznego zarządzania konfiguracją, zmiennymi środowiskowymi i sekretami, który dynamicznie dostosowuje się do wybranego środowiska pracy (deweloperskie, testowe lub produkcyjne). Całość aplikacji, w tym serwer API, została przygotowana do łatwego wdrożenia poprzez konteneryzację.
+        </p>
+        <h3>Czego użyłem?</h3>
+        <p>
+            <ul>
+                <li>Python (>=3.12)</li>
+                <li><b>Scikit-learn</b> do budowy modelu uczenia maszynowego oraz <b>Joblib</b> do jego eksportu.</li>
+                <li><b>FastAPI</b> oraz <b>Uvicorn</b> do stworzenia i serwowania interfejsu API.</li>
+                <li><b>Docker Compose</b> do konteneryzacji i zarządzania uruchamianiem usług.</li>
+                <li><b>Pydantic (pydantic-settings)</b>, <b>python-dotenv</b> oraz <b>PyYAML</b> do ładowania i walidacji ustawień oraz sekretów aplikacji z plików .env i .yaml.</li>
+                <li><b>Pytest</b> jako środowiska do testowania rozwiązań.</li>
+                <li><b>Pre-commit</b> do dbania o jakość i formatowanie kodu przed utworzeniem commita.</li>
+            </ul>
+        </p>
+
+        <h2>Branch: Homework1</h2>
+        <h3>Co zrobiłem?</h3>
+        <p>
+            Zbudowałem aplikację serwującą model uczenia maszynowego, która udostępnia interfejs API do wykonywania predykcji na podstawie przesłanego tekstu. Wykorzystałem model oparty na architekturze Sentence Transformers zintegrowany z zapisanym klasyfikatorem do analizy przetwarzania języka naturalnego (NLP). Aplikacja udostępnia endpoint /predict, który za pomocą określonych schematów żądań, odbiera tekst i przekazuje go do inferencji, po czym zwraca wynik. Projekt został również przystosowany pod Dockera, co ułatwia jego uruchomienie na różnych platformach.
+        </p>
+        <h3>Czego użyłem?</h3>
+        <ul>
+            <li>Python (>=3.12)</li>
+            <li><b>Sentence-Transformers, Transformers</b> oraz <b>PyTorch (torch)</b> do wczytywania i obsługi modeli AI.</li>
+            <li><b>Scikit-learn </b> oraz <b> Joblib</b> do wykorzystania i załadowania gotowego modelu klasyfikatora.</li>
+            <li><b>FastAPI</b> i <b>Uvicorn</b> do stworzenia i uruchomienia wydajnego serwera API.</li>
+            <li><b>Pydantic</b> do definicji modeli i automatycznej walidacji danych przesyłanych do oraz zwracanych z API.</li>
+            <li><b>Clean-text</b> do czyszczenia danych tekstowych.</li>
+            <li><b>Pytest</b> i <b>httpx</b> do testowania logiki.</li>
+            <li><b>Pre-commit</b> i <b>Docker Compose</b></li>
+        </ul>
+
+        <h2>Branch: Lab2</h2>
+        <h3>Co zrobiłem?</h3>
+        <p>
+            W zadaniu skupiłem się na obsłudze relacyjnych i analitycznych baz danych oraz na wydajnym przetwarzaniu zbiorów danych (na przykładzie danych o ruchu pociągów). Skonfigurowałem lokalną instancję bazy PostgreSQL uruchamianą w dockerze. Uzupełniłem notebooki, w których zaimplementowałem połączenia z bazą i wykonywanie zapytań SQL bezpośrednio z poziomu języka Python. Wykorzystałem również silnik OLAP (Online Analytical Processing) m.in. do błyskawicznego odczytu, zaawansowanego parsowania i analizy dużych plików CSV w pamięci, a także konwersji zbiorów do wydajniejszych formatów, takich jak Parquet czy JSON. Na koniec zintegrowałem wyniki zapytań analitycznych z odpowiednimi bibliotekami w celu wizualizacji danych na wykresach.
+        </p>
+        <h3>Czego użyłem?</h3>
+        <ul>
+            <li><b>PostgreSQL</b> jako potężnej relacyjnej bazy danych do przechowywania i odpytywania danych.</li>
+            <li><b>Psycopg</b> jako sterownika służącego do nawiązywania bezpiecznych połączeń i wykonywania zapytań SQL na bazie PostgreSQL z poziomu skryptów.</li>
+            <li><b>DuckDB</b> jako wydajnego, analitycznego systemu bazodanowego do przetwarzania plików lokalnych (CSV, Parquet, JSON), zaawansowanej analizy danych oraz płynnej integracji z istniejącą bazą PostgreSQL.</li>
+            <li><b>Jupyter Notebook</b> do zaprezentowania wyników programu.</li>
+            <li><b>Pandas</b> do operacji na data fremach oraz <b>Matplotlib</b> do wygenerowania wizualizacji z przeanalizowanych statystyk.</li>
+            <li>Narzędzia i technologie wykorzystane ponownie w tym samym celu co w poprzednich projektach: <b>Python</b>, <b>Docker Compose</b>, <b>Pytest</b> oraz <b>Pre-commit</b>.</li>
+        </ul>
+
+        <h2>Branch: Homework2</h2>
+        <h3>Co zrobiłem?</h3>
+        <p>
+            W ramach tego zadania rozszerzyłem analizę danych o ruchu pociągów, tworząc zaawansowane zapytania i przekształcenia danych. 
+            Wczytałem dziesiątki plików CSV i archiwów .csv.gz (dotyczących m.in. połączeń, stacji i zakłóceń w ruchu), połączyłem je za pomocą silnika analitycznego, a część z nich wyeksportowałem do zoptymalizowanego formatu Parquet ze wsparciem kompresji ZSTD w celu szybszego przetwarzania. Zintegrowałem dane plikowe z relacyjną bazą danych uruchomioną w kontenerze (PostgreSQL), co pozwoliło na wykonywanie spójnych zapytań SQL obejmujących różne źródła danych. Na koniec przygotowałem zestaw analitycznych operacji (obliczających m.in. najczęstsze przyczyny usterek, udziały konkretnych połączeń i maksymalne opóźnienia), a wyniki podsumowałem na wykresie słupkowym ilustrującym średnie opóźnienia u różnych przewoźników.
+        </p>
+        <h3>Czego użyłem?</h3>
+        <ul>
+            <li><b>PyArrow</b> jako biblioteki ułatwiającej efektywne operacje na dużych zbiorach danych oraz konwersję do formatów kolumnowych (takich jak Parquet).</li>
+            <li><b>Ruff</b> pełniącego rolę szybkiego lintera i narzędzia do formatowania, co pozwala na automatyczne dbanie o czystość kodu.</li>
+            <li><b>SciPy</b> wchodzącego w skład ekosystemu analitycznego projektu do wsparcia dodatkowych operacji statystycznych i numerycznych.</li>
+            <li>Technologie wykorzystane ponownie w tym samym celu: <b>Python, Docker Compose, PostgreSQL, DuckDB, Psycopg, Jupyter Notebook, Pandas</b> oraz <b>Matplotlib.</b></li>
+        </ul>
+
+        <h2>Branch: Lab3</h2>
+        <h3>Co zrobiłem?</h3>
+        <p>
+            W ramach labu skupiłem się na przetwarzaniu i analityce danych z wykorzystaniem Polars. Uzupełniłem notebooka, 
+            w którym zautomatyzowałem proces pobierania dużych zbiorów danych zapisanych w formacie Parquet. 
+            Wykorzystałem silnik Polars do wydajnego selekcjonowania, filtrowania oraz transformacji rekordów, 
+            a także do łączenia wielu ramek danych i skomplikowanych agregacji. Część otrzymanych wyników przekonwertowałem 
+            do datafremów biblioteki Pandas w celu łatwiejszej integracji i wygenerowania histogramów ilustrujących rozkład czasu podróży.
+        </p>
+        <h3>Czego użyłem?</h3>
+        <ul>
+            <li><b>Polars</b> jako głównej, wielowątkowej biblioteki zastępującej Pandas do błyskawicznej manipulacji i analizy danych (DataFrames).</li>
+            <li>Technologie i narzędzia wykorzystane ponownie w tych samych celach, co w poprzednich projektach: <b>Python (>=3.11), Jupyter Notebook, Pandas, Matplotlib, PyArrow</b> oraz <b>Ruff.</b></li>
+        </ul>
+
+        <h2>Branch: Homework3</h2>
+        <h3>Co zrobiłem?</h3>
+        <p>
+            W ramach tego zadania stworzyłem zaawansowany proces pobierania, czyszczenia, transformacji i analityki danych o przejazdach taksówek 
+            z roku 2024. Zaimplementowałem kod automatyzujący pobieranie surowych zbiorów w formacie Parquet, po czym z użyciem silnika Polars 
+            przefiltrowałem niepoprawne wartości i przeprowadziłem inżynierię cech/feature engineering (m.in. detekcję przejazdów w godzinach szczytu czy tras na lotnisko). 
+            Z tak przygotowanych danych wyliczyłem dzienne agregacje i zapisałem gotowy zbiór analityczny jako docelowy plik Parquet. 
+            Na koniec przygotowałem podsumowanie statystyczne i zwizualizowałem rozkład liczby przejazdów.
+        </p>
+        <h3>Czego użyłem?</h3>
+        <ul>
+            <li><b>Seaborn</b> jako biblioteki statystycznej służącej do wygenerowania czytelnych i estetycznych wykresów na podstawie utworzonych data frame'ów.</li>
+            <li>Technologie i narzędzia wykorzystane ponownie w tych samych celach, co w poprzednich etapach: <b>Python (>=3.11), Jupyter Notebook, Polars, Pandas, Matplotlib, PyArrow</b> oraz <b>Ruff.</b></li>
+        </ul>
+
+        <h2>Branch: Lab4</h2>
+        <h3>Co zrobiłem?</h3>
+        <p>
+            W ramach tego laba zaimplementowałem mechanizmy wyszukiwania semantycznego oraz system Retrieval-Augmented Generation (RAG). 
+            W pierwszej części stworzyłem aplikację wyszukującą gry (na podstawie zbioru danych z platformy Steam), 
+            która dzięki wektoryzacji opisów umożliwia znajdowanie odpowiednich tytułów za pomocą zapytań w języku naturalnym, 
+            wykorzystując rozszerzenia wektorowe dla relacyjnej bazy danych. Następnie zbudowałem pełny potok RAG: 
+            zautomatyzowałem pobieranie i ekstrakcję tekstu z pliku PDF (przewodnika po AI), przekształciłem go na osadzenia (embeddings) 
+            i umieściłem w dedykowanej bazie wektorowej. Całość zintegrowałem z dużym modelem językowym (LLM), 
+            co pozwala systemowi generować precyzyjne odpowiedzi na pytania użytkownika, bazując bezpośrednio na wyekstrahowanym kontekście z dokumentu.
+        </p>
+        <h3>Czego użyłem?</h3>
+        <ul>
+            <li><b>Milvus (PyMilvus)</b> jako dedykowanej, wysoce skalowalnej bazy wektorowej do przechowywania fragmentów tekstu i ich szybkiego przeszukiwania za pomocą zoptymalizowanych indeksów (np. HNSW).</li>
+            <li><b>Pgvector / Vectorscale</b> (w instancji TimescaleDB) jako rozszerzeń dla bazy PostgreSQL, umożliwiających natywne i wydajne operacje na wektorach wielowymiarowych (np. obliczanie dystansu cosinusowego).</li>
+            <li><b>Google GenAI</b> do integracji z chmurowym modelem LLM (Gemini 2.0 Flash) w celu inteligentnego generowania odpowiedzi na podstawie dostarczonych danych kontekstowych.</li>
+            <li><b>Sentence-Transformers</b> wraz z <b>PyTorch</b> do przekształcania tekstu z opisów gier oraz dokumentów PDF na reprezentację wektorową przy użyciu wielojęzycznych modeli uczenia głębokiego.</li>
+            <li><b>PyMuPDF (fitz)</b> do programowego czytania i wydobywania czystego tekstu z poszczególnych stron dokumentów PDF.</li>
+            <li><b>SQLAlchemy</b> jako systemu ORM do definiowania schematów bazy danych oraz abstrakcji zapytań SQL w języku Python.</li>
+            <li><b>Hugging Face Datasets</b> do wygodnego importowania dużego zbioru danych testowych.</li>
+            <li>Technologie i biblioteki wykorzystane ponownie: <b>Python, Docker Compose, PostgreSQL, Jupyter Notebook, Pandas, Matplotlib, Requests</b> oraz <b>tqdm</b>.</li>
+        </ul>
+
+        <h2>Branch: Homework4</h2>
+        <h3>Co zrobiłem?</h3>
+        <p>
+            
+        </p>
+        <h3>Czego użyłem?</h3>
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+
+        <h2>Branch: Lab5</h2>
+        <h3>Co zrobiłem?</h3>
+        <p>
+            
+        </p>
+        <h3>Czego użyłem?</h3>
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+
+        <h2>Branch: Lab6</h2>
+        <h3>Co zrobiłem?</h3>
+        <p>
+            
+        </p>
+        <h3>Czego użyłem?</h3>
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+
+        <h2>Branch: Lab7</h2>
+        <h3>Co zrobiłem?</h3>
+        <p>
+            
+        </p>
+        <h3>Czego użyłem?</h3>
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+
+        <h2>Branch: Lab8</h2>
+        <h3>Co zrobiłem?</h3>
+        <p>
+            
+        </p>
+        <h3>Czego użyłem?</h3>
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+
+        <h2>Branch: Lab9</h2>
+        <h3>Co zrobiłem?</h3>
+        <p>
+            
+        </p>
+        <h3>Czego użyłem?</h3>
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+
+        <h2>Branch: Lab10</h2>
+        <h3>Co zrobiłem?</h3>
+        <p>
+            
+        </p>
+        <h3>Czego użyłem?</h3>
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+
+        <h2>Branch: Lab11</h2>
+        <h3>Co zrobiłem?</h3>
+        <p>
+            
+        </p>
+        <h3>Czego użyłem?</h3>
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+
+        <h2>Branch: Lab12</h2>
+        <h3>Co zrobiłem?</h3>
+        <p>
+            
+        </p>
+        <h3>Czego użyłem?</h3>
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+
+        <h2>Branch: Homework12</h2>
+        <h3>Co zrobiłem?</h3>
+        <p>
+            
+        </p>
+        <h3>Czego użyłem?</h3>
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+
+        <h2>Branch: Lab13</h2>
+        <h3>Co zrobiłem?</h3>
+        <p>
+            
+        </p>
+        <h3>Czego użyłem?</h3>
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+
+        <h2>Branch: Homework13</h2>
+        <h3>Co zrobiłem?</h3>
+        <p>
+            
+        </p>
+        <h3>Czego użyłem?</h3>
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+
     </main>
 
     <footer>
